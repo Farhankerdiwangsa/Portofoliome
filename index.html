@@ -2,18 +2,20 @@
 <html lang="id" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta property="og:image" content="https://files.catbox.moe/lrv9gy.jpg">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Farhan Kertadiwangsa | Creative Developer">
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:image" content="https://files.catbox.moe/lrv9gy.jpg">
     <title>Farhan Kertadiwangsa | Creative Developer</title>
     
-    <!-- Google Fonts: Space Grotesk (Main) & Syne (Display) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
     
-    <!-- Tailwind CSS (CDN) -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Tailwind Configuration -->
     <script>
         tailwind.config = {
             theme: {
@@ -30,22 +32,24 @@
                         'neo-blue': '#2D5BFF',
                         'neo-red': '#FF2E00',
                         'neo-purple': '#9D00FF',
-                        'neo-gray': '#E5E5E5'
+                        'neo-gray': '#E5E5E5',
+                        'wa-green': '#25D366',
+                        'tg-blue': '#229ED9',
+                        'gmail-red': '#EA4335'
                     },
                     boxShadow: {
                         'neo': '5px 5px 0px 0px #0F0F0F',
                         'neo-lg': '8px 8px 0px 0px #0F0F0F',
+                        'neo-xl': '12px 12px 0px 0px #0F0F0F',
                         'neo-sm': '3px 3px 0px 0px #0F0F0F',
                         'neo-hover': '2px 2px 0px 0px #0F0F0F',
                     },
                     borderWidth: {
                         '3': '3px',
                     },
-                    cursor: {
-                        'none': 'none',
-                    },
                     screens: {
-                        'xs': '375px', // Added extra small breakpoint for better fine-tuning
+                        'xs': '375px',
+                        '3xl': '1600px',
                     }
                 }
             }
@@ -53,9 +57,8 @@
     </script>
 
     <style>
-        /* --- CORE STYLES --- */
         html, body {
-            overflow-x: hidden; /* Critical for mobile responsiveness */
+            overflow-x: hidden;
             width: 100%;
             -webkit-tap-highlight-color: transparent;
         }
@@ -64,11 +67,31 @@
             background-color: #F0F0F0;
             background-image: radial-gradient(#d4d4d4 1px, transparent 1px);
             background-size: 24px 24px;
-            /* Default cursor for mobile, custom for desktop via JS */
             cursor: auto; 
         }
 
-        /* Desktop Only Cursor Styles */
+        .text-fluid-hero {
+            font-size: clamp(3.5rem, 10vw, 8.5rem);
+            line-height: 0.9;
+        }
+        
+        .text-fluid-sub {
+            font-size: clamp(2rem, 5vw, 4.5rem);
+            line-height: 1;
+        }
+
+        .text-fluid-h2 {
+            font-size: clamp(2.5rem, 5vw, 6rem);
+            line-height: 0.95;
+        }
+
+        .safe-break {
+            word-break: break-word;
+            overflow-wrap: break-word;
+            hyphens: auto;
+            max-width: 100%;
+        }
+
         @media (min-width: 1024px) {
             body { cursor: none; }
             .cursor-dot, .cursor-circle { display: block; }
@@ -77,142 +100,120 @@
             .cursor-dot, .cursor-circle { display: none !important; }
         }
 
-        /* Selection Color */
-        ::selection {
-            background-color: #0F0F0F;
-            color: #D4FF00;
-        }
-
-        /* --- UTILITIES --- */
+        ::selection { background-color: #0F0F0F; color: #D4FF00; }
         .text-stroke { -webkit-text-stroke: 1px #0F0F0F; color: transparent; }
         .text-stroke-2 { -webkit-text-stroke: 1px #0F0F0F; color: transparent; }
-        @media (min-width: 768px) {
-            .text-stroke-2 { -webkit-text-stroke: 2px #0F0F0F; }
-        }
-
-        /* Prevent text overflow helper */
-        .break-word-fix {
-            word-break: break-word;
-            overflow-wrap: break-word;
-            hyphens: auto;
-        }
-
-        /* Hide Scrollbar */
+        @media (min-width: 768px) { .text-stroke-2 { -webkit-text-stroke: 2px #0F0F0F; } }
+        
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-        /* --- CUSTOM CURSOR --- */
         .cursor-dot, .cursor-circle {
-            position: fixed;
-            top: 0;
-            left: 0;
-            transform: translate(-50%, -50%);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9999;
-            mix-blend-mode: difference;
+            position: fixed; top: 0; left: 0; transform: translate(-50%, -50%);
+            border-radius: 50%; pointer-events: none; z-index: 9999; mix-blend-mode: difference;
         }
         .cursor-dot { width: 10px; height: 10px; background-color: #fff; }
         .cursor-circle {
-            width: 50px; height: 50px;
-            border: 2px solid #fff;
+            width: 50px; height: 50px; border: 2px solid #fff;
             transition: width 0.3s, height 0.3s, background-color 0.3s;
         }
         body.hovering .cursor-circle {
-            width: 80px; height: 80px;
-            background-color: rgba(255, 255, 255, 0.2);
-            border-color: transparent;
+            width: 80px; height: 80px; background-color: rgba(255, 255, 255, 0.2); border-color: transparent;
         }
 
-        /* --- MAGNET EFFECT --- */
         .magnetic-wrap { display: inline-block; position: relative; }
-
-        /* --- ANIMATION UTILS --- */
         .reveal-text-mask { overflow: hidden; display: block; }
         .reveal-text-inner { display: block; transform: translateY(110%); }
 
-        /* Floating Animation */
         @keyframes float {
             0% { transform: translateY(0px) rotate(0deg); }
             50% { transform: translateY(-20px) rotate(2deg); }
             100% { transform: translateY(0px) rotate(0deg); }
         }
-        .float-anim {
-            animation: float 6s ease-in-out infinite;
-        }
-
-        /* Mobile specific fixes */
-        .safe-padding { padding-left: max(1.5rem, env(safe-area-inset-left)); padding-right: max(1.5rem, env(safe-area-inset-right)); }
-
-        /* --- SKILL BUTTON STYLES --- */
-        .skill-btn-wrapper {
-            position: relative;
-            display: inline-block;
-            margin: 0.5rem;
-        }
+        .float-anim { animation: float 6s ease-in-out infinite; }
         
-        .skill-btn {
-            position: relative;
-            z-index: 2;
-            transition: box-shadow 0.1s;
+        .skill-btn-wrapper { position: relative; display: inline-block; margin: 0.5rem; }
+        .skill-btn { position: relative; z-index: 2; transition: box-shadow 0.1s; }
+        .skill-btn img { will-change: transform; pointer-events: none; user-select: none; -webkit-user-drag: none; }
+
+        .pro-mask-img { clip-path: inset(100% 0 0 0); transition: clip-path 1.2s cubic-bezier(0.16, 1, 0.3, 1); }
+        .pro-mask-img.active { clip-path: inset(0% 0 0 0); }
+        
+        .pro-text-mask { overflow: hidden; position: relative; }
+        .pro-text-inner { transform: translateY(120%); display: block; will-change: transform; }
+        
+        .magnetic-btn { display: inline-block; position: relative; z-index: 10; touch-action: none; }
+        
+        .noise-overlay {
+            position: absolute; inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.1'/%3E%3C/svg%3E");
+            opacity: 0.3; pointer-events: none; mix-blend-mode: overlay; z-index: 2;
         }
 
-        /* Ensure icon scaling is smooth */
-        .skill-btn img {
+        .contact-card {
+            transform-style: preserve-3d;
+            perspective: 1000px;
             will-change: transform;
-            /* pointer-events handled by class now, but good to keep safe */
-            pointer-events: none; 
-            user-select: none;
-            -webkit-user-drag: none;
         }
-
+        .contact-icon-float {
+            animation: iconFloat 4s ease-in-out infinite;
+        }
+        @keyframes iconFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
     </style>
 </head>
-<body class="text-neo-black antialiased overflow-x-hidden">
+<body class="text-neo-black antialiased overflow-x-hidden w-full">
 
-    <!-- CUSTOM CURSOR DOM -->
+    <div id="preloader" class="fixed inset-0 z-[10000] bg-neo-black flex flex-col items-center justify-center pointer-events-none">
+        <div class="relative overflow-hidden">
+            <h1 id="preloader-counter" class="text-neo-yellow font-display font-black text-[15vw] md:text-[12vw] leading-none tracking-tighter">0%</h1>
+        </div>
+        <div class="w-48 md:w-64 h-1.5 bg-white/10 mt-2 md:mt-4 rounded-full overflow-hidden relative">
+            <div id="preloader-bar" class="absolute top-0 left-0 h-full w-0 bg-neo-yellow"></div>
+        </div>
+    </div>
+
     <div class="cursor-dot"></div>
     <div class="cursor-circle"></div>
 
-    <!-- HEADER / NAVIGATION -->
     <header class="fixed w-full top-0 z-50 transition-transform duration-500" id="navbar">
         <div class="absolute inset-0 bg-neo-bg/95 border-b-3 border-neo-black backdrop-blur-sm origin-top transform transition-transform duration-500" id="nav-bg"></div>
         
-        <div class="container mx-auto px-4 md:px-6 py-3 md:py-4 relative z-10 flex justify-between items-center">
-            <!-- Logo -->
-            <a href="#" class="interact-hover relative group shrink-0">
-                <div class="bg-neo-black text-neo-white px-3 py-1.5 md:px-4 md:py-2 text-lg md:text-xl font-display font-black uppercase border-2 border-transparent group-hover:bg-neo-yellow group-hover:text-neo-black group-hover:border-neo-black transition-colors duration-300 shadow-neo group-active:shadow-neo-hover group-active:translate-x-[3px] group-active:translate-y-[3px]">
-                    FRHN.
+        <div class="container max-w-screen-xl mx-auto px-4 md:px-6 py-3 md:py-4 relative z-10 flex justify-between items-center h-full">
+            <a href="#" class="interact-hover relative group shrink-0 flex items-center">
+                <div class="bg-neo-black text-neo-white px-4 py-2 text-xl font-display font-black uppercase border-2 border-transparent group-hover:bg-neo-yellow group-hover:text-neo-black group-hover:border-neo-black transition-colors duration-300 shadow-neo group-active:shadow-neo-hover group-active:translate-x-[3px] group-active:translate-y-[3px]">
+                    Farhan|Dev
                 </div>
             </a>
             
-            <!-- Desktop Nav -->
-            <nav class="hidden md:flex items-center gap-6 lg:gap-10 font-bold">
-                <div class="magnetic-wrap interact-hover">
-                    <a href="#about" class="block relative overflow-hidden group px-2 py-1">
-                        <span class="block transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:-translate-y-full">About</span>
-                        <span class="absolute top-0 left-0 block translate-y-full transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:translate-y-0 text-neo-blue">About</span>
-                    </a>
+            <nav class="hidden md:flex items-center gap-8 font-bold">
+                <div class="flex items-center gap-8 mr-4">
+                    <div class="magnetic-wrap interact-hover">
+                        <a href="#about" class="block relative overflow-hidden group px-2 py-1">
+                            <span class="block transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:-translate-y-full">About</span>
+                            <span class="absolute top-0 left-0 block translate-y-full transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:translate-y-0 text-neo-blue">About</span>
+                        </a>
+                    </div>
+                    <div class="magnetic-wrap interact-hover">
+                        <a href="#skills" class="block relative overflow-hidden group px-2 py-1">
+                            <span class="block transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:-translate-y-full">Skills</span>
+                            <span class="absolute top-0 left-0 block translate-y-full transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:translate-y-0 text-neo-purple">Skills</span>
+                        </a>
+                    </div>
+                    <div class="magnetic-wrap interact-hover">
+                        <a href="#projects" class="block relative overflow-hidden group px-2 py-1">
+                            <span class="block transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:-translate-y-full">Projects</span>
+                            <span class="absolute top-0 left-0 block translate-y-full transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:translate-y-0 text-neo-red">Projects</span>
+                        </a>
+                    </div>
                 </div>
-                <div class="magnetic-wrap interact-hover">
-                    <a href="#skills" class="block relative overflow-hidden group px-2 py-1">
-                        <span class="block transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:-translate-y-full">Skills</span>
-                        <span class="absolute top-0 left-0 block translate-y-full transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:translate-y-0 text-neo-purple">Skills</span>
-                    </a>
-                </div>
-                <div class="magnetic-wrap interact-hover">
-                    <a href="#projects" class="block relative overflow-hidden group px-2 py-1">
-                        <span class="block transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:-translate-y-full">Projects</span>
-                        <span class="absolute top-0 left-0 block translate-y-full transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:translate-y-0 text-neo-red">Projects</span>
-                    </a>
-                </div>
-                
-                <a href="#contact" class="interact-hover relative overflow-hidden bg-neo-white border-2 border-neo-black px-4 lg:px-5 py-2 font-bold uppercase tracking-wider hover:bg-neo-black hover:text-white transition-all duration-300 shadow-neo hover:shadow-neo-hover hover:translate-x-[3px] hover:translate-y-[3px]">
+                <a href="#contact" class="interact-hover relative overflow-hidden bg-neo-white border-2 border-neo-black px-6 py-2.5 font-bold uppercase tracking-wider hover:bg-neo-black hover:text-white transition-all duration-300 shadow-neo hover:shadow-neo-hover hover:translate-x-[3px] hover:translate-y-[3px]">
                     Let's Talk
                 </a>
             </nav>
 
-            <!-- Mobile Menu Toggle -->
             <button id="menu-toggle" class="interact-hover md:hidden p-2 border-2 border-neo-black bg-white shadow-neo active:shadow-neo-hover active:translate-y-[2px] transition-all z-50 shrink-0">
                 <div class="space-y-1.5 w-6">
                     <span class="block w-full h-0.5 bg-neo-black transition-transform origin-center" id="bar1"></span>
@@ -222,43 +223,31 @@
             </button>
         </div>
 
-        <!-- Mobile Menu Overlay -->
         <div id="mobile-menu" class="fixed inset-0 bg-neo-yellow z-40 flex flex-col justify-center items-center gap-6 translate-y-[-100%] pointer-events-none md:hidden w-full h-screen">
             <a href="#about" class="mobile-link text-3xl xs:text-4xl font-display font-black uppercase text-neo-black hover:text-white transition-colors">About</a>
             <a href="#skills" class="mobile-link text-3xl xs:text-4xl font-display font-black uppercase text-neo-black hover:text-white transition-colors">Skills</a>
             <a href="#projects" class="mobile-link text-3xl xs:text-4xl font-display font-black uppercase text-neo-black hover:text-white transition-colors">Projects</a>
             <a href="#contact" class="mobile-link text-3xl xs:text-4xl font-display font-black uppercase text-neo-black hover:text-white transition-colors">Contact</a>
-            
-            <!-- Mobile Socials -->
-            <div class="flex gap-4 mt-8 opacity-0 mobile-social">
-                <a href="#" class="w-12 h-12 border-2 border-neo-black flex items-center justify-center bg-white text-lg font-bold">Ln</a>
-                <a href="#" class="w-12 h-12 border-2 border-neo-black flex items-center justify-center bg-white text-lg font-bold">Gh</a>
-            </div>
         </div>
     </header>
 
     <main class="w-full overflow-hidden">
-        <!-- HERO SECTION -->
         <section class="min-h-screen flex items-center pt-24 pb-12 md:pt-32 md:pb-20 relative overflow-hidden border-b-3 border-neo-black bg-neo-bg">
-            <!-- Decorative Background Elements (Fixed position to prevent overflow) -->
-            <div class="absolute inset-0 pointer-events-none overflow-hidden">
-                <div class="absolute top-[10%] -right-10 md:top-[20%] md:right-[10%] w-32 h-32 md:w-64 md:h-64 border-3 border-neo-black rounded-full bg-neo-blue/20 float-anim"></div>
-                <!-- Changed red box to yellow to blend better with theme -->
-                <div class="absolute bottom-[10%] -left-5 md:bottom-[20%] md:left-[5%] w-20 h-20 md:w-40 md:h-40 bg-neo-yellow border-3 border-neo-black rotate-12 float-anim" style="animation-delay: -2s;"></div>
+            <div class="absolute inset-0 pointer-events-none overflow-hidden max-w-[100vw]">
+                <div class="absolute top-[10%] -right-10 md:top-[15%] md:right-[5%] w-24 h-24 md:w-64 md:h-64 border-3 border-neo-black rounded-full bg-neo-blue/20 float-anim"></div>
+                <div class="absolute bottom-[10%] -left-5 md:bottom-[15%] md:left-[5%] w-16 h-16 md:w-40 md:h-40 bg-neo-yellow border-3 border-neo-black rotate-12 float-anim" style="animation-delay: -2s;"></div>
             </div>
 
-            <div class="container mx-auto px-4 md:px-6 grid lg:grid-cols-12 gap-8 md:gap-12 items-center relative z-10">
-                <!-- Text Content -->
-                <div class="lg:col-span-7 flex flex-col justify-center order-2 lg:order-1 text-center lg:text-left w-full">
-                    <div class="hero-badge inline-flex self-center lg:self-start bg-neo-black text-neo-white px-3 py-1 text-xs md:text-sm font-bold border-2 border-transparent -rotate-2 mb-6 shadow-neo-sm">
+            <div class="container max-w-screen-xl mx-auto px-4 md:px-6 grid lg:grid-cols-12 gap-8 md:gap-12 items-center relative z-10">
+                <div class="lg:col-span-8 flex flex-col justify-center order-2 lg:order-1 text-center lg:text-left w-full min-w-0">
+                    <div class="hero-badge inline-flex self-center lg:self-start bg-neo-black text-neo-white px-3 py-1 text-xs md:text-sm font-bold border-2 border-transparent -rotate-2 mb-4 md:mb-6 shadow-neo-sm">
                         ● AVAILABLE FOR FREELANCE
                     </div>
                     
-                    <!-- Responsive Typography Fix: Added w-full and text scaling logic -->
-                    <h1 class="w-full font-display text-4xl xs:text-5xl sm:text-6xl md:text-8xl xl:text-9xl font-black leading-[0.9] tracking-tighter mb-6 md:mb-8 mix-blend-darken uppercase break-word-fix">
+                    <h1 class="w-full font-display text-fluid-hero font-black tracking-tighter mb-6 md:mb-8 mix-blend-darken uppercase safe-break leading-none">
                         <div class="reveal-text-mask"><span class="reveal-text-inner">Frontend</span></div>
                         <div class="reveal-text-mask">
-                            <span class="reveal-text-inner text-transparent bg-clip-text bg-gradient-to-r from-neo-blue to-neo-blue leading-tight pb-2" style="-webkit-text-stroke: 1px #0F0F0F;">
+                            <span class="reveal-text-inner text-transparent bg-clip-text bg-gradient-to-r from-neo-blue to-neo-blue pb-2 md:pb-4" style="-webkit-text-stroke: 1px #0F0F0F;">
                                 Developer
                             </span>
                         </div>
@@ -266,7 +255,7 @@
 
                     <div class="max-w-xl mb-8 md:mb-12 mx-auto lg:mx-0">
                         <p class="text-base xs:text-lg md:text-2xl font-medium border-l-4 border-neo-yellow pl-4 md:pl-6 leading-relaxed reveal-opacity text-left">
-                            Web Devoloper Yang Enggan Ngoding Namun Pengen Jadi Progammer Handal:V
+                            Web Developer Yang Enggan Ngoding Namun Pengen Jadi Programmer Handal :V
                         </p>
                     </div>
 
@@ -281,18 +270,14 @@
                     </div>
                 </div>
 
-                <!-- Image Card with Physics Tilt -->
-                <div class="lg:col-span-5 perspective-container mt-8 lg:mt-0 w-full max-w-[260px] xs:max-w-[300px] md:max-w-sm mx-auto relative group interact-hover order-1 lg:order-2">
-                    <!-- Card Backgrounds -->
+                <div class="lg:col-span-4 perspective-container mt-8 lg:mt-0 w-full max-w-[260px] xs:max-w-[300px] md:max-w-sm mx-auto relative group interact-hover order-1 lg:order-2">
                     <div class="absolute inset-0 bg-neo-black border-3 border-neo-black translate-x-3 translate-y-3 md:translate-x-5 md:translate-y-5 transition-transform duration-300 group-hover:translate-x-2 group-hover:translate-y-2 md:group-hover:translate-x-3 md:group-hover:translate-y-3"></div>
                     <div class="absolute inset-0 bg-neo-blue border-3 border-neo-black translate-x-1.5 translate-y-1.5 md:translate-x-2.5 md:translate-y-2.5 transition-transform duration-300 group-hover:translate-x-1 group-hover:translate-y-1"></div>
                     
-                    <!-- Main Card -->
                     <div id="hero-card" class="relative bg-white border-3 border-neo-black p-3 md:p-4 z-10 overflow-hidden h-full">
                         <div class="aspect-[4/5] bg-neo-gray border-2 border-neo-black overflow-hidden relative grayscale group-hover:grayscale-0 transition-all duration-500">
-                            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Farhan&backgroundColor=b6e3f4" alt="Farhan" class="w-full h-full object-cover transform scale-105 group-hover:scale-110 transition-transform duration-700 ease-out">
+                            <img src="https://files.catbox.moe/lrv9gy.jpg" alt="Farhan" class="w-full h-full object-cover transform scale-105 group-hover:scale-110 transition-transform duration-700 ease-out">
                         </div>
-                        <!-- Updated Card Text Content -->
                         <div class="mt-3 md:mt-4 flex flex-col font-mono font-bold text-[10px] md:text-xs gap-1">
                             <span>Name: Farhan</span>
                             <span>Age: 13</span>
@@ -300,7 +285,6 @@
                         </div>
                     </div>
                     
-                    <!-- Floating Badge -->
                     <div class="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 bg-neo-red text-white font-bold px-3 py-1.5 md:px-6 md:py-3 text-xs md:text-base border-3 border-neo-black shadow-neo z-20 rotate-3 group-hover:rotate-0 transition-transform duration-300 whitespace-nowrap">
                         UI / UX / DEV
                     </div>
@@ -308,57 +292,47 @@
             </div>
         </section>
 
-        <!-- VELOCITY MARQUEE -->
-        <!-- Added max-w-[100vw] to prevent overflow during transform -->
-        <div class="bg-neo-black text-neo-yellow py-4 md:py-8 border-b-3 border-neo-black overflow-hidden relative z-20 transform -skew-y-2 origin-left scale-105 w-full max-w-[100vw]">
+        <div class="bg-neo-black text-neo-yellow py-4 md:py-8 border-b-3 border-neo-black overflow-hidden relative z-20 transform -skew-y-2 origin-left scale-105 w-full max-w-full">
             <div class="marquee-wrapper flex w-max">
                 <div class="marquee-content flex gap-6 md:gap-8 px-4 text-3xl md:text-6xl font-display font-black uppercase tracking-wider">
-                    <span>WEB DEV • FRONTEND DEV • BACKEND DEV • WEB DESIGN • DATABASE ENGGINER • CYBER SEC • FULLSTACK DEV •</span>
-                    <span>WEB DEV • FRONTEND DEV • BACKEND DEV • WEB DESIGN • DATABASE ENGGINER • CYBER SEC • FULLSTACK DEV •</span>
+                    <span>WEB DEV • FRONTEND DEV • BACKEND DEV • WEB DESIGN • DATABASE ENGINEER • CYBER SEC • FULLSTACK DEV •</span>
+                    <span>WEB DEV • FRONTEND DEV • BACKEND DEV • WEB DESIGN • DATABASE ENGINEER • CYBER SEC • FULLSTACK DEV •</span>
                 </div>
-                <!-- Duplicate handled by JS -->
             </div>
         </div>
 
-        <!-- ABOUT SECTION -->
         <section id="about" class="py-12 md:py-32 border-b-3 border-neo-black bg-white relative">
-            <div class="container mx-auto px-4 md:px-6">
-                <div class="flex flex-col md:flex-row gap-10 md:gap-16 lg:gap-24">
-                    <!-- Title -->
-                    <div class="md:w-1/3 relative">
-                        <div class="md:sticky md:top-32">
-                            <!-- Responsive text sizing -->
-                            <h2 class="font-display text-5xl xs:text-6xl md:text-7xl lg:text-8xl font-black leading-none mb-4 md:mb-6 break-word-fix">
-                                <div class="reveal-text-mask"><span class="reveal-text-inner">WHO</span></div>
-                                <div class="reveal-text-mask"><span class="reveal-text-inner">IS</span></div>
-                                <div class="reveal-text-mask"><span class="reveal-text-inner text-stroke-2 hover:text-neo-blue transition-colors duration-300">FARHAN?</span></div>
-                            </h2>
-                            <div class="w-16 h-3 md:w-24 md:h-4 bg-neo-black mt-2 md:mt-4 origin-left scroll-grow-line"></div>
-                        </div>
+            <div class="container max-w-screen-xl mx-auto px-4 md:px-6">
+                <div class="flex flex-col lg:flex-row gap-10 lg:gap-16">
+                    <div class="lg:w-5/12 relative h-fit lg:sticky lg:top-32 self-start">
+                        <h2 class="font-display text-fluid-h2 font-black leading-none mb-4 md:mb-6 safe-break">
+                            <div class="reveal-text-mask"><span class="reveal-text-inner">WHO</span></div>
+                            <div class="reveal-text-mask"><span class="reveal-text-inner">IS</span></div>
+                            <div class="reveal-text-mask"><span class="reveal-text-inner text-stroke-2 hover:text-neo-blue transition-colors duration-300">FARHAN?</span></div>
+                        </h2>
+                        <div class="w-16 h-3 md:w-24 md:h-4 bg-neo-black mt-2 md:mt-4 origin-left scroll-grow-line"></div>
                     </div>
 
-                    <!-- Content -->
-                    <div class="md:w-2/3 space-y-8 md:space-y-12">
-                        <p class="text-lg md:text-3xl font-medium leading-relaxed reveal-paragraph">
+                    <div class="lg:w-7/12 space-y-8 md:space-y-12">
+                        <p class="text-lg md:text-3xl font-medium leading-relaxed about-text-anim">
                             YO! KENALIN, GW <strong>Farhan Kertadiwangsa</strong>. Web Developer spesialis UI/UX yang mulai ngoding sejak kelas 2 SD (thanks to YouTube & pandemi). Sekarang gw duduk di bangku SMP Kelas 7, tapi skill coding gw? Boleh diadu, bro.
                         </p>
                         
                         <div class="p-6 md:p-10 border-3 border-neo-black bg-neo-bg shadow-neo hover:shadow-neo-lg transition-all duration-300 transform hover:-translate-y-2 group interact-hover reveal-box relative overflow-hidden">
-                            <p class="text-base md:text-xl leading-relaxed relative z-10">
-                                Lahir tahun 2012 di Gresik, gw terus push limit kemampuan gw di dunia programming. Meski coding cuma modal 'HP Kentang' yang bikin susah explore framework berat kayak Next.js, gw nggak nyerah. Keterbatasan device bukan alesan buat stop berkarya. Gw emang masih muda dan terus belajar, tapi mimpi gw jadi Developer Handal itu harga mati!
+                            <p class="text-base md:text-xl leading-relaxed relative z-10 about-text-anim">
+                                Lahir tahun 2012 di Gresik, gw terus push limit kemampuan gw di dunia programming. Meski coding cuma modal 'HP Kentang' yang bikin susah explore framework berat kayak Next.js, gw nggak nyerah. Keterbatasan device bukan alesan buat stop berkarya.
                             </p>
                             <div class="absolute inset-0 bg-neo-yellow transform scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-500 ease-out z-0 opacity-20"></div>
                         </div>
 
-                        <!-- Stats Grid -->
                         <div class="grid grid-cols-2 gap-4 md:gap-6 pt-2 md:pt-4">
                             <div class="group border-3 border-neo-black p-4 md:p-6 hover:bg-neo-blue hover:text-white transition-colors duration-300 reveal-box interact-hover">
-                                <h3 class="text-3xl md:text-6xl font-display font-black mb-1 md:mb-2"><span class="counter" data-target="4">0</span>+</h3>
-                                <p class="font-bold tracking-wider uppercase border-t-2 border-current pt-2 text-[10px] md:text-base">Years Exp</p>
+                                <h3 class="text-3xl md:text-6xl font-display font-black mb-1 md:mb-2 about-text-anim"><span class="counter" data-target="4">0</span>+</h3>
+                                <p class="font-bold tracking-wider uppercase border-t-2 border-current pt-2 text-[10px] md:text-base about-text-anim">Years Exp</p>
                             </div>
                             <div class="group border-3 border-neo-black p-4 md:p-6 hover:bg-neo-purple hover:text-white transition-colors duration-300 reveal-box interact-hover">
-                                <h3 class="text-3xl md:text-6xl font-display font-black mb-1 md:mb-2"><span class="counter" data-target="50">0</span>+</h3>
-                                <p class="font-bold tracking-wider uppercase border-t-2 border-current pt-2 text-[10px] md:text-base">Projects</p>
+                                <h3 class="text-3xl md:text-6xl font-display font-black mb-1 md:mb-2 about-text-anim"><span class="counter" data-target="50">0</span>+</h3>
+                                <p class="font-bold tracking-wider uppercase border-t-2 border-current pt-2 text-[10px] md:text-base about-text-anim">Projects</p>
                             </div>
                         </div>
                     </div>
@@ -366,102 +340,119 @@
             </div>
         </section>
 
-        <!-- SKILLS SECTION -->
         <section id="skills" class="py-12 md:py-32 bg-neo-bg border-b-3 border-neo-black relative overflow-hidden">
-            <!-- Grid Background -->
             <div class="absolute inset-0 bg-[linear-gradient(rgba(15,15,15,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(15,15,15,0.05)_1px,transparent_1px)] bg-[size:30px_30px] md:bg-[size:50px_50px] pointer-events-none"></div>
 
-            <div class="container mx-auto px-4 md:px-6 relative z-10">
+            <div class="container max-w-screen-xl mx-auto px-4 md:px-6 relative z-10">
                 <div class="flex flex-col items-center mb-12 md:mb-20">
-                    <h2 class="text-3xl md:text-7xl font-display font-black uppercase bg-white border-3 border-neo-black px-8 py-4 md:px-12 md:py-6 shadow-neo transform -rotate-2 inline-block">
+                    <h2 class="text-3xl md:text-6xl lg:text-7xl font-display font-black uppercase bg-white border-3 border-neo-black px-8 py-4 md:px-12 md:py-6 shadow-neo transform -rotate-2 inline-block max-w-full text-center safe-break">
                         My Skill
                     </h2>
                 </div>
 
-                <!-- NEW SKILL CONTAINER: 3 ROWS -->
                 <div class="flex flex-col gap-6 md:gap-10 items-center justify-center w-full max-w-6xl mx-auto" id="skill-rows-container">
-                    <!-- Content Injected via JS -->
                 </div>
             </div>
         </section>
 
-        <!-- PROJECTS SECTION -->
-        <section id="projects" class="py-12 md:py-32 border-b-3 border-neo-black bg-neo-yellow relative">
-            <div class="container mx-auto px-4 md:px-6">
-                <div class="flex flex-col md:flex-row justify-between items-end mb-12 md:mb-24 border-b-3 border-neo-black pb-6 md:pb-8">
-                    <h2 class="font-display text-4xl xs:text-5xl md:text-8xl font-black leading-none uppercase break-word-fix">
-                        Selected <br> Works
+        <section id="projects" class="py-24 md:py-40 border-b-3 border-neo-black bg-neo-yellow relative overflow-hidden z-20">
+            <div class="absolute top-0 right-0 w-96 h-96 bg-white border-l-3 border-b-3 border-neo-black rounded-bl-full pointer-events-none transform translate-x-40 -translate-y-40 z-0 opacity-50"></div>
+            
+            <div class="container max-w-screen-xl mx-auto px-4 md:px-6 relative z-10">
+                <div class="flex flex-col md:flex-row justify-between items-end mb-20 md:mb-32 border-b-3 border-neo-black pb-8">
+                    <h2 class="font-display text-fluid-sub font-black leading-none uppercase safe-break w-full md:w-auto text-neo-black">
+                        <span class="pro-text-mask"><span class="pro-text-inner">Selected</span></span><br>
+                        <span class="pro-text-mask"><span class="pro-text-inner text-neo-white text-stroke-2">Projects</span></span>
                     </h2>
-                    <div class="text-left md:text-right mt-4 md:mt-0 w-full md:w-auto">
-                        <span class="block text-lg md:text-2xl font-bold font-mono">2023 - 2025</span>
-                        <span class="block text-[10px] md:text-sm font-bold uppercase tracking-[0.2em] mt-2">Quality over Quantity</span>
+                    <div class="text-left md:text-right mt-6 md:mt-0 w-full md:w-auto overflow-hidden">
+                        <span class="block text-lg md:text-2xl font-bold font-mono text-neo-black pro-text-mask"><span class="pro-text-inner delay-100">CRAFTED WITH PASSION</span></span>
+                        <span class="block text-xs md:text-sm font-bold uppercase tracking-[0.2em] mt-2 text-neo-black pro-text-mask"><span class="pro-text-inner delay-200">2025 — PRESENT</span></span>
                     </div>
                 </div>
 
-                <div class="space-y-16 md:space-y-32">
+                <div class="flex flex-col gap-32 md:gap-48">
                     
-                    <!-- Project 1 -->
-                    <article class="project-item flex flex-col md:grid md:grid-cols-2 gap-6 md:gap-12 items-center group perspective-container">
-                        <div class="project-visual w-full relative aspect-[4/3] bg-white border-3 border-neo-black shadow-neo group-hover:shadow-neo-lg transition-all duration-500 overflow-hidden interact-hover">
-                            <div class="absolute inset-0 bg-neo-blue flex items-center justify-center overflow-hidden">
-                                <span class="text-white text-4xl md:text-7xl font-display font-black opacity-20 transform scale-150 group-hover:scale-100 transition-transform duration-700">ECOMM</span>
+                    <article class="pro-project w-full grid md:grid-cols-12 gap-8 md:gap-16 items-center">
+                        <div class="md:col-span-7 relative group cursor-none">
+                            <div class="relative w-full aspect-[16/10] bg-neo-black border-3 border-neo-black overflow-hidden shadow-[10px_10px_0px_#0F0F0F] transition-all duration-500 hover:shadow-[5px_5px_0px_#0F0F0F] pro-card-visual z-10">
+                                <div class="absolute inset-0 bg-gray-800 pro-mask-img z-20">
+                                    <div class="noise-overlay"></div>
+                                    <img src="https://files.catbox.moe/iocdxe.jpg" alt="KynayMic" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 ease-out transform scale-110 group-hover:scale-100 pro-img-parallax">
+                                </div>
+                                <div class="absolute inset-0 bg-neo-black z-0"></div>
                             </div>
-                            <div class="absolute top-3 right-3 md:top-4 md:right-4 bg-white border-2 border-neo-black px-2 py-1 md:px-3 text-[10px] md:text-xs font-bold uppercase rotate-12 group-hover:rotate-0 transition-transform z-10">Featured</div>
+                            
+                            <div class="absolute -bottom-6 -right-4 bg-neo-blue text-white px-5 py-2 border-3 border-neo-black font-bold font-mono text-sm md:text-lg z-30 transform rotate-3 shadow-neo pro-badge">
+                                COMIC READER
+                            </div>
                         </div>
-                        
-                        <div class="project-info w-full md:pl-8">
-                            <div class="flex flex-wrap gap-2 mb-3 md:mb-6">
-                                <span class="px-2 py-1 md:px-3 border-2 border-neo-black bg-neo-white font-bold text-[10px] md:text-xs uppercase shadow-[2px_2px_0px_#000]">React</span>
-                                <span class="px-2 py-1 md:px-3 border-2 border-neo-black bg-neo-white font-bold text-[10px] md:text-xs uppercase shadow-[2px_2px_0px_#000]">Redux</span>
+
+                        <div class="md:col-span-5 flex flex-col justify-center relative z-20">
+                            <div class="pro-text-mask mb-2">
+                                <span class="block font-mono text-xs font-bold uppercase tracking-widest text-neo-black/60 pro-text-inner">01 / Fullstack</span>
                             </div>
-                            <h3 class="text-2xl md:text-5xl font-display font-black uppercase mb-3 md:mb-6 group-hover:text-neo-blue transition-colors">Hype Beast Store</h3>
-                            <p class="text-sm md:text-lg font-medium mb-6 md:mb-8 leading-relaxed border-l-4 border-neo-black pl-4">E-commerce streetwear dengan fitur cart realtime, animasi transisi halaman yang smooth, dan integrasi payment gateway.</p>
-                            <a href="#" class="interact-hover inline-block py-3 px-6 md:py-4 md:px-10 border-3 border-neo-black font-bold uppercase bg-white hover:bg-neo-black hover:text-white transition-all shadow-neo hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-neo-hover text-xs md:text-base">
-                                View Case Study
-                            </a>
+                            <h3 class="text-4xl md:text-6xl font-display font-black uppercase leading-[0.9] mb-6 text-neo-black pro-title">
+                                <div class="pro-text-mask"><span class="pro-text-inner">Kynay</span></div>
+                                <div class="pro-text-mask"><span class="pro-text-inner text-white text-stroke-2">Mic</span></div>
+                            </h3>
+                            <div class="pro-text-mask mb-10">
+                                <p class="text-lg md:text-xl font-medium leading-relaxed border-l-4 border-neo-black pl-6 pro-text-inner text-neo-black max-w-md">
+                                    Platform baca komik legal, gratis, tanpa iklan. Pengalaman membaca imersif dengan UI minimalis.
+                                </p>
+                            </div>
+                            
+                            <div class="pro-text-mask">
+                                <div class="pro-text-inner">
+                                    <a href="https://comic.kynay.biz.id" target="_blank" class="magnetic-btn group inline-flex items-center gap-4">
+                                        <div class="w-14 h-14 md:w-16 md:h-16 rounded-full border-3 border-neo-black bg-white flex items-center justify-center group-hover:bg-neo-black group-hover:text-white transition-colors duration-300 magnetic-trigger">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 transform -rotate-45 group-hover:rotate-0 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                                        </div>
+                                        <span class="font-bold uppercase text-lg tracking-wider group-hover:underline decoration-3 underline-offset-4">Visit Site</span>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </article>
 
-                    <!-- Project 2 -->
-                    <article class="project-item flex flex-col md:grid md:grid-cols-2 gap-6 md:gap-12 items-center group perspective-container">
-                        <!-- Swapped order logic for responsiveness handled by order classes -->
-                        <div class="project-info w-full md:pr-8 md:text-right flex flex-col items-start md:items-end order-2 md:order-1">
-                            <div class="flex flex-wrap gap-2 mb-3 md:mb-6 justify-start md:justify-end">
-                                <span class="px-2 py-1 md:px-3 border-2 border-neo-black bg-neo-white font-bold text-[10px] md:text-xs uppercase shadow-[2px_2px_0px_#000]">Dashboard</span>
-                                <span class="px-2 py-1 md:px-3 border-2 border-neo-black bg-neo-white font-bold text-[10px] md:text-xs uppercase shadow-[2px_2px_0px_#000]">Chart.js</span>
+                    <article class="pro-project w-full grid md:grid-cols-12 gap-8 md:gap-16 items-center">
+                        <div class="md:col-span-5 flex flex-col justify-center relative z-20 order-2 md:order-1 md:text-right md:items-end">
+                            <div class="pro-text-mask mb-2">
+                                <span class="block font-mono text-xs font-bold uppercase tracking-widest text-neo-black/60 pro-text-inner">02 / Community</span>
                             </div>
-                            <h3 class="text-2xl md:text-5xl font-display font-black uppercase mb-3 md:mb-6 group-hover:text-neo-purple transition-colors">Crypto Tracker</h3>
-                            <p class="text-sm md:text-lg font-medium mb-6 md:mb-8 leading-relaxed border-l-4 md:border-l-0 md:border-r-4 border-neo-black pl-4 md:pl-0 md:pr-4">Dashboard monitoring aset crypto dengan data visualisasi yang kompleks, dark mode persisten, dan real-time websocket data.</p>
-                            <a href="#" class="interact-hover inline-block py-3 px-6 md:py-4 md:px-10 border-3 border-neo-black font-bold uppercase bg-white hover:bg-neo-black hover:text-white transition-all shadow-neo hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-neo-hover text-xs md:text-base">
-                                View Case Study
-                            </a>
+                            <h3 class="text-4xl md:text-6xl font-display font-black uppercase leading-[0.9] mb-6 text-neo-black pro-title">
+                                <div class="pro-text-mask"><span class="pro-text-inner">Pemula</span></div>
+                                <div class="pro-text-mask"><span class="pro-text-inner text-neo-red">Coding</span></div>
+                            </h3>
+                            <div class="pro-text-mask mb-10">
+                                <p class="text-lg md:text-xl font-medium leading-relaxed border-l-4 md:border-l-0 md:border-r-4 border-neo-black pl-6 md:pr-6 pro-text-inner text-neo-black max-w-md ml-auto">
+                                    Rumah bagi developer pemula. Forum diskusi, showcase project, dan learning path terstruktur.
+                                </p>
+                            </div>
+                            
+                            <div class="pro-text-mask">
+                                <div class="pro-text-inner">
+                                    <a href="https://pemulacoding.vercel.app" target="_blank" class="magnetic-btn group inline-flex items-center gap-4 flex-row-reverse">
+                                        <div class="w-14 h-14 md:w-16 md:h-16 rounded-full border-3 border-neo-black bg-white flex items-center justify-center group-hover:bg-neo-black group-hover:text-white transition-colors duration-300 magnetic-trigger">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 transform -rotate-45 group-hover:rotate-0 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                                        </div>
+                                        <span class="font-bold uppercase text-lg tracking-wider group-hover:underline decoration-3 underline-offset-4">Join Us</span>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="project-visual w-full order-1 md:order-2 relative aspect-[4/3] bg-white border-3 border-neo-black shadow-neo group-hover:shadow-neo-lg transition-all duration-500 overflow-hidden interact-hover">
-                            <div class="absolute inset-0 bg-neo-purple flex items-center justify-center overflow-hidden">
-                                <span class="text-white text-4xl md:text-7xl font-display font-black opacity-20 transform scale-150 group-hover:scale-100 transition-transform duration-700">FINANCE</span>
+                        <div class="md:col-span-7 relative group cursor-none order-1 md:order-2">
+                            <div class="relative w-full aspect-[16/10] bg-neo-black border-3 border-neo-black overflow-hidden shadow-[10px_10px_0px_#0F0F0F] transition-all duration-500 hover:shadow-[5px_5px_0px_#0F0F0F] pro-card-visual z-10">
+                                <div class="absolute inset-0 bg-gray-800 pro-mask-img z-20">
+                                    <div class="noise-overlay"></div>
+                                    <img src="https://files.catbox.moe/a17kdu.jpg" alt="Pemula Coding" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 ease-out transform scale-110 group-hover:scale-100 pro-img-parallax">
+                                </div>
+                                <div class="absolute inset-0 bg-neo-black z-0"></div>
                             </div>
-                        </div>
-                    </article>
-
-                    <!-- Project 3 -->
-                    <article class="project-item flex flex-col md:grid md:grid-cols-2 gap-6 md:gap-12 items-center group perspective-container">
-                        <div class="project-visual w-full relative aspect-[4/3] bg-white border-3 border-neo-black shadow-neo group-hover:shadow-neo-lg transition-all duration-500 overflow-hidden interact-hover">
-                             <div class="absolute inset-0 bg-neo-red flex items-center justify-center overflow-hidden">
-                                <span class="text-white text-4xl md:text-7xl font-display font-black opacity-20 transform scale-150 group-hover:scale-100 transition-transform duration-700">AGENCY</span>
+                            
+                            <div class="absolute -top-6 -left-4 bg-neo-yellow text-neo-black px-5 py-2 border-3 border-neo-black font-bold font-mono text-sm md:text-lg z-30 transform -rotate-2 shadow-neo pro-badge">
+                                OPEN SOURCE
                             </div>
-                        </div>
-                        
-                        <div class="project-info w-full md:pl-8">
-                            <div class="flex flex-wrap gap-2 mb-3 md:mb-6">
-                                <span class="px-2 py-1 md:px-3 border-2 border-neo-black bg-neo-white font-bold text-[10px] md:text-xs uppercase shadow-[2px_2px_0px_#000]">GSAP</span>
-                                <span class="px-2 py-1 md:px-3 border-2 border-neo-black bg-neo-white font-bold text-[10px] md:text-xs uppercase shadow-[2px_2px_0px_#000]">Landing</span>
-                            </div>
-                            <h3 class="text-2xl md:text-5xl font-display font-black uppercase mb-3 md:mb-6 group-hover:text-neo-red transition-colors">Creative Studio</h3>
-                            <p class="text-sm md:text-lg font-medium mb-6 md:mb-8 leading-relaxed border-l-4 border-neo-black pl-4">Landing page untuk agensi kreatif dengan scroll-trigger animation yang intensif dan layout asimetris.</p>
-                            <a href="#" class="interact-hover inline-block py-3 px-6 md:py-4 md:px-10 border-3 border-neo-black font-bold uppercase bg-white hover:bg-neo-black hover:text-white transition-all shadow-neo hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-neo-hover text-xs md:text-base">
-                                View Case Study
-                            </a>
                         </div>
                     </article>
 
@@ -469,197 +460,176 @@
             </div>
         </section>
 
-        <!-- CONTACT SECTION -->
-        <section id="contact" class="py-12 md:py-32 bg-white border-b-3 border-neo-black">
-            <div class="container mx-auto px-4 md:px-6 max-w-5xl">
-                <div class="relative bg-neo-bg border-3 border-neo-black p-6 md:p-20 shadow-neo-lg">
-                    <!-- Decoration Tape -->
-                    <div class="absolute -top-4 md:-top-5 left-1/2 transform -translate-x-1/2 bg-neo-yellow px-4 py-2 md:px-10 md:py-3 border-3 border-neo-black font-bold font-display uppercase tracking-widest rotate-2 shadow-sm z-20 text-[10px] md:text-base whitespace-nowrap">
-                        Open for Work
-                    </div>
+        <section id="contact" class="py-20 md:py-32 bg-neo-bg border-b-3 border-neo-black relative overflow-hidden">
+            <div class="absolute inset-0 bg-[linear-gradient(rgba(15,15,15,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(15,15,15,0.02)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none"></div>
 
-                    <h2 class="text-3xl xs:text-4xl md:text-7xl font-display font-black mb-4 md:mb-6 uppercase text-center tracking-tight mt-4 md:mt-0 break-word-fix">Let's Collaborate</h2>
-                    <p class="text-center mb-8 md:mb-16 font-medium text-sm md:text-xl max-w-2xl mx-auto">Punya proyek gila? Jangan ragu, ayo wujudkan visi liarmu bersama-sama.</p>
+            <div class="container max-w-screen-xl mx-auto px-4 md:px-6 relative z-10">
+                <div class="flex flex-col items-center mb-16 md:mb-24 text-center">
+                    <div class="inline-block bg-neo-yellow border-3 border-neo-black px-6 py-2 shadow-neo transform -rotate-2 mb-6">
+                        <span class="font-bold font-mono text-sm md:text-base uppercase tracking-widest">Let's Connect</span>
+                    </div>
+                    <h2 class="font-display text-5xl md:text-8xl font-black uppercase leading-none mb-4 tracking-tight">
+                        <span class="block contact-title-reveal">Get In</span>
+                        <span class="block text-stroke-2 text-transparent contact-title-reveal hover:text-neo-black transition-colors duration-500">Touch</span>
+                    </h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 max-w-6xl mx-auto perspective-1000">
                     
-                    <form class="space-y-6 md:space-y-10">
-                        <div class="grid md:grid-cols-2 gap-6 md:gap-10">
-                            <div class="form-group relative w-full">
-                                <label class="block font-bold mb-2 md:mb-3 uppercase text-xs md:text-sm tracking-wider">Nama</label>
-                                <input type="text" placeholder="Siapa nama anda?" class="input-field w-full bg-white border-3 border-neo-black p-3 md:p-6 font-bold text-sm md:text-lg focus:outline-none transition-all placeholder:text-gray-300">
-                                <div class="absolute bottom-0 left-0 h-1 bg-neo-blue w-0 transition-all duration-300 input-line"></div>
+                    <a href="https://wa.me/6282336479077" target="_blank" class="contact-card-wrapper group relative block">
+                        <div class="contact-card bg-white border-3 border-neo-black p-8 md:px-6 md:py-12 shadow-neo-lg hover:shadow-neo-xl transition-all duration-300 flex flex-col items-center justify-center gap-6 h-full min-h-[300px] relative z-20 interact-hover">
+                            <div class="absolute inset-0 bg-wa-green transform scale-y-0 origin-bottom group-hover:scale-y-100 transition-transform duration-500 ease-in-out z-0"></div>
+                            
+                            <div class="relative z-10 contact-icon-float">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="currentColor" class="text-wa-green group-hover:text-white transition-colors duration-300 transform scale-100 group-hover:scale-110">
+                                    <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+                                </svg>
                             </div>
-                            <div class="form-group relative w-full">
-                                <label class="block font-bold mb-2 md:mb-3 uppercase text-xs md:text-sm tracking-wider">Email</label>
-                                <input type="email" placeholder="email@anda.com" class="input-field w-full bg-white border-3 border-neo-black p-3 md:p-6 font-bold text-sm md:text-lg focus:outline-none transition-all placeholder:text-gray-300">
-                                <div class="absolute bottom-0 left-0 h-1 bg-neo-blue w-0 transition-all duration-300 input-line"></div>
+                            
+                            <h3 class="text-2xl lg:text-3xl font-display font-black uppercase text-neo-black group-hover:text-white transition-colors duration-300 relative z-10 w-full text-center break-words">WhatsApp</h3>
+                            
+                            <div class="absolute top-4 right-4 bg-neo-black text-white px-3 py-1 text-xs font-mono font-bold uppercase opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">Chat Now</div>
+                        </div>
+                    </a>
+
+                    <a href="https://t.me/6282336479077" target="_blank" class="contact-card-wrapper group relative block">
+                        <div class="contact-card bg-white border-3 border-neo-black p-8 md:px-6 md:py-12 shadow-neo-lg hover:shadow-neo-xl transition-all duration-300 flex flex-col items-center justify-center gap-6 h-full min-h-[300px] relative z-20 interact-hover">
+                            <div class="absolute inset-0 bg-tg-blue transform scale-y-0 origin-bottom group-hover:scale-y-100 transition-transform duration-500 ease-in-out z-0"></div>
+                            
+                            <div class="relative z-10 contact-icon-float" style="animation-delay: -1s;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="currentColor" class="text-tg-blue group-hover:text-white transition-colors duration-300 transform scale-100 group-hover:scale-110">
+                                    <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 11.944 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+                                </svg>
                             </div>
+                            
+                            <h3 class="text-2xl lg:text-3xl font-display font-black uppercase text-neo-black group-hover:text-white transition-colors duration-300 relative z-10 w-full text-center break-words">Telegram</h3>
+                            
+                             <div class="absolute top-4 right-4 bg-neo-black text-white px-3 py-1 text-xs font-mono font-bold uppercase opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">Message</div>
                         </div>
-                        
-                        <div class="form-group relative w-full">
-                            <label class="block font-bold mb-2 md:mb-3 uppercase text-xs md:text-sm tracking-wider">Pesan</label>
-                            <textarea rows="4" placeholder="Ceritakan detail projectmu disini..." class="input-field w-full bg-white border-3 border-neo-black p-3 md:p-6 font-bold text-sm md:text-lg focus:outline-none transition-all placeholder:text-gray-300 resize-none"></textarea>
-                            <div class="absolute bottom-0 left-0 h-1 bg-neo-blue w-0 transition-all duration-300 input-line"></div>
+                    </a>
+
+                    <a href="mailto:farhanshahab777@gmail.com" class="contact-card-wrapper group relative block">
+                        <div class="contact-card bg-white border-3 border-neo-black p-8 md:px-6 md:py-12 shadow-neo-lg hover:shadow-neo-xl transition-all duration-300 flex flex-col items-center justify-center gap-6 h-full min-h-[300px] relative z-20 interact-hover">
+                            <div class="absolute inset-0 bg-gmail-red transform scale-y-0 origin-bottom group-hover:scale-y-100 transition-transform duration-500 ease-in-out z-0"></div>
+                            
+                            <div class="relative z-10 contact-icon-float" style="animation-delay: -2s;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="currentColor" class="text-gmail-red group-hover:text-white transition-colors duration-300 transform scale-100 group-hover:scale-110">
+                                    <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/>
+                                </svg>
+                            </div>
+                            
+                            <h3 class="text-2xl lg:text-3xl font-display font-black uppercase text-neo-black group-hover:text-white transition-colors duration-300 relative z-10 w-full text-center break-words">Email Me</h3>
+                            
+                             <div class="absolute top-4 right-4 bg-neo-black text-white px-3 py-1 text-xs font-mono font-bold uppercase opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">Send Mail</div>
                         </div>
+                    </a>
 
-                        <button type="button" class="interact-hover group w-full py-4 md:py-6 bg-neo-black text-white text-lg md:text-2xl font-black uppercase border-3 border-transparent hover:border-neo-black hover:bg-neo-white hover:text-neo-black hover:shadow-neo transition-all duration-300 relative overflow-hidden">
-                            <span class="relative z-10">Kirim Pesan</span>
-                        </button>
-                    </form>
-
-                    <div class="mt-8 md:mt-20 flex justify-center gap-4 md:gap-8">
-                        <a href="#" class="interact-hover w-12 h-12 md:w-20 md:h-20 flex items-center justify-center border-3 border-neo-black bg-white hover:bg-neo-blue hover:text-white hover:-translate-y-2 hover:shadow-neo transition-all duration-300 text-lg md:text-2xl font-bold">In</a>
-                        <a href="#" class="interact-hover w-12 h-12 md:w-20 md:h-20 flex items-center justify-center border-3 border-neo-black bg-white hover:bg-neo-black hover:text-white hover:-translate-y-2 hover:shadow-neo transition-all duration-300 text-lg md:text-2xl font-bold">Gh</a>
-                        <a href="#" class="interact-hover w-12 h-12 md:w-20 md:h-20 flex items-center justify-center border-3 border-neo-black bg-white hover:bg-neo-blue hover:text-white hover:-translate-y-2 hover:shadow-neo transition-all duration-300 text-lg md:text-2xl font-bold">Tw</a>
-                    </div>
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- FOOTER -->
     <footer class="bg-neo-black text-white py-12 md:py-20 relative z-10">
-        <div class="container mx-auto px-6 text-center">
+        <div class="container max-w-screen-xl mx-auto px-6 text-center">
             <h2 class="font-display text-4xl md:text-7xl font-black mb-6 md:mb-8 hover:text-neo-yellow transition-colors cursor-default select-none">FARHAN.</h2>
             <div class="flex justify-center items-center gap-4 md:gap-6 mb-8 md:mb-10">
                 <span class="h-1 w-8 md:w-16 bg-neo-yellow"></span>
-                <p class="text-xs md:text-base opacity-70 font-mono">&copy; 2025. Made with sweat & logic.</p>
+                <p class="text-sm md:text-xl font-bold font-mono tracking-wide text-white">Created by Farhan Kertadiwangsa</p>
                 <span class="h-1 w-8 md:w-16 bg-neo-yellow"></span>
             </div>
-            <p class="text-[10px] md:text-xs uppercase tracking-[0.2em] text-neo-yellow animate-pulse">Neo-Brutalism v2.0</p>
         </div>
     </footer>
 
-    <!-- GSAP Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
     <script>
-        // --- 1. SETUP & UTILITIES ---
-        gsap.registerPlugin(ScrollTrigger);
+        // --- 1. IMMEDIATE SCROLL LOCK (CRITICAL) ---
+        // Mengunci scroll sebelum konten apapun dirender
+        document.body.style.overflow = 'hidden';
+        document.documentElement.style.overflow = 'hidden';
+        window.scrollTo(0, 0);
 
+        gsap.registerPlugin(ScrollTrigger);
         const isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
 
-        // --- 2. CUSTOM CURSOR & MAGNETIC EFFECT (DESKTOP ONLY) ---
         if (!isTouch && window.innerWidth > 1024) {
             const cursorDot = document.querySelector('.cursor-dot');
             const cursorCircle = document.querySelector('.cursor-circle');
             
-            // GSAP quickTo for high performance mouse following
             const xDot = gsap.quickTo(cursorDot, "x", {duration: 0.1, ease: "power3"});
             const yDot = gsap.quickTo(cursorDot, "y", {duration: 0.1, ease: "power3"});
             const xCircle = gsap.quickTo(cursorCircle, "x", {duration: 0.3, ease: "power3"});
             const yCircle = gsap.quickTo(cursorCircle, "y", {duration: 0.3, ease: "power3"});
 
             window.addEventListener("mousemove", (e) => {
-                xDot(e.clientX);
-                yDot(e.clientY);
-                xCircle(e.clientX);
-                yCircle(e.clientY);
+                xDot(e.clientX); yDot(e.clientY);
+                xCircle(e.clientX); yCircle(e.clientY);
             });
 
-            // Hover interactions
             const interactables = document.querySelectorAll('a, button, .interact-hover, input, textarea');
             interactables.forEach(el => {
                 el.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
                 el.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
             });
             
-             // Magnetic Buttons
             const magnets = document.querySelectorAll('.magnetic-wrap');
             magnets.forEach(magnet => {
                 magnet.addEventListener('mousemove', (e) => {
                     const bound = magnet.getBoundingClientRect();
                     const x = e.clientX - bound.left - bound.width / 2;
                     const y = e.clientY - bound.top - bound.height / 2;
-                    
                     gsap.to(magnet, { x: x * 0.3, y: y * 0.3, duration: 0.3, ease: "power2.out" });
                 });
-
                 magnet.addEventListener('mouseleave', () => {
                     gsap.to(magnet, { x: 0, y: 0, duration: 0.8, ease: "elastic.out(1, 0.4)" });
                 });
             });
         }
 
-        // --- 4. HERO ANIMATION SEQUENCE ---
         const initHero = () => {
+            // Animasi ini murni Timeline, TIDAK terikat ScrollTrigger
+            // Ini memastikan animasi selalu jalan saat loading selesai
             const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
+            
+            // Selector khusus untuk Hero section saja agar spesifik
+            const heroText = document.querySelectorAll("h1 .reveal-text-inner");
+            
+            tl.to(heroText, { y: 0, duration: 1.2, stagger: 0.15, skewY: 0, force3D: true })
+            .from(".hero-badge", { scale: 0, rotation: -10, opacity: 0, duration: 0.8, ease: "back.out(1.7)" }, "-=0.8")
+            .from(".reveal-opacity", { y: 30, opacity: 0, duration: 1, stagger: 0.1 }, "-=0.6")
+            .from(".perspective-container", { y: 100, opacity: 0, rotation: 5, duration: 1.2, ease: "elastic.out(1, 0.7)" }, "-=1");
 
-            tl.to(".reveal-text-inner", {
-                y: 0,
-                duration: 1.2,
-                stagger: 0.15,
-                skewY: 0,
-            })
-            .from(".hero-badge", {
-                scale: 0,
-                rotation: -10,
-                opacity: 0,
-                duration: 0.8,
-                ease: "back.out(1.7)"
-            }, "-=0.8")
-            .from(".reveal-opacity", {
-                y: 30,
-                opacity: 0,
-                duration: 1,
-                stagger: 0.1
-            }, "-=0.6")
-            .from(".perspective-container", {
-                y: 100,
-                opacity: 0,
-                rotation: 5,
-                duration: 1.2,
-                ease: "elastic.out(1, 0.7)"
-            }, "-=1");
-
-            // Hero Mouse Parallax (3D Effect) - Disable on Mobile
             if(window.innerWidth > 768) {
                 const heroCard = document.querySelector('#hero-card');
                 const heroSection = document.querySelector('section');
-                
                 heroSection.addEventListener('mousemove', (e) => {
                     const xVal = (e.clientX - window.innerWidth / 2) * 0.015;
                     const yVal = (e.clientY - window.innerHeight / 2) * 0.015;
-                    
-                    gsap.to(heroCard, {
-                        rotationY: xVal,
-                        rotationX: -yVal,
-                        duration: 0.5,
-                        ease: "power2.out"
-                    });
+                    gsap.to(heroCard, { rotationY: xVal, rotationX: -yVal, duration: 0.5, ease: "power2.out" });
                 });
             }
+            
+            return tl; // Return timeline untuk di-chain
         };
 
-        // --- 5. VELOCITY MARQUEE ---
         const initMarquee = () => {
             const marquee = document.querySelector(".marquee-wrapper");
             const content = document.querySelector(".marquee-content");
-            
-            // Clone content untuk seamless loop
             const clone = content.cloneNode(true);
             marquee.appendChild(clone);
 
-            let tween = gsap.to(marquee, {
-                x: -content.offsetWidth,
-                repeat: -1,
-                duration: 15,
-                ease: "none"
-            });
+            let tween = gsap.to(marquee, { x: -content.offsetWidth, repeat: -1, duration: 15, ease: "none" });
 
             ScrollTrigger.create({
                 onUpdate: (self) => {
-                    // Only apply fancy skew/scale on larger screens to prevent jank on mobile
                     if(window.innerWidth > 768) {
                         let skew = self.getVelocity() / -300;
                         let scale = 1 + Math.abs(self.getVelocity() / 5000); 
                         let timeScale = 1 + Math.abs(self.getVelocity() / 500); 
-                        
                         skew = gsap.utils.clamp(-10, 10, skew);
-
                         gsap.to(tween, { timeScale: timeScale, duration: 0.2, overwrite: true });
                         gsap.to(".marquee-wrapper", { skewX: skew, scale: scale, duration: 0.2, overwrite: true });
-                        
                         gsap.to(tween, { timeScale: 1, duration: 1, delay: 0.2 });
                         gsap.to(".marquee-wrapper", { skewX: 0, scale: 1, duration: 1, delay: 0.2 });
                     }
@@ -667,282 +637,341 @@
             });
         };
 
-        // --- 6. SCROLL REVEALS & PHYSICS ---
         const initScrollReveals = () => {
-            // Text Mask Reveals
-            gsap.utils.toArray(".reveal-text-mask").forEach(mask => {
+            // --- FIX 2: ISOLASI HERO DARI SCROLLTRIGGER ---
+            // Kita filter agar ScrollTrigger TIDAK mengambil alih elemen H1 (Hero)
+            // Hanya elemen selain H1 yang akan mendapatkan efek scroll trigger
+            const allMasks = gsap.utils.toArray(".reveal-text-mask");
+            
+            allMasks.forEach(mask => {
+                // Skip jika parent terdekat adalah H1 (Hero Section)
+                if (mask.closest('h1')) return;
+
                 const text = mask.querySelector(".reveal-text-inner");
                 if(text) {
-                    gsap.fromTo(text, 
-                        { y: "100%" },
-                        {
-                            y: "0%",
-                            duration: 1,
-                            ease: "power3.out",
-                            scrollTrigger: {
-                                trigger: mask,
-                                start: "top 95%", // Adjusted for mobile trigger
-                                toggleActions: "play none none reverse"
-                            }
-                        }
-                    );
+                    gsap.fromTo(text, { y: "100%" }, { y: "0%", duration: 1, ease: "power3.out", scrollTrigger: { trigger: mask, start: "top 95%", toggleActions: "play none none reverse" }});
                 }
             });
 
-            // Card / Box Pops
-            gsap.utils.toArray(".reveal-box").forEach((box, i) => {
-                gsap.from(box, {
-                    y: 50,
+            gsap.utils.toArray(".reveal-box").forEach((box) => {
+                gsap.from(box, { y: 50, opacity: 0, scale: 0.95, duration: 0.8, ease: "back.out(1.5)", scrollTrigger: { trigger: box, start: "top 90%", toggleActions: "play none none reverse" }});
+            });
+
+            gsap.utils.toArray(".about-text-anim").forEach((text, i) => {
+                gsap.from(text, {
+                    y: 30,
                     opacity: 0,
-                    scale: 0.95,
-                    duration: 0.8,
-                    ease: "back.out(1.5)",
+                    duration: 1.2,
+                    ease: "power3.out",
                     scrollTrigger: {
-                        trigger: box,
-                        start: "top 90%",
-                        toggleActions: "play none none reverse" // Added reverse here too for consistency
+                        trigger: text,
+                        start: "top 85%", 
+                        toggleActions: "play none none reverse"
                     }
                 });
             });
-
-            // Project Parallax (Disabled on Mobile for performance)
-             if(window.innerWidth > 768) {
-                gsap.utils.toArray(".project-item").forEach(item => {
-                    const img = item.querySelector(".project-visual");
-                    gsap.fromTo(img, 
-                        { y: 50 },
-                        { y: -50, scrollTrigger: {
-                            trigger: item,
-                            start: "top bottom",
-                            end: "bottom top",
-                            scrub: 1
-                        }}
-                    );
-                });
-            }
         };
 
-        // --- 7. NEW SKILL SECTION INTERACTION (URL BASED) ---
+        const initProProjects = () => {
+            const projects = gsap.utils.toArray('.pro-project');
+            
+            const headerTexts = document.querySelectorAll('#projects .pro-text-inner');
+            ScrollTrigger.batch(headerTexts, {
+                start: "top 90%",
+                onEnter: batch => gsap.to(batch, { y: "0%", duration: 1.2, stagger: 0.1, ease: "power4.out" }),
+                once: true
+            });
+
+            projects.forEach((project, i) => {
+                const imgMask = project.querySelector('.pro-mask-img');
+                const imgParallax = project.querySelector('.pro-img-parallax');
+                const texts = project.querySelectorAll('.pro-text-inner');
+                const visual = project.querySelector('.pro-card-visual');
+                const badge = project.querySelector('.pro-badge');
+                const btn = project.querySelector('.magnetic-btn');
+                const btnTrigger = btn.querySelector('.magnetic-trigger');
+
+                const tl = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: project,
+                        start: "top 75%",
+                        toggleActions: "play none none reverse"
+                    }
+                });
+
+                tl.to(imgMask, { clipPath: "inset(0% 0 0 0)", duration: 1.4, ease: "expo.out" })
+                  .to(texts, { y: "0%", duration: 1, stagger: 0.1, ease: "power3.out" }, "-=1")
+                  .from(badge, { scale: 0, rotation: 180, duration: 0.8, ease: "back.out(1.7)" }, "-=1");
+
+                gsap.fromTo(imgParallax, 
+                    { yPercent: -10, scale: 1.1 }, 
+                    { yPercent: 10, scale: 1, ease: "none", scrollTrigger: { trigger: project, start: "top bottom", end: "bottom top", scrub: true }}
+                );
+
+                if(btn && btnTrigger && !isTouch && window.innerWidth > 1024) {
+                    btn.addEventListener('mousemove', (e) => {
+                        const bound = btnTrigger.getBoundingClientRect();
+                        const x = e.clientX - bound.left - bound.width / 2;
+                        const y = e.clientY - bound.top - bound.height / 2;
+                        gsap.to(btnTrigger, { x: x * 0.4, y: y * 0.4, duration: 0.3, ease: "power2.out" });
+                    });
+                    btn.addEventListener('mouseleave', () => {
+                        gsap.to(btnTrigger, { x: 0, y: 0, duration: 0.8, ease: "elastic.out(1, 0.4)" });
+                    });
+                }
+
+                if(visual && !isTouch && window.innerWidth > 1024) {
+                    const xTo = gsap.quickTo(visual, "rotationY", { duration: 0.4, ease: "power3.out" });
+                    const yTo = gsap.quickTo(visual, "rotationX", { duration: 0.4, ease: "power3.out" });
+
+                    project.addEventListener("mousemove", (e) => {
+                        const rect = visual.getBoundingClientRect();
+                        const x = (e.clientX - rect.left - rect.width / 2) / 20;
+                        const y = (e.clientY - rect.top - rect.height / 2) / 20 * -1;
+                        
+                        xTo(x);
+                        yTo(y);
+                    });
+
+                    project.addEventListener("mouseleave", () => {
+                        xTo(0);
+                        yTo(0);
+                    });
+                }
+            });
+        };
+
         const initSkills = () => {
-            // Updated Skill Data Structure (Using CDN URLs)
             const skillRows = [
-                // Row 1: Languages
-                [
+                 [
                     { name: 'HTML', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg' },
                     { name: 'CSS', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg' },
-                    { name: 'JS', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg' },
+                    { name: 'JavaScript', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg' },
+                    { name: 'TypeScript', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg' },
                     { name: 'Python', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg' },
-                    { name: 'Go', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original.svg' }
+                    { name: 'Go', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original.svg' },
+                    { name: 'C++', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg' },
+                    { name: 'Java', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg' },
+                    { name: 'Lua', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/lua/lua-original.svg' }
                 ],
-                // Row 2: Frameworks
                 [
                     { name: 'React', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg' },
-                    { name: 'Next', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg' },
+                    { name: 'Next.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg' },
+                    { name: 'Vue', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg' },
+                    { name: 'Svelte', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/svelte/svelte-original.svg' },
                     { name: 'Tailwind', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg' },
-                    { name: 'Vite', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vitejs/vitejs-original.svg' },
-                    { name: 'Express', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg' }
+                    { name: 'Bootstrap', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg' },
+                    { name: 'Vite', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vitejs/vitejs-original.svg' }
                 ],
-                // Row 3: Tools & DB
+                [
+                    { name: 'Node.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg' },
+                    { name: 'Express', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg' },
+                    { name: 'NestJS', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nestjs/nestjs-original.svg' },
+                    { name: 'Laravel', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg' },
+                    { name: 'Spring', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg' },
+                    { name: 'Django', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg' },
+                    { name: 'FastAPI', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg' }
+                ],
+                [
+                    { name: 'MySQL', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg' },
+                    { name: 'PostgreSQL', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg' },
+                    { name: 'MongoDB', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg' },
+                    { name: 'Redis', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg' },
+                    { name: 'Firebase', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg' },
+                    { name: 'Supabase', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/supabase/supabase-original.svg' }
+                ],
+                [
+                    { name: 'Docker', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg' },
+                    { name: 'Kubernetes', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg' },
+                    { name: 'Nginx', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nginx/nginx-original.svg' },
+                    { name: 'Linux', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg' },
+                    { name: 'Cloudflare', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cloudflare/cloudflare-original.svg' },
+                    { name: 'Vercel', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vercel/vercel-original.svg' }
+                ],
                 [
                     { name: 'Git', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg' },
-                    { name: 'Firebase', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg' },
-                    { name: 'Supabase', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/supabase/supabase-original.svg' },
-                    { name: 'MySQL', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg' },
-                    { name: 'Postgres', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg' },
-                    { name: 'Mongo', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg' }
+                    { name: 'GitHub', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg' },
+                    { name: 'Figma', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg' },
+                    { name: 'Postman', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg' },
+                    { name: 'VS Code', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg' }
                 ]
             ];
 
             const container = document.getElementById('skill-rows-container');
             
-            // Build Rows
-            skillRows.forEach((rowSkills, i) => {
+            skillRows.forEach((rowSkills) => {
                 const rowDiv = document.createElement('div');
                 rowDiv.className = "flex flex-wrap justify-center gap-4 md:gap-8 w-full";
                 
                 rowSkills.forEach(skill => {
                     const btnWrapper = document.createElement('div');
                     btnWrapper.className = 'skill-btn-wrapper';
-                    
                     const btn = document.createElement('div');
                     btn.className = `skill-btn w-16 h-16 md:w-24 md:h-24 bg-white border-3 border-neo-black rounded-xl md:rounded-2xl shadow-neo flex items-center justify-center cursor-pointer relative z-10 will-change-transform`;
-                    
-                    // Add IMG Icon (Replaced SVG)
-                    // Note: pointer-events-none added to ensure clicks pass through to the btn div
                     btn.innerHTML = `<img src="${skill.icon}" alt="${skill.name}" class="w-8 h-8 md:w-12 md:h-12 object-contain pointer-events-none select-none" loading="lazy">`;
-                    
                     btnWrapper.appendChild(btn);
                     rowDiv.appendChild(btnWrapper);
 
-                    // --- 1. IDLE ANIMATION (Organic Float) ---
-                    // Independent random movement for each button
-                    gsap.to(btn, {
-                        y: gsap.utils.random(-6, 6),
-                        rotation: gsap.utils.random(-3, 3),
-                        duration: gsap.utils.random(2.5, 4.5),
-                        ease: "sine.inOut",
-                        yoyo: true,
-                        repeat: -1,
-                        delay: gsap.utils.random(0, 2) // Async start
-                    });
+                    gsap.to(btn, { y: gsap.utils.random(-6, 6), rotation: gsap.utils.random(-3, 3), duration: gsap.utils.random(2.5, 4.5), ease: "sine.inOut", yoyo: true, repeat: -1, delay: gsap.utils.random(0, 2) });
 
-                    // --- 2. PHYSICS HOVER (Magnetic + Scale) ---
-                    // Desktop only complex physics
                     if(!isTouch && window.innerWidth > 1024) {
                         btn.addEventListener('mousemove', (e) => {
                             const rect = btn.getBoundingClientRect();
                             const x = e.clientX - rect.left - rect.width / 2;
                             const y = e.clientY - rect.top - rect.height / 2;
-                            
-                            // Magnetic attraction
-                            gsap.to(btn, {
-                                x: x * 0.4,
-                                y: y * 0.4,
-                                scale: 1.15,
-                                boxShadow: "10px 10px 0px 0px #0F0F0F",
-                                borderColor: "#0F0F0F",
-                                duration: 0.3,
-                                ease: "power2.out"
-                            });
+                            gsap.to(btn, { x: x * 0.4, y: y * 0.4, scale: 1.15, boxShadow: "10px 10px 0px 0px #0F0F0F", borderColor: "#0F0F0F", duration: 0.3, ease: "power2.out" });
                         });
-
                         btn.addEventListener('mouseleave', () => {
-                            // Elastic rebound on release
-                            gsap.to(btn, {
-                                x: 0,
-                                y: 0,
-                                scale: 1,
-                                boxShadow: "5px 5px 0px 0px #0F0F0F",
-                                duration: 1.2,
-                                ease: "elastic.out(1, 0.3)"
-                            });
+                            gsap.to(btn, { x: 0, y: 0, scale: 1, boxShadow: "5px 5px 0px 0px #0F0F0F", duration: 1.2, ease: "elastic.out(1, 0.3)" });
                         });
                     }
-
-                    // --- 3. CLICK/PRESS EFFECT (Mechanical Feel) ---
-                    btn.addEventListener('mousedown', () => {
-                        gsap.to(btn, {
-                            scale: 0.95,
-                            boxShadow: "0px 0px 0px 0px #0F0F0F",
-                            x: 5, // Move matches shadow offset for "pressing in" feel
-                            y: 5,
-                            duration: 0.05,
-                            ease: "power2.out"
-                        });
-                    });
-
-                    btn.addEventListener('mouseup', () => {
-                         // Spring back up
-                        gsap.to(btn, {
-                            scale: 1.1,
-                            boxShadow: "8px 8px 0px 0px #0F0F0F",
-                            x: 0,
-                            y: 0,
-                            duration: 0.5,
-                            ease: "elastic.out(1, 0.4)"
-                        });
-                        // Return to idle state handled by mouseleave/idle anim
-                    });
+                    btn.addEventListener('mousedown', () => gsap.to(btn, { scale: 0.95, boxShadow: "0px 0px 0px 0px #0F0F0F", x: 5, y: 5, duration: 0.05, ease: "power2.out" }));
+                    btn.addEventListener('mouseup', () => gsap.to(btn, { scale: 1.1, boxShadow: "8px 8px 0px 0px #0F0F0F", x: 0, y: 0, duration: 0.5, ease: "elastic.out(1, 0.4)" }));
                 });
-                
                 container.appendChild(rowDiv);
-
-                // --- 4. SCROLL STAGGER ENTRANCE (MODIFIED) ---
-                gsap.from(rowDiv.children, {
-                    y: 150,
-                    opacity: 0,
-                    scale: 0.5,
-                    duration: 0.8,
-                    stagger: 0.05,
-                    ease: "back.out(1.5)",
-                    scrollTrigger: {
-                        trigger: rowDiv,
-                        start: "top 90%",
-                        toggleActions: "play none none reverse" // Enables re-animation when scrolling back
-                    }
-                });
+                gsap.from(rowDiv.children, { y: 150, opacity: 0, scale: 0.5, duration: 0.8, stagger: 0.05, ease: "back.out(1.5)", scrollTrigger: { trigger: rowDiv, start: "top 90%", toggleActions: "play none none reverse" }});
             });
         };
 
-        // --- 8. FORM INTERACTIONS ---
-        const initForm = () => {
-            const inputs = document.querySelectorAll('.input-field');
-            inputs.forEach(input => {
-                const line = input.parentElement.querySelector('.input-line');
-                
-                input.addEventListener('focus', () => {
-                    gsap.to(input, { backgroundColor: '#D4FF00', boxShadow: '4px 4px 0px 0px #000', borderColor: '#000', duration: 0.3 });
-                    gsap.to(line, { width: '100%', duration: 0.3, ease: 'power2.out' });
-                });
-                
-                input.addEventListener('blur', () => {
-                    if(input.value === '') {
-                         gsap.to(input, { backgroundColor: '#FFFFFF', boxShadow: '0px 0px 0px 0px #000', duration: 0.3 });
-                    } else {
-                         gsap.to(input, { backgroundColor: '#FFFFFF', boxShadow: '4px 4px 0px 0px #000', duration: 0.3 });
-                    }
-                    gsap.to(line, { width: '0%', duration: 0.3 });
-                });
-            });
-        };
-
-        // --- 9. MOBILE MENU FIX ---
         const initMenu = () => {
             const btn = document.getElementById('menu-toggle');
             const menu = document.getElementById('mobile-menu');
             const bars = [document.getElementById('bar1'), document.getElementById('bar2'), document.getElementById('bar3')];
             const links = document.querySelectorAll('.mobile-link');
-            const social = document.querySelector('.mobile-social');
             let isOpen = false;
 
             const tl = gsap.timeline({ paused: true });
-            
             tl.to(menu, { y: '0%', duration: 0.4, ease: 'power4.out' })
-              .to(links, { y: 0, opacity: 1, stagger: 0.05, duration: 0.3 }, "-=0.2")
-              .to(social, { opacity: 1, duration: 0.3 }, "-=0.2");
+              .to(links, { y: 0, opacity: 1, stagger: 0.05, duration: 0.3 }, "-=0.2");
 
             btn.addEventListener('click', () => {
                 isOpen = !isOpen;
                 if(isOpen) {
                     menu.style.pointerEvents = "auto";
-                    document.body.style.overflow = "hidden"; // Lock scroll
+                    document.body.style.overflow = "hidden";
                     tl.play();
                     gsap.to(bars[0], { rotate: 45, y: 7, duration: 0.3 });
                     gsap.to(bars[1], { opacity: 0, duration: 0.3 });
                     gsap.to(bars[2], { rotate: -45, y: -7, duration: 0.3 });
                 } else {
                     menu.style.pointerEvents = "none";
-                    document.body.style.overflow = "auto"; // Unlock scroll
+                    document.body.style.overflow = "auto";
                     tl.reverse();
                     gsap.to(bars[0], { rotate: 0, y: 0, duration: 0.3 });
                     gsap.to(bars[1], { opacity: 1, duration: 0.3 });
                     gsap.to(bars[2], { rotate: 0, y: 0, duration: 0.3 });
                 }
             });
-
             links.forEach(link => link.addEventListener('click', () => btn.click()));
         };
 
-        // --- INIT ALL ---
-        window.addEventListener('load', () => {
-            initHero();
-            initMarquee();
-            initScrollReveals();
-            initSkills();
-            initForm();
-            initMenu();
-            
-             gsap.utils.toArray(".counter").forEach(counter => {
-                const target = parseInt(counter.getAttribute("data-target"));
-                gsap.to(counter, {
-                    innerText: target,
-                    duration: 2,
-                    snap: { innerText: 1 },
-                    scrollTrigger: { trigger: counter, start: "top 85%", once: true }
-                });
-            });
-        });
+        const initContactPhysics = () => {
+            const section = document.querySelector('#contact');
+            const titleTexts = section.querySelectorAll('.contact-title-reveal');
+            const cards = section.querySelectorAll('.contact-card-wrapper');
 
+            gsap.fromTo(titleTexts, 
+                { y: 100, opacity: 0, rotate: 5 },
+                { y: 0, opacity: 1, rotate: 0, duration: 1.2, stagger: 0.2, ease: "power4.out", scrollTrigger: { trigger: section, start: "top 60%" } }
+            );
+
+            gsap.fromTo(cards, 
+                { y: 200, opacity: 0, scale: 0.8 },
+                { y: 0, opacity: 1, scale: 1, duration: 1, stagger: 0.15, ease: "back.out(1.2)", scrollTrigger: { trigger: section, start: "top 50%" } }
+            );
+
+            if(!isTouch && window.innerWidth > 1024) {
+                cards.forEach(card => {
+                    const inner = card.querySelector('.contact-card');
+                    
+                    card.addEventListener('mousemove', (e) => {
+                        const rect = card.getBoundingClientRect();
+                        const x = e.clientX - rect.left - rect.width / 2;
+                        const y = e.clientY - rect.top - rect.height / 2;
+                        
+                        gsap.to(card, { x: x * 0.3, y: y * 0.3, duration: 0.4, ease: "power2.out" });
+                        
+                        gsap.to(inner, { 
+                            rotationY: x * 0.1, 
+                            rotationX: -y * 0.1, 
+                            transformPerspective: 1000,
+                            transformOrigin: "center center", 
+                            duration: 0.4, 
+                            ease: "power2.out" 
+                        });
+                    });
+
+                    card.addEventListener('mouseleave', () => {
+                        gsap.to(card, { x: 0, y: 0, duration: 1, ease: "elastic.out(1, 0.3)" });
+                        gsap.to(inner, { rotationY: 0, rotationX: 0, duration: 1, ease: "elastic.out(1, 0.3)" });
+                    });
+
+                    card.addEventListener('mousedown', () => {
+                        gsap.to(inner, { scale: 0.92, duration: 0.1, ease: "power2.in" });
+                    });
+
+                    card.addEventListener('mouseup', () => {
+                        gsap.to(inner, { scale: 1, duration: 0.6, ease: "elastic.out(1, 0.3)" });
+                    });
+                });
+            }
+        };
+
+        window.addEventListener('load', () => {
+            // Force scroll to top saat reload agar experience konsisten
+            window.scrollTo(0, 0);
+
+            // Inisialisasi konten background dulu
+            initMarquee(); 
+            initScrollReveals(); // Hero section sekarang aman dari function ini
+            initSkills(); 
+            initProProjects(); 
+            initMenu();
+            initContactPhysics();
+            
+            gsap.utils.toArray(".counter").forEach(counter => {
+                const target = parseInt(counter.getAttribute("data-target"));
+                gsap.to(counter, { innerText: target, duration: 2, snap: { innerText: 1 }, scrollTrigger: { trigger: counter, start: "top 85%", once: true }});
+            });
+
+            // --- 3. LOADER & HERO ORCHESTRATION ---
+            const counter = { val: 0 };
+            const loaderText = document.getElementById('preloader-counter');
+            const loaderBar = document.getElementById('preloader-bar');
+            const screen = document.getElementById('preloader');
+
+            const tlLoader = gsap.timeline({
+                onComplete: () => {
+                    // Hanya unlock scroll SETELAH sequence selesai
+                    // Ini memastikan user tidak bisa scroll saat animasi Hero berlangsung
+                    document.body.style.overflow = '';
+                    document.documentElement.style.overflow = '';
+                    
+                    // Refresh ScrollTrigger karena layout mungkin bergeser
+                    ScrollTrigger.refresh();
+                }
+            });
+
+            tlLoader.to(counter, {
+                val: 100,
+                duration: 2.2,
+                ease: "power2.inOut",
+                onUpdate: () => {
+                    loaderText.innerText = Math.floor(counter.val) + "%";
+                    loaderBar.style.width = counter.val + "%";
+                }
+            })
+            .to(loaderText, { y: -100, opacity: 0, duration: 0.5, ease: "power2.in" })
+            .to(screen, {
+                yPercent: -100,
+                duration: 1.2,
+                ease: "power4.inOut"
+            }, "-=0.2")
+            // --- CRITICAL TIMING ---
+            // Jalankan initHero() tepat saat layar hitam mulai naik
+            // Gunakan add() agar timeline hero menjadi bagian dari main sequence
+            .add(initHero(), "-=0.8");
+        });
     </script>
 </body>
 </html>
