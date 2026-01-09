@@ -61,6 +61,7 @@
             overflow-x: hidden;
             width: 100%;
             -webkit-tap-highlight-color: transparent;
+            scroll-behavior: smooth;
         }
 
         body {
@@ -155,79 +156,142 @@
             perspective: 1000px;
             will-change: transform;
         }
-        .contact-icon-float {
-            animation: iconFloat 4s ease-in-out infinite;
+        
+        .section-anim {
+            opacity: 0;
+            will-change: transform, opacity;
         }
-        @keyframes iconFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+
+        #preloader { transform-origin: top; }
+        #loader-rocket svg { overflow: visible; }
+        #battery-liquid { transition: transform 0.1s linear; transform-box: fill-box; transform-origin: bottom; }
+        
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #D4FF00;
+            transform: scaleY(0);
+            transform-origin: bottom;
+            transition: transform 0.3s cubic-bezier(0.7, 0, 0.3, 1);
+            z-index: -1;
         }
+        .nav-link:hover::before {
+            transform: scaleY(1);
+        }
+        .nav-link:hover span {
+            color: #0F0F0F;
+        }
+
+        .hamburger-line {
+            transition: all 0.4s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+        }
+        
+        #menu-toggle.active .hamburger-line:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+        #menu-toggle.active .hamburger-line:nth-child(2) {
+            opacity: 0;
+            transform: translateX(-10px);
+        }
+        #menu-toggle.active .hamburger-line:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+        
+        #menu-toggle:hover .hamburger-line {
+            background-color: #D4FF00;
+        }
+        #menu-toggle:hover {
+            background-color: #0F0F0F;
+            border-color: #0F0F0F;
+        }
+
     </style>
 </head>
 <body class="text-neo-black antialiased overflow-x-hidden w-full">
 
-    <div id="preloader" class="fixed inset-0 z-[10000] bg-neo-black flex flex-col items-center justify-center pointer-events-none">
-        <div class="relative overflow-hidden">
-            <h1 id="preloader-counter" class="text-neo-yellow font-display font-black text-[15vw] md:text-[12vw] leading-none tracking-tighter">0%</h1>
+    <div id="preloader" class="fixed inset-0 z-[10000] bg-neo-black flex flex-col items-center justify-center overflow-hidden cursor-none">
+        
+        <div id="loader-intro" class="absolute inset-0 flex flex-col items-center justify-center z-30 pointer-events-none">
+            <div class="reveal-text-mask overflow-hidden mb-1 md:mb-2">
+                <span class="reveal-text-inner block font-display text-4xl sm:text-5xl md:text-7xl font-black text-white uppercase tracking-tight text-center leading-none">Welcome To</span>
+            </div>
+            <div class="reveal-text-mask overflow-hidden">
+                <span class="reveal-text-inner block font-display text-4xl sm:text-5xl md:text-7xl font-black text-neo-yellow uppercase tracking-tight text-center leading-none">My Portfolio</span>
+            </div>
         </div>
-        <div class="w-48 md:w-64 h-1.5 bg-white/10 mt-2 md:mt-4 rounded-full overflow-hidden relative">
-            <div id="preloader-bar" class="absolute top-0 left-0 h-full w-0 bg-neo-yellow"></div>
+
+        <div id="loader-main" class="relative z-20 flex flex-col items-center justify-center translate-y-[100vh]">
+            <div class="relative w-40 h-40 md:w-56 md:h-56 flex items-center justify-center">
+                <svg class="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="46" fill="none" stroke="#1F1F1F" stroke-width="2" />
+                    <circle id="loader-circle" cx="50" cy="50" r="46" fill="none" stroke="#D4FF00" stroke-width="2" stroke-dasharray="289" stroke-dashoffset="289" stroke-linecap="round" />
+                </svg>
+                
+                <div id="loader-rocket" class="absolute inset-0 flex items-center justify-center text-white drop-shadow-[0_0_20px_rgba(212,255,0,0.3)]">
+                    <svg width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="transform scale-125 md:scale-150">
+                        <rect x="7" y="2" width="10" height="20" rx="2" stroke="currentColor" stroke-width="2" />
+                        <path d="M9 2V1C9 0.447715 9.44772 0 10 0H14C14.5523 0 15 0.447715 15 1V2" stroke="currentColor" stroke-width="2" />
+                        <defs>
+                            <clipPath id="battery-clip">
+                                <rect x="8" y="3" width="8" height="18" rx="0.5" />
+                            </clipPath>
+                        </defs>
+                        <g clip-path="url(#battery-clip)">
+                            <rect id="battery-liquid" x="8" y="3" width="8" height="18" fill="#D4FF00" style="transform: scaleY(0);" />
+                        </g>
+                        <path d="M14 4H15V8H14V4Z" fill="white" fill-opacity="0.3"/>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="mt-4 md:mt-6 overflow-hidden h-8 flex justify-center w-full">
+                <span id="loader-percent" class="block font-mono text-neo-yellow text-lg md:text-xl font-bold tracking-[0.2em]">0%</span>
+            </div>
+            
+            <div class="mt-2 overflow-hidden flex justify-center w-full max-w-md px-4">
+                <span id="loader-text-sub" class="block font-sans text-[10px] md:text-xs font-bold text-neo-gray tracking-[0.2em] uppercase text-center translate-y-full opacity-0">Please Wait For Best UI UX Experience</span>
+            </div>
         </div>
     </div>
 
     <div class="cursor-dot"></div>
     <div class="cursor-circle"></div>
 
-    <header class="fixed w-full top-0 z-50 transition-transform duration-500" id="navbar">
+    <header class="fixed w-full top-0 z-50 transition-all duration-500" id="navbar">
         <div class="absolute inset-0 bg-neo-bg/95 border-b-3 border-neo-black backdrop-blur-sm origin-top transform transition-transform duration-500" id="nav-bg"></div>
         
-        <div class="container max-w-screen-xl mx-auto px-4 md:px-6 py-3 md:py-4 relative z-10 flex justify-between items-center h-full">
-            <a href="#" class="interact-hover relative group shrink-0 flex items-center">
-                <div class="bg-neo-black text-neo-white px-4 py-2 text-xl font-display font-black uppercase border-2 border-transparent group-hover:bg-neo-yellow group-hover:text-neo-black group-hover:border-neo-black transition-colors duration-300 shadow-neo group-active:shadow-neo-hover group-active:translate-x-[3px] group-active:translate-y-[3px]">
-                    Farhan|Dev
+        <div class="container max-w-screen-xl mx-auto px-4 md:px-6 py-4 relative z-50 flex justify-between items-center h-full">
+            <a href="#" class="interact-hover relative group shrink-0 flex items-center nav-item-anim perspective-500">
+                <div class="bg-neo-black text-neo-white px-4 py-2 text-xl font-display font-black uppercase border-2 border-transparent group-hover:bg-neo-yellow group-hover:text-neo-black group-hover:border-neo-black transition-all duration-300 shadow-neo group-hover:shadow-neo-hover group-hover:translate-x-[2px] group-hover:translate-y-[2px] transform-style-3d">
+                    <span class="inline-block group-hover:skew-x-6 transition-transform">Farhan|Dev</span>
                 </div>
             </a>
             
-            <nav class="hidden md:flex items-center gap-8 font-bold">
-                <div class="flex items-center gap-8 mr-4">
-                    <div class="magnetic-wrap interact-hover">
-                        <a href="#about" class="block relative overflow-hidden group px-2 py-1">
-                            <span class="block transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:-translate-y-full">About</span>
-                            <span class="absolute top-0 left-0 block translate-y-full transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:translate-y-0 text-neo-blue">About</span>
-                        </a>
-                    </div>
-                    <div class="magnetic-wrap interact-hover">
-                        <a href="#skills" class="block relative overflow-hidden group px-2 py-1">
-                            <span class="block transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:-translate-y-full">Skills</span>
-                            <span class="absolute top-0 left-0 block translate-y-full transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:translate-y-0 text-neo-purple">Skills</span>
-                        </a>
-                    </div>
-                    <div class="magnetic-wrap interact-hover">
-                        <a href="#projects" class="block relative overflow-hidden group px-2 py-1">
-                            <span class="block transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:-translate-y-full">Projects</span>
-                            <span class="absolute top-0 left-0 block translate-y-full transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:translate-y-0 text-neo-red">Projects</span>
-                        </a>
-                    </div>
-                </div>
-                <a href="#contact" class="interact-hover relative overflow-hidden bg-neo-white border-2 border-neo-black px-6 py-2.5 font-bold uppercase tracking-wider hover:bg-neo-black hover:text-white transition-all duration-300 shadow-neo hover:shadow-neo-hover hover:translate-x-[3px] hover:translate-y-[3px]">
-                    Let's Talk
-                </a>
-            </nav>
-
-            <button id="menu-toggle" class="interact-hover md:hidden p-2 border-2 border-neo-black bg-white shadow-neo active:shadow-neo-hover active:translate-y-[2px] transition-all z-50 shrink-0">
-                <div class="space-y-1.5 w-6">
-                    <span class="block w-full h-0.5 bg-neo-black transition-transform origin-center" id="bar1"></span>
-                    <span class="block w-full h-0.5 bg-neo-black transition-opacity" id="bar2"></span>
-                    <span class="block w-full h-0.5 bg-neo-black transition-transform origin-center" id="bar3"></span>
-                </div>
-            </button>
+            <div class="magnetic-wrap nav-item-anim">
+                <button id="menu-toggle" class="interact-hover p-3 border-2 border-neo-black bg-white shadow-neo transition-all duration-300 z-50 shrink-0 relative flex flex-col justify-center items-center gap-1.5 w-12 h-12">
+                    <span class="hamburger-line block w-6 h-0.5 bg-neo-black"></span>
+                    <span class="hamburger-line block w-6 h-0.5 bg-neo-black"></span>
+                    <span class="hamburger-line block w-6 h-0.5 bg-neo-black"></span>
+                </button>
+            </div>
         </div>
 
-        <div id="mobile-menu" class="fixed inset-0 bg-neo-yellow z-40 flex flex-col justify-center items-center gap-6 translate-y-[-100%] pointer-events-none md:hidden w-full h-screen">
-            <a href="#about" class="mobile-link text-3xl xs:text-4xl font-display font-black uppercase text-neo-black hover:text-white transition-colors">About</a>
-            <a href="#skills" class="mobile-link text-3xl xs:text-4xl font-display font-black uppercase text-neo-black hover:text-white transition-colors">Skills</a>
-            <a href="#projects" class="mobile-link text-3xl xs:text-4xl font-display font-black uppercase text-neo-black hover:text-white transition-colors">Projects</a>
-            <a href="#contact" class="mobile-link text-3xl xs:text-4xl font-display font-black uppercase text-neo-black hover:text-white transition-colors">Contact</a>
+        <div id="mobile-menu" class="fixed inset-0 top-0 left-0 bg-neo-yellow z-40 flex flex-col justify-center items-center gap-6 translate-y-[-100%] pointer-events-none w-full h-screen h-dvh">
+            <a href="#about" class="mobile-link text-4xl font-display font-black uppercase text-neo-black hover:text-white transition-colors hover:scale-110 transform duration-300">About</a>
+            <a href="#skills" class="mobile-link text-4xl font-display font-black uppercase text-neo-black hover:text-white transition-colors hover:scale-110 transform duration-300">Skills</a>
+            <a href="#projects" class="mobile-link text-4xl font-display font-black uppercase text-neo-black hover:text-white transition-colors hover:scale-110 transform duration-300">Projects</a>
+            <a href="#comment" class="mobile-link text-4xl font-display font-black uppercase text-neo-black hover:text-white transition-colors hover:scale-110 transform duration-300">
+    comment
+</a>
+            <a href="#contact" class="mobile-link text-4xl font-display font-black uppercase text-neo-black hover:text-white transition-colors hover:scale-110 transform duration-300">Contact</a>
+            
+            <div class="absolute bottom-8 text-xs font-mono font-bold">
+                FARHAN KERTADIWANGSA © 2025
+            </div>
         </div>
     </header>
 
@@ -238,8 +302,8 @@
                 <div class="absolute bottom-[10%] -left-5 md:bottom-[15%] md:left-[5%] w-16 h-16 md:w-40 md:h-40 bg-neo-yellow border-3 border-neo-black rotate-12 float-anim" style="animation-delay: -2s;"></div>
             </div>
 
-            <div class="container max-w-screen-xl mx-auto px-4 md:px-6 grid lg:grid-cols-12 gap-8 md:gap-12 items-center relative z-10">
-                <div class="lg:col-span-8 flex flex-col justify-center order-2 lg:order-1 text-center lg:text-left w-full min-w-0">
+            <div class="container max-w-screen-xl mx-auto px-4 md:px-6 grid lg:grid-cols-2 gap-12 items-center relative z-10">
+                <div class="flex flex-col justify-center order-2 lg:order-1 text-center lg:text-left w-full min-w-0">
                     <div class="hero-badge inline-flex self-center lg:self-start bg-neo-black text-neo-white px-3 py-1 text-xs md:text-sm font-bold border-2 border-transparent -rotate-2 mb-4 md:mb-6 shadow-neo-sm">
                         ● AVAILABLE FOR FREELANCE
                     </div>
@@ -270,41 +334,95 @@
                     </div>
                 </div>
 
-                <div class="lg:col-span-4 perspective-container mt-8 lg:mt-0 w-full max-w-[260px] xs:max-w-[300px] md:max-w-sm mx-auto relative group interact-hover order-1 lg:order-2">
-                    <div class="absolute inset-0 bg-neo-black border-3 border-neo-black translate-x-3 translate-y-3 md:translate-x-5 md:translate-y-5 transition-transform duration-300 group-hover:translate-x-2 group-hover:translate-y-2 md:group-hover:translate-x-3 md:group-hover:translate-y-3"></div>
-                    <div class="absolute inset-0 bg-neo-blue border-3 border-neo-black translate-x-1.5 translate-y-1.5 md:translate-x-2.5 md:translate-y-2.5 transition-transform duration-300 group-hover:translate-x-1 group-hover:translate-y-1"></div>
-                    
-                    <div id="hero-card" class="relative bg-white border-3 border-neo-black p-3 md:p-4 z-10 overflow-hidden h-full">
-                        <div class="aspect-[4/5] bg-neo-gray border-2 border-neo-black overflow-hidden relative grayscale group-hover:grayscale-0 transition-all duration-500">
-                            <img src="https://files.catbox.moe/lrv9gy.jpg" alt="Farhan" class="w-full h-full object-cover transform scale-105 group-hover:scale-110 transition-transform duration-700 ease-out">
+                <div class="perspective-container mt-8 lg:mt-0 w-full flex justify-center lg:justify-end relative group interact-hover order-1 lg:order-2">
+                    <div class="relative w-full max-w-[260px] xs:max-w-[300px] md:max-w-sm">
+                        <div class="absolute inset-0 bg-neo-black border-3 border-neo-black translate-x-3 translate-y-3 md:translate-x-5 md:translate-y-5 transition-transform duration-300 group-hover:translate-x-2 group-hover:translate-y-2 md:group-hover:translate-x-3 md:group-hover:translate-y-3"></div>
+                        <div class="absolute inset-0 bg-neo-blue border-3 border-neo-black translate-x-1.5 translate-y-1.5 md:translate-x-2.5 md:translate-y-2.5 transition-transform duration-300 group-hover:translate-x-1 group-hover:translate-y-1"></div>
+                        
+                        <div id="hero-card" class="relative bg-white border-3 border-neo-black p-3 md:p-4 z-10 overflow-hidden h-full">
+                            <div class="aspect-[4/5] bg-neo-gray border-2 border-neo-black overflow-hidden relative grayscale group-hover:grayscale-0 transition-all duration-500">
+                                <img src="https://files.catbox.moe/lrv9gy.jpg" alt="Farhan" class="w-full h-full object-cover transform scale-105 group-hover:scale-110 transition-transform duration-700 ease-out">
+                            </div>
+                            <div class="mt-3 md:mt-4 flex flex-col font-mono font-bold text-[10px] md:text-xs gap-1">
+                                <span>Name: Farhan</span>
+                                <span>Age: 13</span>
+                                <span>Role: Web Developer</span>
+                            </div>
                         </div>
-                        <div class="mt-3 md:mt-4 flex flex-col font-mono font-bold text-[10px] md:text-xs gap-1">
-                            <span>Name: Farhan</span>
-                            <span>Age: 13</span>
-                            <span>Role: Web Developer</span>
+                        
+                        <div class="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 bg-neo-red text-white font-bold px-3 py-1.5 md:px-6 md:py-3 text-xs md:text-base border-3 border-neo-black shadow-neo z-20 rotate-3 group-hover:rotate-0 transition-transform duration-300 whitespace-nowrap">
+                            UI / UX / DEV
                         </div>
-                    </div>
-                    
-                    <div class="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 bg-neo-red text-white font-bold px-3 py-1.5 md:px-6 md:py-3 text-xs md:text-base border-3 border-neo-black shadow-neo z-20 rotate-3 group-hover:rotate-0 transition-transform duration-300 whitespace-nowrap">
-                        UI / UX / DEV
                     </div>
                 </div>
             </div>
         </section>
 
-        <div class="bg-neo-black text-neo-yellow py-4 md:py-8 border-b-3 border-neo-black overflow-hidden relative z-20 transform -skew-y-2 origin-left scale-105 w-full max-w-full">
-            <div class="marquee-wrapper flex w-max">
-                <div class="marquee-content flex gap-6 md:gap-8 px-4 text-3xl md:text-6xl font-display font-black uppercase tracking-wider">
-                    <span>WEB DEV • FRONTEND DEV • BACKEND DEV • WEB DESIGN • DATABASE ENGINEER • CYBER SEC • FULLSTACK DEV •</span>
+        <div class="py-6 border-b-3 border-neo-black overflow-hidden relative z-20 transform -skew-y-2 origin-left scale-105 w-full max-w-full flex flex-col">
+            
+            <div class="marquee-row relative flex overflow-hidden select-none w-full bg-neo-yellow border-y-3 border-neo-black py-3" data-base-factor="-1" data-speed="0.3">
+                <div class="marquee-track flex gap-12 md:gap-24 whitespace-nowrap will-change-transform text-neo-black text-3xl md:text-5xl font-display font-black uppercase tracking-wider items-center">
                     <span>WEB DEV • FRONTEND DEV • BACKEND DEV • WEB DESIGN • DATABASE ENGINEER • CYBER SEC • FULLSTACK DEV •</span>
                 </div>
             </div>
+
+            <div class="marquee-row relative flex overflow-hidden select-none w-full bg-neo-black border-b-3 border-neo-black py-3" data-base-factor="1" data-speed="0.3">
+                <div class="marquee-track flex gap-12 md:gap-24 whitespace-nowrap will-change-transform text-neo-white text-3xl md:text-5xl font-display font-black uppercase tracking-wider items-center">
+                    <span>FARHAN KERTADIWANGSA • FARHAN KERTADIWANGSA • FARHAN KERTADIWANGSA •</span>
+                </div>
+            </div>
+
+            <div class="marquee-row relative flex overflow-hidden select-none w-full items-center bg-white border-b-3 border-neo-black py-4" data-base-factor="-1" data-speed="0.2">
+                <div class="marquee-track flex gap-16 md:gap-32 whitespace-nowrap will-change-transform items-center px-4">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" class="h-10 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" class="h-10 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" class="h-10 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" class="h-10 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" class="h-10 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original.svg" class="h-10 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" class="h-10 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" class="h-10 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/lua/lua-original.svg" class="h-10 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" class="h-10 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" class="h-10 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg" class="h-10 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/svelte/svelte-original.svg" class="h-10 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg" class="h-10 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg" class="h-10 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vitejs/vitejs-original.svg" class="h-10 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" class="h-10 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" class="h-10 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nestjs/nestjs-original.svg" class="h-10 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg" class="h-10 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" class="h-10 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg" class="h-10 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg" class="h-10 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" class="h-10 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" class="h-10 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" class="h-10 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg" class="h-10 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" class="h-10 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/supabase/supabase-original.svg" class="h-10 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" class="h-10 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg" class="h-10 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nginx/nginx-original.svg" class="h-10 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" class="h-10 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cloudflare/cloudflare-original.svg" class="h-10 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vercel/vercel-original.svg" class="h-10 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" class="h-10 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" class="h-10 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" class="h-10 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg" class="h-10 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" class="h-10 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
+                </div>
+            </div>
+
         </div>
 
-        <section id="about" class="py-12 md:py-32 border-b-3 border-neo-black bg-white relative">
+        <section id="about" class="py-12 md:py-32 border-b-3 border-neo-black bg-white relative section-anim">
             <div class="container max-w-screen-xl mx-auto px-4 md:px-6">
-                <div class="flex flex-col lg:flex-row gap-10 lg:gap-16">
-                    <div class="lg:w-5/12 relative h-fit lg:sticky lg:top-32 self-start">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
+                    <div class="lg:col-span-5 relative h-fit lg:sticky lg:top-32">
                         <h2 class="font-display text-fluid-h2 font-black leading-none mb-4 md:mb-6 safe-break">
                             <div class="reveal-text-mask"><span class="reveal-text-inner">WHO</span></div>
                             <div class="reveal-text-mask"><span class="reveal-text-inner">IS</span></div>
@@ -313,7 +431,7 @@
                         <div class="w-16 h-3 md:w-24 md:h-4 bg-neo-black mt-2 md:mt-4 origin-left scroll-grow-line"></div>
                     </div>
 
-                    <div class="lg:w-7/12 space-y-8 md:space-y-12">
+                    <div class="lg:col-span-7 space-y-8 md:space-y-12">
                         <p class="text-lg md:text-3xl font-medium leading-relaxed about-text-anim">
                             YO! KENALIN, GW <strong>Farhan Kertadiwangsa</strong>. Web Developer spesialis UI/UX yang mulai ngoding sejak kelas 2 SD (thanks to YouTube & pandemi). Sekarang gw duduk di bangku SMP Kelas 7, tapi skill coding gw? Boleh diadu, bro.
                         </p>
@@ -340,7 +458,7 @@
             </div>
         </section>
 
-        <section id="skills" class="py-12 md:py-32 bg-neo-bg border-b-3 border-neo-black relative overflow-hidden">
+        <section id="skills" class="py-12 md:py-32 bg-neo-bg border-b-3 border-neo-black relative overflow-hidden section-anim">
             <div class="absolute inset-0 bg-[linear-gradient(rgba(15,15,15,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(15,15,15,0.05)_1px,transparent_1px)] bg-[size:30px_30px] md:bg-[size:50px_50px] pointer-events-none"></div>
 
             <div class="container max-w-screen-xl mx-auto px-4 md:px-6 relative z-10">
@@ -352,10 +470,17 @@
 
                 <div class="flex flex-col gap-6 md:gap-10 items-center justify-center w-full max-w-6xl mx-auto" id="skill-rows-container">
                 </div>
+
+                <div class="mt-16 flex justify-center w-full">
+                    <a href="Skill.html" class="magnetic-btn interact-hover group relative inline-flex items-center justify-center px-8 py-4 text-lg font-bold bg-neo-purple text-white border-3 border-neo-black shadow-neo hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-neo-hover transition-all duration-200">
+                        <span class="mr-2">SEE MORE SKILLS</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                    </a>
+                </div>
             </div>
         </section>
 
-        <section id="projects" class="py-24 md:py-40 border-b-3 border-neo-black bg-neo-yellow relative overflow-hidden z-20">
+        <section id="projects" class="py-24 md:py-40 border-b-3 border-neo-black bg-neo-yellow relative overflow-hidden z-20 section-anim">
             <div class="absolute top-0 right-0 w-96 h-96 bg-white border-l-3 border-b-3 border-neo-black rounded-bl-full pointer-events-none transform translate-x-40 -translate-y-40 z-0 opacity-50"></div>
             
             <div class="container max-w-screen-xl mx-auto px-4 md:px-6 relative z-10">
@@ -457,10 +582,653 @@
                     </article>
 
                 </div>
+
+                <div class="mt-24 flex justify-center w-full">
+                    <a href="Project.html" class="magnetic-btn interact-hover group relative inline-flex items-center justify-center px-8 py-4 text-lg font-bold bg-neo-black text-white border-3 border-neo-black shadow-neo hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-neo-hover transition-all duration-200">
+                        <span class="mr-2">SEE MORE PROJECTS</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                    </a>
+                </div>
             </div>
         </section>
+<section id="comment" class="py-12 sm:py-16 md:py-24 lg:py-32 xl:py-40 bg-white border-b-3 border-neo-black relative overflow-hidden section-anim">
+    <div class="absolute top-4 left-4 w-20 h-20 sm:top-6 sm:left-6 sm:w-32 sm:h-32 md:top-10 md:left-10 md:w-64 md:h-64 border-3 border-neo-black rotate-12 opacity-10 pointer-events-none"></div>
+    <div class="absolute bottom-4 right-4 w-16 h-16 sm:bottom-6 sm:right-6 sm:w-24 sm:h-24 md:bottom-10 md:right-10 md:w-48 md:h-48 bg-neo-yellow/10 border-3 border-neo-black -rotate-6 opacity-20 pointer-events-none"></div>
 
-        <section id="contact" class="py-20 md:py-32 bg-neo-bg border-b-3 border-neo-black relative overflow-hidden">
+    <div class="container max-w-screen-xl mx-auto px-3 sm:px-4 md:px-6 relative z-10">
+        <div class="flex flex-col items-center mb-8 sm:mb-12 md:mb-16 lg:mb-24 text-center">
+            <div class="inline-block bg-neo-black text-white border-3 border-neo-black px-4 py-1 sm:px-5 sm:py-1.5 md:px-6 md:py-2 shadow-neo transform rotate-2 mb-4 sm:mb-5 md:mb-6">
+                <span class="font-bold font-mono text-xs sm:text-sm md:text-base uppercase tracking-widest">Comment Zone</span>
+            </div>
+            <h2 class="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-black uppercase leading-none mb-2 sm:mb-3 md:mb-4 tracking-tight">
+                <span class="block">Share Your</span>
+                <span class="block text-stroke-2 text-transparent hover:text-neo-blue transition-colors duration-500">Experience</span>
+            </h2>
+            <p class="text-base sm:text-lg md:text-xl lg:text-2xl font-medium max-w-xs sm:max-w-sm md:max-w-xl lg:max-w-2xl mx-auto mt-4 sm:mt-5 md:mt-6">Login with GitHub and leave your mark on this portfolio</p>
+        </div>
+
+        <div class="max-w-full sm:max-w-2xl md:max-w-3xl lg:max-w-4xl mx-auto">
+            <div class="window-frame bg-white/90 backdrop-blur-lg border-3 border-neo-black shadow-neo-xl overflow-hidden w-full">
+                <div class="window-header bg-neo-black px-3 py-2 sm:px-4 sm:py-3 flex items-center justify-between border-b-3 border-neo-black">
+                    <div class="flex items-center gap-1.5 sm:gap-2">
+                        <div class="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-neo-red"></div>
+                        <div class="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-neo-yellow"></div>
+                        <div class="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-neo-blue"></div>
+                    </div>
+                    <div class="font-mono text-xs sm:text-xs text-white font-bold truncate ml-2 mr-2">terminal@share-experience:~</div>
+                    <div class="w-8 sm:w-12 md:w-20"></div>
+                </div>
+
+                <div class="window-body p-4 sm:p-5 md:p-6 lg:p-8 xl:p-10">
+                    <div id="auth-state" class="text-center py-8 sm:py-10 md:py-12">
+                        <div class="mb-6 sm:mb-8">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" class="mx-auto mb-4 sm:mb-5 md:mb-6 opacity-80 w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20" viewBox="0 0 24 24">
+                                <path fill="currentColor" d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                            </svg>
+                            <h3 class="text-xl sm:text-2xl md:text-3xl font-display font-black mb-3 sm:mb-4">GitHub Login Required</h3>
+                            <p class="text-gray-600 text-sm sm:text-base md:text-lg mb-6 sm:mb-8">Authenticate with GitHub to share your thoughts and reactions</p>
+                        </div>
+                        <button id="github-login-btn" class="magnetic-btn interact-hover group relative inline-flex items-center justify-center px-6 py-3 sm:px-7 sm:py-3.5 md:px-8 md:py-4 text-sm sm:text-base md:text-lg font-bold bg-neo-black text-white border-3 border-neo-black shadow-neo hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-neo-hover transition-all duration-200">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" class="mr-2 sm:mr-3 w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" viewBox="0 0 24 24">
+                                <path fill="currentColor" d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                            </svg>
+                            Login with GitHub
+                        </button>
+                    </div>
+
+                    <div id="user-panel" class="hidden">
+                        <div class="flex flex-wrap items-center gap-3 sm:gap-4 mb-6 sm:mb-8 p-3 sm:p-4 bg-neo-gray/50 border-2 border-neo-black rounded-lg">
+                            <img id="user-avatar" class="w-10 h-10 sm:w-12 sm:h-12 rounded-full border-2 border-neo-black flex-shrink-0" src="" alt="Profile">
+                            <div class="flex-1 min-w-[120px]">
+                                <h4 id="user-name" class="font-display font-bold text-lg sm:text-xl truncate"></h4>
+                                <p id="user-email" class="text-xs sm:text-sm text-gray-600 truncate"></p>
+                            </div>
+                            <button id="logout-btn" class="px-3 py-1.5 sm:px-4 sm:py-2 bg-white border-2 border-neo-black text-xs sm:text-sm font-bold hover:bg-neo-black hover:text-white transition-colors flex-shrink-0">Logout</button>
+                        </div>
+
+                        <form id="comment-form" class="mb-8 sm:mb-10 md:mb-12">
+                            <textarea id="comment-input" rows="4" class="w-full p-3 sm:p-4 border-3 border-neo-black bg-white/80 font-mono text-base sm:text-lg resize-none focus:outline-none focus:border-neo-blue min-h-[120px]" placeholder="Type your comment here... (Max 280 characters)" maxlength="280"></textarea>
+                            <div class="flex flex-wrap justify-between items-center mt-3 sm:mt-4 gap-2">
+                                <div class="text-xs sm:text-sm text-gray-600 font-mono">
+                                    <span id="char-count">0</span>/280
+                                </div>
+                                <button type="submit" class="px-4 py-2 sm:px-5 sm:py-2.5 md:px-6 md:py-3 bg-neo-blue text-white border-3 border-neo-black font-bold hover:bg-neo-black hover:translate-x-[2px] hover:translate-y-[2px] transition-all text-sm sm:text-base">Submit Comment</button>
+                            </div>
+                        </form>
+
+                        <div id="comments-container" class="space-y-4 sm:space-y-5 md:space-y-6">
+                            <div class="text-center py-8 sm:py-10 md:py-12">
+                                <div class="animate-spin w-10 h-10 sm:w-12 sm:h-12 border-4 border-neo-black border-t-transparent rounded-full mx-auto mb-3 sm:mb-4"></div>
+                                <p class="font-mono text-sm sm:text-base">Loading comments...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-analytics.js";
+    import { getAuth, signInWithPopup, GithubAuthProvider, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-auth.js";
+    import { getDatabase, ref, push, onValue, remove } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-database.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyBMYdUb6cvKFn_TPc495t-ozqXv0D31ero",
+        authDomain: "porto-b6518.firebaseapp.com",
+        databaseURL: "https://porto-b6518-default-rtdb.asia-southeast1.firebasedatabase.app",
+        projectId: "porto-b6518",
+        storageBucket: "porto-b6518.firebasestorage.app",
+        messagingSenderId: "362925622446",
+        appId: "1:362925622446:web:3a9ad69eed6ad4e425d93f",
+        measurementId: "G-MK64TJENVS"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const auth = getAuth(app);
+    const provider = new GithubAuthProvider();
+    const db = getDatabase(app);
+
+    const authState = document.getElementById('auth-state');
+    const userPanel = document.getElementById('user-panel');
+    const loginBtn = document.getElementById('github-login-btn');
+    const logoutBtn = document.getElementById('logout-btn');
+    const commentForm = document.getElementById('comment-form');
+    const commentInput = document.getElementById('comment-input');
+    const charCount = document.getElementById('char-count');
+    const commentsContainer = document.getElementById('comments-container');
+    const userAvatar = document.getElementById('user-avatar');
+    const userName = document.getElementById('user-name');
+    const userEmail = document.getElementById('user-email');
+
+    const bubbleColors = ['bg-yellow-100', 'bg-blue-100', 'bg-purple-100', 'bg-red-100', 'bg-green-100'];
+
+    async function getGitHubDisplayName(user) {
+        if (user.displayName && user.displayName.trim() !== '') {
+            return user.displayName;
+        }
+        
+        if (user.providerData && user.providerData.length > 0) {
+            const providerData = user.providerData[0];
+            if (providerData.displayName && providerData.displayName.trim() !== '') {
+                return providerData.displayName;
+            }
+        }
+        
+        try {
+            await user.reload();
+            const reloadedUser = auth.currentUser;
+            
+            if (reloadedUser.displayName && reloadedUser.displayName.trim() !== '') {
+                return reloadedUser.displayName;
+            }
+            
+            if (reloadedUser.reloadUserInfo && reloadedUser.reloadUserInfo.screenName) {
+                return reloadedUser.reloadUserInfo.screenName;
+            }
+            
+            if (reloadedUser.email) {
+                return reloadedUser.email.split('@')[0];
+            }
+            
+            return 'GitHub User';
+            
+        } catch (error) {
+            if (user.email) {
+                return user.email.split('@')[0];
+            }
+            return 'GitHub User';
+        }
+    }
+
+    commentInput.addEventListener('input', () => {
+        charCount.textContent = commentInput.value.length;
+    });
+
+    loginBtn.addEventListener('click', async () => {
+        try {
+            await signInWithPopup(auth, provider);
+        } catch (error) {
+            console.error('Login error:', error);
+        }
+    });
+
+    logoutBtn.addEventListener('click', async () => {
+        try {
+            await signOut(auth);
+        } catch (error) {
+            console.error('Logout error:', error);
+        }
+    });
+
+    commentForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const user = auth.currentUser;
+        if (!user || !commentInput.value.trim()) return;
+
+        const displayName = await getGitHubDisplayName(user);
+
+        const commentData = {
+            text: commentInput.value.trim(),
+            userId: user.uid,
+            userName: displayName,
+            userAvatar: user.photoURL || '',
+            timestamp: Date.now(),
+            color: bubbleColors[Math.floor(Math.random() * bubbleColors.length)]
+        };
+
+        try {
+            const commentsRef = ref(db, 'comments');
+            await push(commentsRef, commentData);
+            commentInput.value = '';
+            charCount.textContent = '0';
+        } catch (error) {
+            console.error('Submit error:', error);
+        }
+    });
+
+    onAuthStateChanged(auth, async (user) => {
+        if (user) {
+            authState.classList.add('hidden');
+            userPanel.classList.remove('hidden');
+            userAvatar.src = user.photoURL || '';
+            
+            const displayName = await getGitHubDisplayName(user);
+            userName.textContent = displayName;
+            userEmail.textContent = user.email || '';
+            
+            loadComments();
+        } else {
+            authState.classList.remove('hidden');
+            userPanel.classList.add('hidden');
+            commentsContainer.innerHTML = '<p class="text-center text-gray-600 font-mono py-12">Login to view comments</p>';
+        }
+    });
+
+    function loadComments() {
+        const commentsRef = ref(db, 'comments');
+        onValue(commentsRef, (snapshot) => {
+            commentsContainer.innerHTML = '';
+            const data = snapshot.val();
+            if (!data) {
+                commentsContainer.innerHTML = '<p class="text-center text-gray-600 font-mono py-8 sm:py-10 md:py-12 text-sm sm:text-base">No comments yet. Be the first!</p>';
+                return;
+            }
+
+            const comments = Object.entries(data).map(([id, comment]) => ({ id, ...comment }));
+            comments.sort((a, b) => b.timestamp - a.timestamp);
+
+            comments.forEach((comment, index) => {
+                const commentEl = document.createElement('div');
+                commentEl.className = `comment-bubble p-4 sm:p-5 md:p-6 rounded-xl sm:rounded-2xl border-3 border-neo-black shadow-neo-sm backdrop-blur-sm ${comment.color} transform transition-all duration-300 hover:-translate-y-1`;
+
+                const time = new Date(comment.timestamp).toLocaleDateString('en-US', {
+                    month: 'short',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+
+                commentEl.innerHTML = `
+                    <div class="flex items-start gap-3 sm:gap-4">
+                        <img src="${comment.userAvatar || 'https://avatars.githubusercontent.com/u/583231?v=4'}" 
+                             alt="${comment.userName}" 
+                             class="w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 rounded-full border-2 border-neo-black flex-shrink-0">
+                        <div class="flex-1 min-w-0">
+                            <div class="flex flex-wrap justify-between items-start mb-2 gap-2">
+                                <h5 class="font-display font-bold text-base sm:text-lg truncate">${comment.userName}</h5>
+                                <span class="text-xs font-mono text-gray-600 flex-shrink-0">${time}</span>
+                            </div>
+                            <p class="text-gray-800 text-sm sm:text-base md:text-lg leading-relaxed break-words">${comment.text}</p>
+                            ${auth.currentUser && auth.currentUser.uid === comment.userId ? 
+                                `<button class="delete-comment mt-2 sm:mt-3 text-xs font-mono text-red-600 hover:text-red-800" data-id="${comment.id}">Delete</button>` : ''}
+                        </div>
+                    </div>
+                `;
+
+                commentsContainer.appendChild(commentEl);
+
+                gsap.fromTo(commentEl, 
+                    { 
+                        opacity: 0, 
+                        y: 40, 
+                        scale: 0.95,
+                        rotation: index % 2 === 0 ? -0.5 : 0.5
+                    },
+                    { 
+                        opacity: 1, 
+                        y: 0, 
+                        scale: 1,
+                        rotation: index % 2 === 0 ? -0.5 : 0.5,
+                        duration: 0.8, 
+                        ease: "back.out(1.4)",
+                        delay: index * 0.08
+                    }
+                );
+            });
+
+            document.querySelectorAll('.delete-comment').forEach(btn => {
+                btn.addEventListener('click', async (e) => {
+                    const id = e.target.dataset.id;
+                    if (confirm('Delete this comment?')) {
+                        await remove(ref(db, `comments/${id}`));
+                    }
+                });
+            });
+        });
+    }
+
+    const section = document.getElementById('share-experience');
+    const windowFrame = section.querySelector('.window-frame');
+    const bgShapes = section.querySelectorAll('.absolute');
+    const titleElements = section.querySelectorAll('.font-display, .text-lg');
+    const interactiveZone = section.querySelector('.inline-block');
+
+    ScrollTrigger.getAll().forEach(trigger => {
+        if (trigger.trigger === section) {
+            trigger.kill();
+        }
+    });
+
+    const masterTL = gsap.timeline({
+        scrollTrigger: {
+            trigger: section,
+            start: "top 80%",
+            end: "bottom top",
+            scrub: 1.2,
+            toggleActions: "play none reverse none"
+        }
+    });
+
+    masterTL.fromTo(section,
+        {
+            opacity: 0.3,
+            y: 80
+        },
+        {
+            opacity: 1,
+            y: 0,
+            duration: 1.5,
+            ease: "power3.out"
+        }
+    );
+
+    masterTL.fromTo(bgShapes[0],
+        {
+            x: -100,
+            y: 80,
+            rotation: 5,
+            opacity: 0
+        },
+        {
+            x: 0,
+            y: 0,
+            rotation: 12,
+            opacity: 0.1,
+            duration: 2,
+            ease: "power3.out"
+        },
+        0
+    );
+
+    masterTL.fromTo(bgShapes[1],
+        {
+            x: 100,
+            y: 100,
+            rotation: -15,
+            opacity: 0
+        },
+        {
+            x: 0,
+            y: 0,
+            rotation: -6,
+            opacity: 0.2,
+            duration: 2,
+            ease: "power3.out"
+        },
+        0.1
+    );
+
+    const parallaxTL = gsap.timeline({
+        scrollTrigger: {
+            trigger: section,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 0.8
+        }
+    });
+
+    parallaxTL.to(bgShapes[0], {
+        y: -60,
+        rotation: 15,
+        ease: "none"
+    })
+    .to(bgShapes[1], {
+        y: -40,
+        rotation: -3,
+        ease: "none"
+    }, 0);
+
+    const textTL = gsap.timeline({
+        scrollTrigger: {
+            trigger: section,
+            start: "top 85%",
+            toggleActions: "play none reverse none"
+        }
+    });
+
+    textTL.fromTo(interactiveZone,
+        {
+            opacity: 0,
+            scale: 0.8,
+            rotation: -8,
+            y: 30
+        },
+        {
+            opacity: 1,
+            scale: 1,
+            rotation: 2,
+            y: 0,
+            duration: 0.9,
+            ease: "back.out(1.7)"
+        }
+    );
+
+    textTL.fromTo(titleElements[0],
+        {
+            opacity: 0,
+            y: 50,
+            scale: 0.95
+        },
+        {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 1,
+            ease: "power3.out"
+        },
+        0.3
+    );
+
+    textTL.fromTo(titleElements[1],
+        {
+            opacity: 0,
+            y: 50,
+            scale: 0.95
+        },
+        {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 1,
+            ease: "power3.out"
+        },
+        0.4
+    );
+
+    textTL.fromTo(titleElements[2],
+        {
+            opacity: 0,
+            y: 40
+        },
+        {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: "power3.out"
+        },
+        0.6
+    );
+
+    const windowTL = gsap.timeline({
+        scrollTrigger: {
+            trigger: section,
+            start: "top 75%",
+            toggleActions: "play none reverse none"
+        }
+    });
+
+    windowTL.fromTo(windowFrame,
+        {
+            opacity: 0,
+            scale: 0.85,
+            y: 80,
+            rotation: -5,
+            transformPerspective: 1000,
+            rotationX: 15
+        },
+        {
+            opacity: 1,
+            scale: 1,
+            y: 0,
+            rotation: 0,
+            rotationX: 0,
+            duration: 1.4,
+            ease: "power3.out"
+        },
+        0.5
+    );
+
+    const floatTL = gsap.timeline({
+        repeat: -1,
+        yoyo: true,
+        paused: true
+    });
+
+    floatTL.to(windowFrame, {
+        y: -12,
+        duration: 2.8,
+        ease: "sine.inOut"
+    })
+    .to(windowFrame, {
+        y: 0,
+        duration: 2.8,
+        ease: "sine.inOut"
+    });
+
+    ScrollTrigger.create({
+        trigger: section,
+        start: "top 60%",
+        end: "bottom top",
+        onEnter: () => floatTL.play(),
+        onLeave: () => floatTL.pause(),
+        onEnterBack: () => floatTL.restart(),
+        onLeaveBack: () => floatTL.pause()
+    });
+
+    const rotateTL = gsap.timeline({
+        repeat: -1,
+        paused: true
+    });
+
+    rotateTL.to(bgShapes[0], {
+        rotation: 20,
+        duration: 25,
+        ease: "none"
+    })
+    .to(bgShapes[1], {
+        rotation: -10,
+        duration: 25,
+        ease: "none"
+    }, 0);
+
+    ScrollTrigger.create({
+        trigger: section,
+        start: "top 70%",
+        end: "bottom top",
+        onEnter: () => rotateTL.play(),
+        onLeave: () => rotateTL.pause(),
+        onEnterBack: () => rotateTL.play(),
+        onLeaveBack: () => rotateTL.pause()
+    });
+
+    const microBounce = gsap.timeline({
+        repeat: -1,
+        yoyo: true,
+        paused: true
+    });
+
+    microBounce.to(windowFrame, {
+        scale: 1.008,
+        duration: 1.5,
+        ease: "sine.inOut"
+    })
+    .to(windowFrame, {
+        scale: 1,
+        duration: 1.5,
+        ease: "sine.inOut"
+    });
+
+    ScrollTrigger.create({
+        trigger: section,
+        start: "top 60%",
+        onEnter: () => microBounce.play(),
+        onLeave: () => microBounce.pause(),
+        onEnterBack: () => microBounce.play(),
+        onLeaveBack: () => microBounce.pause()
+    });
+
+    const glowEffect = gsap.timeline({
+        repeat: -1,
+        yoyo: true,
+        paused: true
+    });
+
+    glowEffect.to(windowFrame, {
+        boxShadow: "0 0 40px rgba(59, 130, 246, 0.15)",
+        duration: 2,
+        ease: "sine.inOut"
+    })
+    .to(windowFrame, {
+        boxShadow: "0 0 20px rgba(59, 130, 246, 0.05)",
+        duration: 2,
+        ease: "sine.inOut"
+    });
+
+    ScrollTrigger.create({
+        trigger: section,
+        start: "top 70%",
+        onEnter: () => glowEffect.play(),
+        onLeave: () => glowEffect.pause(),
+        onEnterBack: () => glowEffect.play(),
+        onLeaveBack: () => glowEffect.pause()
+    });
+</script>
+
+    <style>
+        .comment-bubble {
+            position: relative;
+            animation: bubbleIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            opacity: 0;
+        }
+        
+        @keyframes bubbleIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        
+        .window-frame {
+            transform-style: preserve-3d;
+            transform: perspective(1000px);
+        }
+        
+        .comment-bubble:nth-child(odd) {
+            transform: rotate(0.5deg);
+        }
+        
+        .comment-bubble:nth-child(even) {
+            transform: rotate(-0.5deg);
+        }
+        
+        .comment-bubble:hover {
+            transform: rotate(0deg) translateY(-4px) !important;
+            box-shadow: 8px 8px 0px 0px #0F0F0F !important;
+        }
+        
+        #github-login-btn:hover {
+            background-color: #333 !important;
+        }
+        
+        @media (max-width: 768px) {
+            .window-body {
+                padding: 1.5rem !important;
+            }
+            
+            .comment-bubble {
+                padding: 1rem !important;
+            }
+        }
+    </style>
+</section>
+        <section id="contact" class="py-20 md:py-32 bg-neo-bg border-b-3 border-neo-black relative overflow-hidden section-anim">
             <div class="absolute inset-0 bg-[linear-gradient(rgba(15,15,15,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(15,15,15,0.02)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none"></div>
 
             <div class="container max-w-screen-xl mx-auto px-4 md:px-6 relative z-10">
@@ -496,7 +1264,7 @@
                         <div class="contact-card bg-white border-3 border-neo-black p-8 md:px-6 md:py-12 shadow-neo-lg hover:shadow-neo-xl transition-all duration-300 flex flex-col items-center justify-center gap-6 h-full min-h-[300px] relative z-20 interact-hover">
                             <div class="absolute inset-0 bg-tg-blue transform scale-y-0 origin-bottom group-hover:scale-y-100 transition-transform duration-500 ease-in-out z-0"></div>
                             
-                            <div class="relative z-10 contact-icon-float" style="animation-delay: -1s;">
+                            <div class="relative z-10 contact-icon-float" style="animation-delay: -1.3s;">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="currentColor" class="text-tg-blue group-hover:text-white transition-colors duration-300 transform scale-100 group-hover:scale-110">
                                     <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 11.944 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
                                 </svg>
@@ -512,7 +1280,7 @@
                         <div class="contact-card bg-white border-3 border-neo-black p-8 md:px-6 md:py-12 shadow-neo-lg hover:shadow-neo-xl transition-all duration-300 flex flex-col items-center justify-center gap-6 h-full min-h-[300px] relative z-20 interact-hover">
                             <div class="absolute inset-0 bg-gmail-red transform scale-y-0 origin-bottom group-hover:scale-y-100 transition-transform duration-500 ease-in-out z-0"></div>
                             
-                            <div class="relative z-10 contact-icon-float" style="animation-delay: -2s;">
+                            <div class="relative z-10 contact-icon-float" style="animation-delay: -2.6s;">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="currentColor" class="text-gmail-red group-hover:text-white transition-colors duration-300 transform scale-100 group-hover:scale-110">
                                     <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/>
                                 </svg>
@@ -529,8 +1297,8 @@
         </section>
     </main>
 
-    <footer class="bg-neo-black text-white py-12 md:py-20 relative z-10">
-        <div class="container max-w-screen-xl mx-auto px-6 text-center">
+    <footer class="bg-neo-black text-white py-12 md:py-20 relative z-10" id="main-footer">
+        <div class="container max-w-screen-xl mx-auto px-6 text-center footer-content opacity-0 translate-y-10">
             <h2 class="font-display text-4xl md:text-7xl font-black mb-6 md:mb-8 hover:text-neo-yellow transition-colors cursor-default select-none">FARHAN.</h2>
             <div class="flex justify-center items-center gap-4 md:gap-6 mb-8 md:mb-10">
                 <span class="h-1 w-8 md:w-16 bg-neo-yellow"></span>
@@ -544,8 +1312,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
     <script>
-        // --- 1. IMMEDIATE SCROLL LOCK (CRITICAL) ---
-        // Mengunci scroll sebelum konten apapun dirender
         document.body.style.overflow = 'hidden';
         document.documentElement.style.overflow = 'hidden';
         window.scrollTo(0, 0);
@@ -588,17 +1354,15 @@
         }
 
         const initHero = () => {
-            // Animasi ini murni Timeline, TIDAK terikat ScrollTrigger
-            // Ini memastikan animasi selalu jalan saat loading selesai
             const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
             
-            // Selector khusus untuk Hero section saja agar spesifik
             const heroText = document.querySelectorAll("h1 .reveal-text-inner");
             
             tl.to(heroText, { y: 0, duration: 1.2, stagger: 0.15, skewY: 0, force3D: true })
             .from(".hero-badge", { scale: 0, rotation: -10, opacity: 0, duration: 0.8, ease: "back.out(1.7)" }, "-=0.8")
             .from(".reveal-opacity", { y: 30, opacity: 0, duration: 1, stagger: 0.1 }, "-=0.6")
-            .from(".perspective-container", { y: 100, opacity: 0, rotation: 5, duration: 1.2, ease: "elastic.out(1, 0.7)" }, "-=1");
+            .from(".perspective-container", { y: 100, opacity: 0, rotation: 5, duration: 1.2, ease: "elastic.out(1, 0.7)" }, "-=1")
+            .from(".nav-item-anim", { y: -30, opacity: 0, duration: 1, stagger: 0.1, ease: "elastic.out(1, 0.75)" }, "-=1.2");
 
             if(window.innerWidth > 768) {
                 const heroCard = document.querySelector('#hero-card');
@@ -610,42 +1374,74 @@
                 });
             }
             
-            return tl; // Return timeline untuk di-chain
+            return tl;
         };
 
         const initMarquee = () => {
-            const marquee = document.querySelector(".marquee-wrapper");
-            const content = document.querySelector(".marquee-content");
-            const clone = content.cloneNode(true);
-            marquee.appendChild(clone);
-
-            let tween = gsap.to(marquee, { x: -content.offsetWidth, repeat: -1, duration: 15, ease: "none" });
+            const rows = document.querySelectorAll('.marquee-row');
+            
+            rows.forEach(row => {
+                const track = row.querySelector('.marquee-track');
+                const content = track.innerHTML;
+                track.innerHTML = content + content + content + content; 
+                
+                const speed = parseFloat(row.dataset.speed || 1);
+                
+                const tween = gsap.to(track, {
+                    x: "-25%",
+                    duration: 20 / speed,
+                    ease: "none",
+                    repeat: -1
+                });
+                
+                row.marqueeTween = tween;
+            });
 
             ScrollTrigger.create({
                 onUpdate: (self) => {
-                    if(window.innerWidth > 768) {
-                        let skew = self.getVelocity() / -300;
-                        let scale = 1 + Math.abs(self.getVelocity() / 5000); 
-                        let timeScale = 1 + Math.abs(self.getVelocity() / 500); 
-                        skew = gsap.utils.clamp(-10, 10, skew);
-                        gsap.to(tween, { timeScale: timeScale, duration: 0.2, overwrite: true });
-                        gsap.to(".marquee-wrapper", { skewX: skew, scale: scale, duration: 0.2, overwrite: true });
-                        gsap.to(tween, { timeScale: 1, duration: 1, delay: 0.2 });
-                        gsap.to(".marquee-wrapper", { skewX: 0, scale: 1, duration: 1, delay: 0.2 });
-                    }
+                    const scrollDir = self.direction; 
+                    
+                    rows.forEach(row => {
+                        const tween = row.marqueeTween;
+                        const baseFactor = parseFloat(row.dataset.baseFactor || 1);
+                        
+                        const targetTimeScale = -1 * baseFactor * scrollDir;
+                        
+                        gsap.to(tween, {
+                            timeScale: targetTimeScale,
+                            duration: 0.8,
+                            ease: "power1.out",
+                            overwrite: true
+                        });
+                    });
                 }
             });
         };
 
+        const initSectionAnimations = () => {
+            gsap.utils.toArray('.section-anim').forEach(section => {
+                gsap.fromTo(section, 
+                    { opacity: 0, y: 50, scale: 0.98 },
+                    { 
+                        opacity: 1, y: 0, scale: 1, 
+                        duration: 1.2, 
+                        ease: "power3.out",
+                        scrollTrigger: {
+                            trigger: section,
+                            start: "top 85%",
+                            end: "bottom top",
+                            toggleActions: "play reverse play reverse"
+                        }
+                    }
+                );
+            });
+        };
+
         const initScrollReveals = () => {
-            // --- FIX 2: ISOLASI HERO DARI SCROLLTRIGGER ---
-            // Kita filter agar ScrollTrigger TIDAK mengambil alih elemen H1 (Hero)
-            // Hanya elemen selain H1 yang akan mendapatkan efek scroll trigger
             const allMasks = gsap.utils.toArray(".reveal-text-mask");
             
             allMasks.forEach(mask => {
-                // Skip jika parent terdekat adalah H1 (Hero Section)
-                if (mask.closest('h1')) return;
+                if (mask.closest('h1') || mask.closest('#loader-intro')) return;
 
                 const text = mask.querySelector(".reveal-text-inner");
                 if(text) {
@@ -669,6 +1465,18 @@
                         toggleActions: "play none none reverse"
                     }
                 });
+            });
+
+            gsap.to(".footer-content", {
+                y: 0,
+                opacity: 1,
+                duration: 1,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: "#main-footer",
+                    start: "top 90%",
+                    toggleActions: "play none none reverse"
+                }
             });
         };
 
@@ -836,30 +1644,25 @@
         const initMenu = () => {
             const btn = document.getElementById('menu-toggle');
             const menu = document.getElementById('mobile-menu');
-            const bars = [document.getElementById('bar1'), document.getElementById('bar2'), document.getElementById('bar3')];
             const links = document.querySelectorAll('.mobile-link');
             let isOpen = false;
 
             const tl = gsap.timeline({ paused: true });
-            tl.to(menu, { y: '0%', duration: 0.4, ease: 'power4.out' })
-              .to(links, { y: 0, opacity: 1, stagger: 0.05, duration: 0.3 }, "-=0.2");
+            tl.to(menu, { y: '0%', duration: 0.6, ease: 'expo.inOut' })
+              .fromTo(links, { y: 50, opacity: 0 }, { y: 0, opacity: 1, stagger: 0.1, duration: 0.4 }, "-=0.3");
 
             btn.addEventListener('click', () => {
                 isOpen = !isOpen;
                 if(isOpen) {
+                    btn.classList.add('active');
                     menu.style.pointerEvents = "auto";
                     document.body.style.overflow = "hidden";
                     tl.play();
-                    gsap.to(bars[0], { rotate: 45, y: 7, duration: 0.3 });
-                    gsap.to(bars[1], { opacity: 0, duration: 0.3 });
-                    gsap.to(bars[2], { rotate: -45, y: -7, duration: 0.3 });
                 } else {
+                    btn.classList.remove('active');
                     menu.style.pointerEvents = "none";
                     document.body.style.overflow = "auto";
                     tl.reverse();
-                    gsap.to(bars[0], { rotate: 0, y: 0, duration: 0.3 });
-                    gsap.to(bars[1], { opacity: 1, duration: 0.3 });
-                    gsap.to(bars[2], { rotate: 0, y: 0, duration: 0.3 });
                 }
             });
             links.forEach(link => link.addEventListener('click', () => btn.click()));
@@ -872,12 +1675,12 @@
 
             gsap.fromTo(titleTexts, 
                 { y: 100, opacity: 0, rotate: 5 },
-                { y: 0, opacity: 1, rotate: 0, duration: 1.2, stagger: 0.2, ease: "power4.out", scrollTrigger: { trigger: section, start: "top 60%" } }
+                { y: 0, opacity: 1, rotate: 0, duration: 1.2, stagger: 0.2, ease: "power4.out", scrollTrigger: { trigger: section, start: "top 60%", toggleActions: "play reverse play reverse" } }
             );
 
             gsap.fromTo(cards, 
                 { y: 200, opacity: 0, scale: 0.8 },
-                { y: 0, opacity: 1, scale: 1, duration: 1, stagger: 0.15, ease: "back.out(1.2)", scrollTrigger: { trigger: section, start: "top 50%" } }
+                { y: 0, opacity: 1, scale: 1, duration: 1, stagger: 0.15, ease: "back.out(1.2)", scrollTrigger: { trigger: section, start: "top 60%", toggleActions: "play reverse play reverse" } }
             );
 
             if(!isTouch && window.innerWidth > 1024) {
@@ -918,12 +1721,11 @@
         };
 
         window.addEventListener('load', () => {
-            // Force scroll to top saat reload agar experience konsisten
             window.scrollTo(0, 0);
 
-            // Inisialisasi konten background dulu
             initMarquee(); 
-            initScrollReveals(); // Hero section sekarang aman dari function ini
+            initSectionAnimations();
+            initScrollReveals(); 
             initSkills(); 
             initProProjects(); 
             initMenu();
@@ -934,43 +1736,82 @@
                 gsap.to(counter, { innerText: target, duration: 2, snap: { innerText: 1 }, scrollTrigger: { trigger: counter, start: "top 85%", once: true }});
             });
 
-            // --- 3. LOADER & HERO ORCHESTRATION ---
-            const counter = { val: 0 };
-            const loaderText = document.getElementById('preloader-counter');
-            const loaderBar = document.getElementById('preloader-bar');
-            const screen = document.getElementById('preloader');
-
             const tlLoader = gsap.timeline({
                 onComplete: () => {
-                    // Hanya unlock scroll SETELAH sequence selesai
-                    // Ini memastikan user tidak bisa scroll saat animasi Hero berlangsung
                     document.body.style.overflow = '';
                     document.documentElement.style.overflow = '';
-                    
-                    // Refresh ScrollTrigger karena layout mungkin bergeser
+                    gsap.set("#preloader", { display: "none" });
                     ScrollTrigger.refresh();
+                    initHero();
                 }
             });
 
-            tlLoader.to(counter, {
+            const introTexts = document.querySelectorAll("#loader-intro .reveal-text-inner");
+            tlLoader.to(introTexts, {
+                y: "0%",
+                duration: 1.2,
+                stagger: 0.2,
+                ease: "power4.out"
+            })
+            .to(introTexts, {
+                y: "-120%",
+                duration: 0.8,
+                stagger: 0.1,
+                ease: "power3.in",
+                delay: 0.5
+            });
+
+            tlLoader.to("#loader-main", {
+                y: 0,
+                duration: 1.5,
+                ease: "elastic.out(1, 0.75)",
+            }, "-=0.2");
+
+            const circle = document.getElementById("loader-circle");
+            const percentText = document.getElementById("loader-percent");
+            const batteryLiquid = document.getElementById("battery-liquid");
+            const counter = { val: 0 };
+
+            tlLoader.to(circle, {
+                strokeDashoffset: 0,
+                duration: 2.2,
+                ease: "power2.inOut"
+            })
+            .to(counter, {
                 val: 100,
                 duration: 2.2,
                 ease: "power2.inOut",
                 onUpdate: () => {
-                    loaderText.innerText = Math.floor(counter.val) + "%";
-                    loaderBar.style.width = counter.val + "%";
+                    percentText.innerText = Math.floor(counter.val) + "%";
+                    if(batteryLiquid) {
+                        batteryLiquid.style.transform = `scaleY(${counter.val / 100})`;
+                    }
                 }
+            }, "<")
+            .to("#loader-text-sub", {
+                y: "0%",
+                opacity: 1,
+                duration: 1,
+                ease: "power3.out"
+            }, "<0.5");
+
+            tlLoader.to("#loader-rocket", {
+                scale: 3,
+                y: -50,
+                duration: 0.5,
+                ease: "back.in(2)"
             })
-            .to(loaderText, { y: -100, opacity: 0, duration: 0.5, ease: "power2.in" })
-            .to(screen, {
+            .to(["#loader-main", "#loader-text-sub"], {
+                opacity: 0,
+                scale: 0.95,
+                duration: 0.3,
+                ease: "power2.out"
+            }, "<")
+            .to("#preloader", {
                 yPercent: -100,
-                duration: 1.2,
+                duration: 0.8,
                 ease: "power4.inOut"
-            }, "-=0.2")
-            // --- CRITICAL TIMING ---
-            // Jalankan initHero() tepat saat layar hitam mulai naik
-            // Gunakan add() agar timeline hero menjadi bagian dari main sequence
-            .add(initHero(), "-=0.8");
+            }, "-=0.1");
         });
     </script>
 </body>
