@@ -1,0 +1,1805 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta property="og:image" content="https://files.catbox.moe/lrv9gy.jpg">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Farhan Kertadiwangsa | Creative Developer">
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:image" content="https://files.catbox.moe/lrv9gy.jpg">
+    <title>Farhan Kertadiwangsa | Creative Developer</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Space Grotesk"', 'sans-serif'],
+                        display: ['"Syne"', 'sans-serif'],
+                    },
+                    colors: {
+                        'neo-bg': '#F0F0F0',
+                        'neo-black': '#0F0F0F',
+                        'neo-white': '#FFFFFF',
+                        'neo-yellow': '#D4FF00', 
+                        'neo-blue': '#2D5BFF',
+                        'neo-red': '#FF2E00',
+                        'neo-purple': '#9D00FF',
+                        'neo-gray': '#E5E5E5',
+                        'wa-green': '#25D366',
+                        'tg-blue': '#229ED9',
+                        'gmail-red': '#EA4335'
+                    },
+                    boxShadow: {
+                        'neo': '5px 5px 0px 0px #0F0F0F',
+                        'neo-lg': '8px 8px 0px 0px #0F0F0F',
+                        'neo-xl': '12px 12px 0px 0px #0F0F0F',
+                        'neo-sm': '3px 3px 0px 0px #0F0F0F',
+                        'neo-hover': '2px 2px 0px 0px #0F0F0F',
+                    },
+                    borderWidth: {
+                        '3': '3px',
+                    },
+                    screens: {
+                        'xs': '375px',
+                        '3xl': '1600px',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+            -webkit-tap-highlight-color: transparent;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #F0F0F0;
+            background-image: radial-gradient(#d4d4d4 1px, transparent 1px);
+            background-size: 24px 24px;
+            cursor: auto; 
+        }
+
+        .text-fluid-hero {
+            font-size: clamp(3.5rem, 10vw, 8.5rem);
+            line-height: 0.9;
+        }
+        
+        .text-fluid-sub {
+            font-size: clamp(2rem, 5vw, 4.5rem);
+            line-height: 1;
+        }
+
+        .text-fluid-h2 {
+            font-size: clamp(2.5rem, 5vw, 6rem);
+            line-height: 0.95;
+        }
+
+        .safe-break {
+            word-break: break-word;
+            overflow-wrap: break-word;
+            hyphens: auto;
+            max-width: 100%;
+        }
+
+        @media (min-width: 1024px) {
+            body { cursor: none; }
+            .cursor-dot, .cursor-circle { display: block; }
+        }
+        @media (max-width: 1023px) {
+            .cursor-dot, .cursor-circle { display: none !important; }
+        }
+
+        ::selection { background-color: #0F0F0F; color: #D4FF00; }
+        .text-stroke { -webkit-text-stroke: 1px #0F0F0F; color: transparent; }
+        .text-stroke-2 { -webkit-text-stroke: 1px #0F0F0F; color: transparent; }
+        @media (min-width: 768px) { .text-stroke-2 { -webkit-text-stroke: 2px #0F0F0F; } }
+        
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        .cursor-dot, .cursor-circle {
+            position: fixed; top: 0; left: 0; transform: translate(-50%, -50%);
+            border-radius: 50%; pointer-events: none; z-index: 9999; mix-blend-mode: difference;
+        }
+        .cursor-dot { width: 10px; height: 10px; background-color: #fff; }
+        .cursor-circle {
+            width: 50px; height: 50px; border: 2px solid #fff;
+            transition: width 0.3s, height 0.3s, background-color 0.3s;
+        }
+        body.hovering .cursor-circle {
+            width: 80px; height: 80px; background-color: rgba(255, 255, 255, 0.2); border-color: transparent;
+        }
+
+        .magnetic-wrap { display: inline-block; position: relative; }
+        .reveal-text-mask { overflow: hidden; display: block; }
+        .reveal-text-inner { display: block; transform: translateY(110%); }
+
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(2deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+        .float-anim { animation: float 6s ease-in-out infinite; }
+        
+        .skill-btn-wrapper { position: relative; display: inline-block; margin: 0.5rem; }
+        .skill-btn { position: relative; z-index: 2; transition: box-shadow 0.1s; }
+        .skill-btn img { will-change: transform; pointer-events: none; user-select: none; -webkit-user-drag: none; }
+
+        .pro-mask-img { clip-path: inset(100% 0 0 0); transition: clip-path 1.2s cubic-bezier(0.16, 1, 0.3, 1); }
+        .pro-mask-img.active { clip-path: inset(0% 0 0 0); }
+        
+        .pro-text-mask { overflow: hidden; position: relative; }
+        .pro-text-inner { transform: translateY(120%); display: block; will-change: transform; }
+        
+        .magnetic-btn { display: inline-block; position: relative; z-index: 10; touch-action: none; }
+        
+        .noise-overlay {
+            position: absolute; inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.1'/%3E%3C/svg%3E");
+            opacity: 0.3; pointer-events: none; mix-blend-mode: overlay; z-index: 2;
+        }
+
+        .contact-card {
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            will-change: transform;
+        }
+        
+        .section-anim {
+            opacity: 0;
+            will-change: transform, opacity;
+        }
+
+        #preloader { transform-origin: top; }
+        #loader-rocket svg { overflow: visible; }
+        #battery-liquid { transition: transform 0.1s linear; transform-box: fill-box; transform-origin: bottom; }
+        
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #D4FF00;
+            transform: scaleY(0);
+            transform-origin: bottom;
+            transition: transform 0.3s cubic-bezier(0.7, 0, 0.3, 1);
+            z-index: -1;
+        }
+        .nav-link:hover::before {
+            transform: scaleY(1);
+        }
+        .nav-link:hover span {
+            color: #0F0F0F;
+        }
+
+        .hamburger-line {
+            transition: all 0.4s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+        }
+        
+        #menu-toggle.active .hamburger-line:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+        #menu-toggle.active .hamburger-line:nth-child(2) {
+            opacity: 0;
+            transform: translateX(-10px);
+        }
+        #menu-toggle.active .hamburger-line:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+        
+        #menu-toggle:hover .hamburger-line {
+            background-color: #D4FF00;
+        }
+        #menu-toggle:hover {
+            background-color: #0F0F0F;
+            border-color: #0F0F0F;
+        }
+
+    </style>
+</head>
+<body class="text-neo-black antialiased overflow-x-hidden w-full">
+
+    <div id="preloader" class="fixed inset-0 z-[10000] bg-neo-black flex flex-col items-center justify-center overflow-hidden cursor-none">
+        
+        <div id="loader-intro" class="absolute inset-0 flex flex-col items-center justify-center z-30 pointer-events-none">
+            <div class="reveal-text-mask overflow-hidden mb-1 md:mb-2">
+                <span class="reveal-text-inner block font-display text-4xl sm:text-5xl md:text-7xl font-black text-white uppercase tracking-tight text-center leading-none">Welcome To</span>
+            </div>
+            <div class="reveal-text-mask overflow-hidden">
+                <span class="reveal-text-inner block font-display text-4xl sm:text-5xl md:text-7xl font-black text-neo-yellow uppercase tracking-tight text-center leading-none">My Portfolio</span>
+            </div>
+        </div>
+
+        <div id="loader-main" class="relative z-20 flex flex-col items-center justify-center translate-y-[100vh]">
+            <div class="relative w-40 h-40 md:w-56 md:h-56 flex items-center justify-center">
+                <svg class="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="46" fill="none" stroke="#1F1F1F" stroke-width="2" />
+                    <circle id="loader-circle" cx="50" cy="50" r="46" fill="none" stroke="#D4FF00" stroke-width="2" stroke-dasharray="289" stroke-dashoffset="289" stroke-linecap="round" />
+                </svg>
+                
+                <div id="loader-rocket" class="absolute inset-0 flex items-center justify-center text-white drop-shadow-[0_0_20px_rgba(212,255,0,0.3)]">
+                    <svg width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="transform scale-125 md:scale-150">
+                        <rect x="7" y="2" width="10" height="20" rx="2" stroke="currentColor" stroke-width="2" />
+                        <path d="M9 2V1C9 0.447715 9.44772 0 10 0H14C14.5523 0 15 0.447715 15 1V2" stroke="currentColor" stroke-width="2" />
+                        <defs>
+                            <clipPath id="battery-clip">
+                                <rect x="8" y="3" width="8" height="18" rx="0.5" />
+                            </clipPath>
+                        </defs>
+                        <g clip-path="url(#battery-clip)">
+                            <rect id="battery-liquid" x="8" y="3" width="8" height="18" fill="#D4FF00" style="transform: scaleY(0);" />
+                        </g>
+                        <path d="M14 4H15V8H14V4Z" fill="white" fill-opacity="0.3"/>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="mt-4 md:mt-6 overflow-hidden h-8 flex justify-center w-full">
+                <span id="loader-percent" class="block font-mono text-neo-yellow text-lg md:text-xl font-bold tracking-[0.2em]">0%</span>
+            </div>
+            
+            <div class="mt-2 overflow-hidden flex justify-center w-full max-w-md px-4">
+                <span id="loader-text-sub" class="block font-sans text-[10px] md:text-xs font-bold text-neo-gray tracking-[0.2em] uppercase text-center translate-y-full opacity-0">Please Wait For Best UI UX Experience</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="cursor-dot"></div>
+    <div class="cursor-circle"></div>
+
+    <header class="fixed w-full top-0 z-50 transition-all duration-500" id="navbar">
+        <div class="absolute inset-0 bg-neo-bg/95 border-b-3 border-neo-black backdrop-blur-sm origin-top transform transition-transform duration-500" id="nav-bg"></div>
+        
+        <div class="container max-w-screen-xl mx-auto px-4 md:px-6 py-4 relative z-50 flex justify-between items-center h-full">
+            <a href="#" class="interact-hover relative group shrink-0 flex items-center nav-item-anim perspective-500">
+                <div class="bg-neo-black text-neo-white px-4 py-2 text-xl font-display font-black uppercase border-2 border-transparent group-hover:bg-neo-yellow group-hover:text-neo-black group-hover:border-neo-black transition-all duration-300 shadow-neo group-hover:shadow-neo-hover group-hover:translate-x-[2px] group-hover:translate-y-[2px] transform-style-3d">
+                    <span class="inline-block group-hover:skew-x-6 transition-transform">Farhan|Dev</span>
+                </div>
+            </a>
+            
+            <div class="magnetic-wrap nav-item-anim">
+                <button id="menu-toggle" class="interact-hover p-3 border-2 border-neo-black bg-white shadow-neo transition-all duration-300 z-50 shrink-0 relative flex flex-col justify-center items-center gap-1.5 w-12 h-12">
+                    <span class="hamburger-line block w-6 h-0.5 bg-neo-black"></span>
+                    <span class="hamburger-line block w-6 h-0.5 bg-neo-black"></span>
+                    <span class="hamburger-line block w-6 h-0.5 bg-neo-black"></span>
+                </button>
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="fixed inset-0 top-0 left-0 bg-neo-yellow z-40 flex flex-col justify-center items-center gap-6 translate-y-[-100%] pointer-events-none w-full h-screen h-dvh">
+            <a href="#about" class="mobile-link text-4xl font-display font-black uppercase text-neo-black hover:text-white transition-colors hover:scale-110 transform duration-300">About</a>
+            <a href="#skills" class="mobile-link text-4xl font-display font-black uppercase text-neo-black hover:text-white transition-colors hover:scale-110 transform duration-300">Skills</a>
+            <a href="#projects" class="mobile-link text-4xl font-display font-black uppercase text-neo-black hover:text-white transition-colors hover:scale-110 transform duration-300">Projects</a>
+            <a href="#comment" class="mobile-link text-4xl font-display font-black uppercase text-neo-black hover:text-white transition-colors hover:scale-110 transform duration-300">
+    comment
+</a>
+            <a href="#contact" class="mobile-link text-4xl font-display font-black uppercase text-neo-black hover:text-white transition-colors hover:scale-110 transform duration-300">Contact</a>
+            
+            <div class="absolute bottom-8 text-xs font-mono font-bold">
+                FARHAN KERTADIWANGSA © 2025
+            </div>
+        </div>
+    </header>
+
+    <main class="w-full overflow-hidden">
+        <section class="min-h-screen flex items-center pt-24 pb-12 md:pt-32 md:pb-20 relative overflow-hidden border-b-3 border-neo-black bg-neo-bg">
+            <div class="absolute inset-0 pointer-events-none overflow-hidden max-w-[100vw]">
+                <div class="absolute top-[10%] -right-10 md:top-[15%] md:right-[5%] w-24 h-24 md:w-64 md:h-64 border-3 border-neo-black rounded-full bg-neo-blue/20 float-anim"></div>
+                <div class="absolute bottom-[10%] -left-5 md:bottom-[15%] md:left-[5%] w-16 h-16 md:w-40 md:h-40 bg-neo-yellow border-3 border-neo-black rotate-12 float-anim" style="animation-delay: -2s;"></div>
+            </div>
+
+            <div class="container max-w-screen-xl mx-auto px-4 md:px-6 grid lg:grid-cols-2 gap-12 items-center relative z-10">
+                <div class="flex flex-col justify-center order-2 lg:order-1 text-center lg:text-left w-full min-w-0">
+                    <div class="hero-badge inline-flex self-center lg:self-start bg-neo-black text-neo-white px-3 py-1 text-xs md:text-sm font-bold border-2 border-transparent -rotate-2 mb-4 md:mb-6 shadow-neo-sm">
+                        ● AVAILABLE FOR FREELANCE
+                    </div>
+                    
+                    <h1 class="w-full font-display text-fluid-hero font-black tracking-tighter mb-6 md:mb-8 mix-blend-darken uppercase safe-break leading-none">
+                        <div class="reveal-text-mask"><span class="reveal-text-inner">Frontend</span></div>
+                        <div class="reveal-text-mask">
+                            <span class="reveal-text-inner text-transparent bg-clip-text bg-gradient-to-r from-neo-blue to-neo-blue pb-2 md:pb-4" style="-webkit-text-stroke: 1px #0F0F0F;">
+                                Developer
+                            </span>
+                        </div>
+                    </h1>
+
+                    <div class="max-w-xl mb-8 md:mb-12 mx-auto lg:mx-0">
+                        <p class="text-base xs:text-lg md:text-2xl font-medium border-l-4 border-neo-yellow pl-4 md:pl-6 leading-relaxed reveal-opacity text-left">
+                            Web Developer Yang Enggan Ngoding Namun Pengen Jadi Programmer Handal :V
+                        </p>
+                    </div>
+
+                    <div class="flex flex-col xs:flex-row gap-4 justify-center lg:justify-start reveal-opacity w-full">
+                        <a href="#projects" class="interact-hover group relative inline-flex items-center justify-center px-6 py-3 md:px-8 md:py-4 text-sm md:text-lg font-bold bg-neo-yellow border-3 border-neo-black shadow-neo hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-neo-hover transition-all duration-200 text-center whitespace-nowrap">
+                            <span class="relative z-10">LIHAT KARYA</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 md:h-6 md:w-6 ml-2 transform group-hover:rotate-45 transition-transform duration-300 z-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="square" stroke-linejoin="miter" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                        </a>
+                        <a href="#contact" class="interact-hover relative inline-flex items-center justify-center px-6 py-3 md:px-8 md:py-4 text-sm md:text-lg font-bold bg-white border-3 border-neo-black shadow-neo hover:bg-neo-black hover:text-white hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-neo-hover transition-all duration-200 text-center whitespace-nowrap">
+                            HUBUNGI SAYA
+                        </a>
+                    </div>
+                </div>
+
+                <div class="perspective-container mt-8 lg:mt-0 w-full flex justify-center lg:justify-end relative group interact-hover order-1 lg:order-2">
+                    <div class="relative w-full max-w-[260px] xs:max-w-[300px] md:max-w-sm">
+                        <div class="absolute inset-0 bg-neo-black border-3 border-neo-black translate-x-3 translate-y-3 md:translate-x-5 md:translate-y-5 transition-transform duration-300 group-hover:translate-x-2 group-hover:translate-y-2 md:group-hover:translate-x-3 md:group-hover:translate-y-3"></div>
+                        <div class="absolute inset-0 bg-neo-blue border-3 border-neo-black translate-x-1.5 translate-y-1.5 md:translate-x-2.5 md:translate-y-2.5 transition-transform duration-300 group-hover:translate-x-1 group-hover:translate-y-1"></div>
+                        
+                        <div id="hero-card" class="relative bg-white border-3 border-neo-black p-3 md:p-4 z-10 overflow-hidden h-full">
+                            <div class="aspect-[4/5] bg-neo-gray border-2 border-neo-black overflow-hidden relative grayscale group-hover:grayscale-0 transition-all duration-500">
+                                <img src="https://files.catbox.moe/lrv9gy.jpg" alt="Farhan" class="w-full h-full object-cover transform scale-105 group-hover:scale-110 transition-transform duration-700 ease-out">
+                            </div>
+                            <div class="mt-3 md:mt-4 flex flex-col font-mono font-bold text-[10px] md:text-xs gap-1">
+                                <span>Name: Farhan</span>
+                                <span>Age: 13</span>
+                                <span>Role: Web Developer</span>
+                            </div>
+                        </div>
+                        
+                        <div class="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 bg-neo-red text-white font-bold px-3 py-1.5 md:px-6 md:py-3 text-xs md:text-base border-3 border-neo-black shadow-neo z-20 rotate-3 group-hover:rotate-0 transition-transform duration-300 whitespace-nowrap">
+                            UI / UX / DEV
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="py-6 border-b-3 border-neo-black overflow-hidden relative z-20 transform -skew-y-2 origin-left scale-105 w-full max-w-full flex flex-col">
+            
+            <div class="marquee-row relative flex overflow-hidden select-none w-full bg-neo-yellow border-y-3 border-neo-black py-3" data-base-factor="-1" data-speed="0.3">
+                <div class="marquee-track flex gap-12 md:gap-24 whitespace-nowrap will-change-transform text-neo-black text-3xl md:text-5xl font-display font-black uppercase tracking-wider items-center">
+                    <span>WEB DEV • FRONTEND DEV • BACKEND DEV • WEB DESIGN • DATABASE ENGINEER • CYBER SEC • FULLSTACK DEV •</span>
+                </div>
+            </div>
+
+            <div class="marquee-row relative flex overflow-hidden select-none w-full bg-neo-black border-b-3 border-neo-black py-3" data-base-factor="1" data-speed="0.3">
+                <div class="marquee-track flex gap-12 md:gap-24 whitespace-nowrap will-change-transform text-neo-white text-3xl md:text-5xl font-display font-black uppercase tracking-wider items-center">
+                    <span>FARHAN KERTADIWANGSA • FARHAN KERTADIWANGSA • FARHAN KERTADIWANGSA •</span>
+                </div>
+            </div>
+
+            <div class="marquee-row relative flex overflow-hidden select-none w-full items-center bg-white border-b-3 border-neo-black py-4" data-base-factor="-1" data-speed="0.2">
+                <div class="marquee-track flex gap-16 md:gap-32 whitespace-nowrap will-change-transform items-center px-4">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" class="h-10 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" class="h-10 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" class="h-10 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" class="h-10 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" class="h-10 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original.svg" class="h-10 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" class="h-10 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" class="h-10 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/lua/lua-original.svg" class="h-10 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" class="h-10 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" class="h-10 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg" class="h-10 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/svelte/svelte-original.svg" class="h-10 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg" class="h-10 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg" class="h-10 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vitejs/vitejs-original.svg" class="h-10 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" class="h-10 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" class="h-10 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nestjs/nestjs-original.svg" class="h-10 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg" class="h-10 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" class="h-10 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg" class="h-10 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg" class="h-10 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" class="h-10 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" class="h-10 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" class="h-10 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg" class="h-10 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" class="h-10 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/supabase/supabase-original.svg" class="h-10 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" class="h-10 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg" class="h-10 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nginx/nginx-original.svg" class="h-10 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" class="h-10 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cloudflare/cloudflare-original.svg" class="h-10 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vercel/vercel-original.svg" class="h-10 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" class="h-10 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" class="h-10 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" class="h-10 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg" class="h-10 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" class="h-10 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
+                </div>
+            </div>
+
+        </div>
+
+        <section id="about" class="py-12 md:py-32 border-b-3 border-neo-black bg-white relative section-anim">
+            <div class="container max-w-screen-xl mx-auto px-4 md:px-6">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
+                    <div class="lg:col-span-5 relative h-fit lg:sticky lg:top-32">
+                        <h2 class="font-display text-fluid-h2 font-black leading-none mb-4 md:mb-6 safe-break">
+                            <div class="reveal-text-mask"><span class="reveal-text-inner">WHO</span></div>
+                            <div class="reveal-text-mask"><span class="reveal-text-inner">IS</span></div>
+                            <div class="reveal-text-mask"><span class="reveal-text-inner text-stroke-2 hover:text-neo-blue transition-colors duration-300">FARHAN?</span></div>
+                        </h2>
+                        <div class="w-16 h-3 md:w-24 md:h-4 bg-neo-black mt-2 md:mt-4 origin-left scroll-grow-line"></div>
+                    </div>
+
+                    <div class="lg:col-span-7 space-y-8 md:space-y-12">
+                        <p class="text-lg md:text-3xl font-medium leading-relaxed about-text-anim">
+                            YO! KENALIN, GW <strong>Farhan Kertadiwangsa</strong>. Web Developer spesialis UI/UX yang mulai ngoding sejak kelas 2 SD (thanks to YouTube & pandemi). Sekarang gw duduk di bangku SMP Kelas 7, tapi skill coding gw? Boleh diadu, bro.
+                        </p>
+                        
+                        <div class="p-6 md:p-10 border-3 border-neo-black bg-neo-bg shadow-neo hover:shadow-neo-lg transition-all duration-300 transform hover:-translate-y-2 group interact-hover reveal-box relative overflow-hidden">
+                            <p class="text-base md:text-xl leading-relaxed relative z-10 about-text-anim">
+                                Lahir tahun 2012 di Gresik, gw terus push limit kemampuan gw di dunia programming. Meski coding cuma modal 'HP Kentang' yang bikin susah explore framework berat kayak Next.js, gw nggak nyerah. Keterbatasan device bukan alesan buat stop berkarya.
+                            </p>
+                            <div class="absolute inset-0 bg-neo-yellow transform scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-500 ease-out z-0 opacity-20"></div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4 md:gap-6 pt-2 md:pt-4">
+                            <div class="group border-3 border-neo-black p-4 md:p-6 hover:bg-neo-blue hover:text-white transition-colors duration-300 reveal-box interact-hover">
+                                <h3 class="text-3xl md:text-6xl font-display font-black mb-1 md:mb-2 about-text-anim"><span class="counter" data-target="4">0</span>+</h3>
+                                <p class="font-bold tracking-wider uppercase border-t-2 border-current pt-2 text-[10px] md:text-base about-text-anim">Years Exp</p>
+                            </div>
+                            <div class="group border-3 border-neo-black p-4 md:p-6 hover:bg-neo-purple hover:text-white transition-colors duration-300 reveal-box interact-hover">
+                                <h3 class="text-3xl md:text-6xl font-display font-black mb-1 md:mb-2 about-text-anim"><span class="counter" data-target="50">0</span>+</h3>
+                                <p class="font-bold tracking-wider uppercase border-t-2 border-current pt-2 text-[10px] md:text-base about-text-anim">Projects</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="py-12 md:py-32 bg-neo-bg border-b-3 border-neo-black relative overflow-hidden section-anim">
+            <div class="absolute inset-0 bg-[linear-gradient(rgba(15,15,15,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(15,15,15,0.05)_1px,transparent_1px)] bg-[size:30px_30px] md:bg-[size:50px_50px] pointer-events-none"></div>
+
+            <div class="container max-w-screen-xl mx-auto px-4 md:px-6 relative z-10">
+                <div class="flex flex-col items-center mb-12 md:mb-20">
+                    <h2 class="text-3xl md:text-6xl lg:text-7xl font-display font-black uppercase bg-white border-3 border-neo-black px-8 py-4 md:px-12 md:py-6 shadow-neo transform -rotate-2 inline-block max-w-full text-center safe-break">
+                        My Skill
+                    </h2>
+                </div>
+
+                <div class="flex flex-col gap-6 md:gap-10 items-center justify-center w-full max-w-6xl mx-auto" id="skill-rows-container">
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="py-24 md:py-40 border-b-3 border-neo-black bg-neo-yellow relative overflow-hidden z-20 section-anim">
+            <div class="absolute top-0 right-0 w-96 h-96 bg-white border-l-3 border-b-3 border-neo-black rounded-bl-full pointer-events-none transform translate-x-40 -translate-y-40 z-0 opacity-50"></div>
+            
+            <div class="container max-w-screen-xl mx-auto px-4 md:px-6 relative z-10">
+                <div class="flex flex-col md:flex-row justify-between items-end mb-20 md:mb-32 border-b-3 border-neo-black pb-8">
+                    <h2 class="font-display text-fluid-sub font-black leading-none uppercase safe-break w-full md:w-auto text-neo-black">
+                        <span class="pro-text-mask"><span class="pro-text-inner">Selected</span></span><br>
+                        <span class="pro-text-mask"><span class="pro-text-inner text-neo-white text-stroke-2">Projects</span></span>
+                    </h2>
+                    <div class="text-left md:text-right mt-6 md:mt-0 w-full md:w-auto overflow-hidden">
+                        <span class="block text-lg md:text-2xl font-bold font-mono text-neo-black pro-text-mask"><span class="pro-text-inner delay-100">CRAFTED WITH PASSION</span></span>
+                        <span class="block text-xs md:text-sm font-bold uppercase tracking-[0.2em] mt-2 text-neo-black pro-text-mask"><span class="pro-text-inner delay-200">2025 — PRESENT</span></span>
+                    </div>
+                </div>
+
+                <div class="flex flex-col gap-32 md:gap-48">
+                    
+                    <article class="pro-project w-full grid md:grid-cols-12 gap-8 md:gap-16 items-center">
+                        <div class="md:col-span-7 relative group cursor-none">
+                            <div class="relative w-full aspect-[16/10] bg-neo-black border-3 border-neo-black overflow-hidden shadow-[10px_10px_0px_#0F0F0F] transition-all duration-500 hover:shadow-[5px_5px_0px_#0F0F0F] pro-card-visual z-10">
+                                <div class="absolute inset-0 bg-gray-800 pro-mask-img z-20">
+                                    <div class="noise-overlay"></div>
+                                    <img src="https://files.catbox.moe/iocdxe.jpg" alt="KynayMic" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 ease-out transform scale-110 group-hover:scale-100 pro-img-parallax">
+                                </div>
+                                <div class="absolute inset-0 bg-neo-black z-0"></div>
+                            </div>
+                            
+                            <div class="absolute -bottom-6 -right-4 bg-neo-blue text-white px-5 py-2 border-3 border-neo-black font-bold font-mono text-sm md:text-lg z-30 transform rotate-3 shadow-neo pro-badge">
+                                COMIC READER
+                            </div>
+                        </div>
+
+                        <div class="md:col-span-5 flex flex-col justify-center relative z-20">
+                            <div class="pro-text-mask mb-2">
+                                <span class="block font-mono text-xs font-bold uppercase tracking-widest text-neo-black/60 pro-text-inner">01 / Fullstack</span>
+                            </div>
+                            <h3 class="text-4xl md:text-6xl font-display font-black uppercase leading-[0.9] mb-6 text-neo-black pro-title">
+                                <div class="pro-text-mask"><span class="pro-text-inner">Kynay</span></div>
+                                <div class="pro-text-mask"><span class="pro-text-inner text-white text-stroke-2">Mic</span></div>
+                            </h3>
+                            <div class="pro-text-mask mb-10">
+                                <p class="text-lg md:text-xl font-medium leading-relaxed border-l-4 border-neo-black pl-6 pro-text-inner text-neo-black max-w-md">
+                                    Platform baca komik legal, gratis, tanpa iklan. Pengalaman membaca imersif dengan UI minimalis.
+                                </p>
+                            </div>
+                            
+                            <div class="pro-text-mask">
+                                <div class="pro-text-inner">
+                                    <a href="https://comic.kynay.biz.id" target="_blank" class="magnetic-btn group inline-flex items-center gap-4">
+                                        <div class="w-14 h-14 md:w-16 md:h-16 rounded-full border-3 border-neo-black bg-white flex items-center justify-center group-hover:bg-neo-black group-hover:text-white transition-colors duration-300 magnetic-trigger">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 transform -rotate-45 group-hover:rotate-0 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                                        </div>
+                                        <span class="font-bold uppercase text-lg tracking-wider group-hover:underline decoration-3 underline-offset-4">Visit Site</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="pro-project w-full grid md:grid-cols-12 gap-8 md:gap-16 items-center">
+                        <div class="md:col-span-5 flex flex-col justify-center relative z-20 order-2 md:order-1 md:text-right md:items-end">
+                            <div class="pro-text-mask mb-2">
+                                <span class="block font-mono text-xs font-bold uppercase tracking-widest text-neo-black/60 pro-text-inner">02 / Community</span>
+                            </div>
+                            <h3 class="text-4xl md:text-6xl font-display font-black uppercase leading-[0.9] mb-6 text-neo-black pro-title">
+                                <div class="pro-text-mask"><span class="pro-text-inner">Pemula</span></div>
+                                <div class="pro-text-mask"><span class="pro-text-inner text-neo-red">Coding</span></div>
+                            </h3>
+                            <div class="pro-text-mask mb-10">
+                                <p class="text-lg md:text-xl font-medium leading-relaxed border-l-4 md:border-l-0 md:border-r-4 border-neo-black pl-6 md:pr-6 pro-text-inner text-neo-black max-w-md ml-auto">
+                                    Rumah bagi developer pemula. Forum diskusi, showcase project, dan learning path terstruktur.
+                                </p>
+                            </div>
+                            
+                            <div class="pro-text-mask">
+                                <div class="pro-text-inner">
+                                    <a href="https://pemulacoding.vercel.app" target="_blank" class="magnetic-btn group inline-flex items-center gap-4 flex-row-reverse">
+                                        <div class="w-14 h-14 md:w-16 md:h-16 rounded-full border-3 border-neo-black bg-white flex items-center justify-center group-hover:bg-neo-black group-hover:text-white transition-colors duration-300 magnetic-trigger">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 transform -rotate-45 group-hover:rotate-0 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                                        </div>
+                                        <span class="font-bold uppercase text-lg tracking-wider group-hover:underline decoration-3 underline-offset-4">Join Us</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="md:col-span-7 relative group cursor-none order-1 md:order-2">
+                            <div class="relative w-full aspect-[16/10] bg-neo-black border-3 border-neo-black overflow-hidden shadow-[10px_10px_0px_#0F0F0F] transition-all duration-500 hover:shadow-[5px_5px_0px_#0F0F0F] pro-card-visual z-10">
+                                <div class="absolute inset-0 bg-gray-800 pro-mask-img z-20">
+                                    <div class="noise-overlay"></div>
+                                    <img src="https://files.catbox.moe/a17kdu.jpg" alt="Pemula Coding" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 ease-out transform scale-110 group-hover:scale-100 pro-img-parallax">
+                                </div>
+                                <div class="absolute inset-0 bg-neo-black z-0"></div>
+                            </div>
+                            
+                            <div class="absolute -top-6 -left-4 bg-neo-yellow text-neo-black px-5 py-2 border-3 border-neo-black font-bold font-mono text-sm md:text-lg z-30 transform -rotate-2 shadow-neo pro-badge">
+                                OPEN SOURCE
+                            </div>
+                        </div>
+                    </article>
+
+                </div>
+
+            </div>
+        </section>
+<section id="comment" class="py-12 sm:py-16 md:py-24 lg:py-32 xl:py-40 bg-white border-b-3 border-neo-black relative overflow-hidden section-anim">
+    <div class="absolute top-4 left-4 w-20 h-20 sm:top-6 sm:left-6 sm:w-32 sm:h-32 md:top-10 md:left-10 md:w-64 md:h-64 border-3 border-neo-black rotate-12 opacity-10 pointer-events-none"></div>
+    <div class="absolute bottom-4 right-4 w-16 h-16 sm:bottom-6 sm:right-6 sm:w-24 sm:h-24 md:bottom-10 md:right-10 md:w-48 md:h-48 bg-neo-yellow/10 border-3 border-neo-black -rotate-6 opacity-20 pointer-events-none"></div>
+
+    <div class="container max-w-screen-xl mx-auto px-3 sm:px-4 md:px-6 relative z-10">
+        <div class="flex flex-col items-center mb-8 sm:mb-12 md:mb-16 lg:mb-24 text-center">
+            <div class="inline-block bg-neo-black text-white border-3 border-neo-black px-4 py-1 sm:px-5 sm:py-1.5 md:px-6 md:py-2 shadow-neo transform rotate-2 mb-4 sm:mb-5 md:mb-6">
+                <span class="font-bold font-mono text-xs sm:text-sm md:text-base uppercase tracking-widest">Comment Zone</span>
+            </div>
+            <h2 class="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-black uppercase leading-none mb-2 sm:mb-3 md:mb-4 tracking-tight">
+                <span class="block">Share Your</span>
+                <span class="block text-stroke-2 text-transparent hover:text-neo-blue transition-colors duration-500">Experience</span>
+            </h2>
+            <p class="text-base sm:text-lg md:text-xl lg:text-2xl font-medium max-w-xs sm:max-w-sm md:max-w-xl lg:max-w-2xl mx-auto mt-4 sm:mt-5 md:mt-6">Login with GitHub and leave your mark on this portfolio</p>
+        </div>
+
+        <div class="max-w-full sm:max-w-2xl md:max-w-3xl lg:max-w-4xl mx-auto">
+            <div class="window-frame bg-white/90 backdrop-blur-lg border-3 border-neo-black shadow-neo-xl overflow-hidden w-full">
+                <div class="window-header bg-neo-black px-3 py-2 sm:px-4 sm:py-3 flex items-center justify-between border-b-3 border-neo-black">
+                    <div class="flex items-center gap-1.5 sm:gap-2">
+                        <div class="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-neo-red"></div>
+                        <div class="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-neo-yellow"></div>
+                        <div class="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-neo-blue"></div>
+                    </div>
+                    <div class="font-mono text-xs sm:text-xs text-white font-bold truncate ml-2 mr-2">terminal@share-experience:~</div>
+                    <div class="w-8 sm:w-12 md:w-20"></div>
+                </div>
+
+                <div class="window-body p-4 sm:p-5 md:p-6 lg:p-8 xl:p-10">
+                    <div id="auth-state" class="text-center py-8 sm:py-10 md:py-12">
+                        <div class="mb-6 sm:mb-8">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" class="mx-auto mb-4 sm:mb-5 md:mb-6 opacity-80 w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20" viewBox="0 0 24 24">
+                                <path fill="currentColor" d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                            </svg>
+                            <h3 class="text-xl sm:text-2xl md:text-3xl font-display font-black mb-3 sm:mb-4">GitHub Login Required</h3>
+                            <p class="text-gray-600 text-sm sm:text-base md:text-lg mb-6 sm:mb-8">Authenticate with GitHub to share your thoughts and reactions</p>
+                        </div>
+                        <button id="github-login-btn" class="magnetic-btn interact-hover group relative inline-flex items-center justify-center px-6 py-3 sm:px-7 sm:py-3.5 md:px-8 md:py-4 text-sm sm:text-base md:text-lg font-bold bg-neo-black text-white border-3 border-neo-black shadow-neo hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-neo-hover transition-all duration-200">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" class="mr-2 sm:mr-3 w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" viewBox="0 0 24 24">
+                                <path fill="currentColor" d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                            </svg>
+                            Login with GitHub
+                        </button>
+                    </div>
+
+                    <div id="user-panel" class="hidden">
+                        <div class="flex flex-wrap items-center gap-3 sm:gap-4 mb-6 sm:mb-8 p-3 sm:p-4 bg-neo-gray/50 border-2 border-neo-black rounded-lg">
+                            <img id="user-avatar" class="w-10 h-10 sm:w-12 sm:h-12 rounded-full border-2 border-neo-black flex-shrink-0" src="" alt="Profile">
+                            <div class="flex-1 min-w-[120px]">
+                                <h4 id="user-name" class="font-display font-bold text-lg sm:text-xl truncate"></h4>
+                                <p id="user-email" class="text-xs sm:text-sm text-gray-600 truncate"></p>
+                            </div>
+                            <button id="logout-btn" class="px-3 py-1.5 sm:px-4 sm:py-2 bg-white border-2 border-neo-black text-xs sm:text-sm font-bold hover:bg-neo-black hover:text-white transition-colors flex-shrink-0">Logout</button>
+                        </div>
+
+                        <form id="comment-form" class="mb-8 sm:mb-10 md:mb-12">
+                            <textarea id="comment-input" rows="4" class="w-full p-3 sm:p-4 border-3 border-neo-black bg-white/80 font-mono text-base sm:text-lg resize-none focus:outline-none focus:border-neo-blue min-h-[120px]" placeholder="Type your comment here... (Max 280 characters)" maxlength="280"></textarea>
+                            <div class="flex flex-wrap justify-between items-center mt-3 sm:mt-4 gap-2">
+                                <div class="text-xs sm:text-sm text-gray-600 font-mono">
+                                    <span id="char-count">0</span>/280
+                                </div>
+                                <button type="submit" class="px-4 py-2 sm:px-5 sm:py-2.5 md:px-6 md:py-3 bg-neo-blue text-white border-3 border-neo-black font-bold hover:bg-neo-black hover:translate-x-[2px] hover:translate-y-[2px] transition-all text-sm sm:text-base">Submit Comment</button>
+                            </div>
+                        </form>
+
+                        <div id="comments-container" class="space-y-4 sm:space-y-5 md:space-y-6">
+                            <div class="text-center py-8 sm:py-10 md:py-12">
+                                <div class="animate-spin w-10 h-10 sm:w-12 sm:h-12 border-4 border-neo-black border-t-transparent rounded-full mx-auto mb-3 sm:mb-4"></div>
+                                <p class="font-mono text-sm sm:text-base">Loading comments...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-analytics.js";
+    import { getAuth, signInWithPopup, GithubAuthProvider, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-auth.js";
+    import { getDatabase, ref, push, onValue, remove } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-database.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyBMYdUb6cvKFn_TPc495t-ozqXv0D31ero",
+        authDomain: "porto-b6518.firebaseapp.com",
+        databaseURL: "https://porto-b6518-default-rtdb.asia-southeast1.firebasedatabase.app",
+        projectId: "porto-b6518",
+        storageBucket: "porto-b6518.firebasestorage.app",
+        messagingSenderId: "362925622446",
+        appId: "1:362925622446:web:3a9ad69eed6ad4e425d93f",
+        measurementId: "G-MK64TJENVS"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const auth = getAuth(app);
+    const provider = new GithubAuthProvider();
+    const db = getDatabase(app);
+
+    const authState = document.getElementById('auth-state');
+    const userPanel = document.getElementById('user-panel');
+    const loginBtn = document.getElementById('github-login-btn');
+    const logoutBtn = document.getElementById('logout-btn');
+    const commentForm = document.getElementById('comment-form');
+    const commentInput = document.getElementById('comment-input');
+    const charCount = document.getElementById('char-count');
+    const commentsContainer = document.getElementById('comments-container');
+    const userAvatar = document.getElementById('user-avatar');
+    const userName = document.getElementById('user-name');
+    const userEmail = document.getElementById('user-email');
+
+    const bubbleColors = ['bg-yellow-100', 'bg-blue-100', 'bg-purple-100', 'bg-red-100', 'bg-green-100'];
+
+    async function getGitHubDisplayName(user) {
+        if (user.displayName && user.displayName.trim() !== '') {
+            return user.displayName;
+        }
+        
+        if (user.providerData && user.providerData.length > 0) {
+            const providerData = user.providerData[0];
+            if (providerData.displayName && providerData.displayName.trim() !== '') {
+                return providerData.displayName;
+            }
+        }
+        
+        try {
+            await user.reload();
+            const reloadedUser = auth.currentUser;
+            
+            if (reloadedUser.displayName && reloadedUser.displayName.trim() !== '') {
+                return reloadedUser.displayName;
+            }
+            
+            if (reloadedUser.reloadUserInfo && reloadedUser.reloadUserInfo.screenName) {
+                return reloadedUser.reloadUserInfo.screenName;
+            }
+            
+            if (reloadedUser.email) {
+                return reloadedUser.email.split('@')[0];
+            }
+            
+            return 'GitHub User';
+            
+        } catch (error) {
+            if (user.email) {
+                return user.email.split('@')[0];
+            }
+            return 'GitHub User';
+        }
+    }
+
+    commentInput.addEventListener('input', () => {
+        charCount.textContent = commentInput.value.length;
+    });
+
+    loginBtn.addEventListener('click', async () => {
+        try {
+            await signInWithPopup(auth, provider);
+        } catch (error) {
+            console.error('Login error:', error);
+        }
+    });
+
+    logoutBtn.addEventListener('click', async () => {
+        try {
+            await signOut(auth);
+        } catch (error) {
+            console.error('Logout error:', error);
+        }
+    });
+
+    commentForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const user = auth.currentUser;
+        if (!user || !commentInput.value.trim()) return;
+
+        const displayName = await getGitHubDisplayName(user);
+
+        const commentData = {
+            text: commentInput.value.trim(),
+            userId: user.uid,
+            userName: displayName,
+            userAvatar: user.photoURL || '',
+            timestamp: Date.now(),
+            color: bubbleColors[Math.floor(Math.random() * bubbleColors.length)]
+        };
+
+        try {
+            const commentsRef = ref(db, 'comments');
+            await push(commentsRef, commentData);
+            commentInput.value = '';
+            charCount.textContent = '0';
+        } catch (error) {
+            console.error('Submit error:', error);
+        }
+    });
+
+    onAuthStateChanged(auth, async (user) => {
+        if (user) {
+            authState.classList.add('hidden');
+            userPanel.classList.remove('hidden');
+            userAvatar.src = user.photoURL || '';
+            
+            const displayName = await getGitHubDisplayName(user);
+            userName.textContent = displayName;
+            userEmail.textContent = user.email || '';
+            
+            loadComments();
+        } else {
+            authState.classList.remove('hidden');
+            userPanel.classList.add('hidden');
+            commentsContainer.innerHTML = '<p class="text-center text-gray-600 font-mono py-12">Login to view comments</p>';
+        }
+    });
+
+    function loadComments() {
+        const commentsRef = ref(db, 'comments');
+        onValue(commentsRef, (snapshot) => {
+            commentsContainer.innerHTML = '';
+            const data = snapshot.val();
+            if (!data) {
+                commentsContainer.innerHTML = '<p class="text-center text-gray-600 font-mono py-8 sm:py-10 md:py-12 text-sm sm:text-base">No comments yet. Be the first!</p>';
+                return;
+            }
+
+            const comments = Object.entries(data).map(([id, comment]) => ({ id, ...comment }));
+            comments.sort((a, b) => b.timestamp - a.timestamp);
+
+            comments.forEach((comment, index) => {
+                const commentEl = document.createElement('div');
+                commentEl.className = `comment-bubble p-4 sm:p-5 md:p-6 rounded-xl sm:rounded-2xl border-3 border-neo-black shadow-neo-sm backdrop-blur-sm ${comment.color} transform transition-all duration-300 hover:-translate-y-1`;
+
+                const time = new Date(comment.timestamp).toLocaleDateString('en-US', {
+                    month: 'short',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+
+                commentEl.innerHTML = `
+                    <div class="flex items-start gap-3 sm:gap-4">
+                        <img src="${comment.userAvatar || 'https://avatars.githubusercontent.com/u/583231?v=4'}" 
+                             alt="${comment.userName}" 
+                             class="w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 rounded-full border-2 border-neo-black flex-shrink-0">
+                        <div class="flex-1 min-w-0">
+                            <div class="flex flex-wrap justify-between items-start mb-2 gap-2">
+                                <h5 class="font-display font-bold text-base sm:text-lg truncate">${comment.userName}</h5>
+                                <span class="text-xs font-mono text-gray-600 flex-shrink-0">${time}</span>
+                            </div>
+                            <p class="text-gray-800 text-sm sm:text-base md:text-lg leading-relaxed break-words">${comment.text}</p>
+                            ${auth.currentUser && auth.currentUser.uid === comment.userId ? 
+                                `<button class="delete-comment mt-2 sm:mt-3 text-xs font-mono text-red-600 hover:text-red-800" data-id="${comment.id}">Delete</button>` : ''}
+                        </div>
+                    </div>
+                `;
+
+                commentsContainer.appendChild(commentEl);
+
+                gsap.fromTo(commentEl, 
+                    { 
+                        opacity: 0, 
+                        y: 40, 
+                        scale: 0.95,
+                        rotation: index % 2 === 0 ? -0.5 : 0.5
+                    },
+                    { 
+                        opacity: 1, 
+                        y: 0, 
+                        scale: 1,
+                        rotation: index % 2 === 0 ? -0.5 : 0.5,
+                        duration: 0.8, 
+                        ease: "back.out(1.4)",
+                        delay: index * 0.08
+                    }
+                );
+            });
+
+            document.querySelectorAll('.delete-comment').forEach(btn => {
+                btn.addEventListener('click', async (e) => {
+                    const id = e.target.dataset.id;
+                    if (confirm('Delete this comment?')) {
+                        await remove(ref(db, `comments/${id}`));
+                    }
+                });
+            });
+        });
+    }
+
+    const section = document.getElementById('comment');
+    const windowFrame = section.querySelector('.window-frame');
+    const bgShapes = section.querySelectorAll('.absolute');
+    const titleElements = section.querySelectorAll('.font-display, .text-lg');
+    const interactiveZone = section.querySelector('.inline-block');
+
+    ScrollTrigger.getAll().forEach(trigger => {
+        if (trigger.trigger === section) {
+            trigger.kill();
+        }
+    });
+
+    const masterTL = gsap.timeline({
+        scrollTrigger: {
+            trigger: section,
+            start: "top 80%",
+            end: "bottom top",
+            scrub: 1.2,
+            toggleActions: "play none reverse none"
+        }
+    });
+
+    masterTL.fromTo(section,
+        {
+            opacity: 0.3,
+            y: 80
+        },
+        {
+            opacity: 1,
+            y: 0,
+            duration: 1.5,
+            ease: "power3.out"
+        }
+    );
+
+    masterTL.fromTo(bgShapes[0],
+        {
+            x: -100,
+            y: 80,
+            rotation: 5,
+            opacity: 0
+        },
+        {
+            x: 0,
+            y: 0,
+            rotation: 12,
+            opacity: 0.1,
+            duration: 2,
+            ease: "power3.out"
+        },
+        0
+    );
+
+    masterTL.fromTo(bgShapes[1],
+        {
+            x: 100,
+            y: 100,
+            rotation: -15,
+            opacity: 0
+        },
+        {
+            x: 0,
+            y: 0,
+            rotation: -6,
+            opacity: 0.2,
+            duration: 2,
+            ease: "power3.out"
+        },
+        0.1
+    );
+
+    const parallaxTL = gsap.timeline({
+        scrollTrigger: {
+            trigger: section,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 0.8
+        }
+    });
+
+    parallaxTL.to(bgShapes[0], {
+        y: -60,
+        rotation: 15,
+        ease: "none"
+    })
+    .to(bgShapes[1], {
+        y: -40,
+        rotation: -3,
+        ease: "none"
+    }, 0);
+
+    const textTL = gsap.timeline({
+        scrollTrigger: {
+            trigger: section,
+            start: "top 85%",
+            toggleActions: "play none reverse none"
+        }
+    });
+
+    textTL.fromTo(interactiveZone,
+        {
+            opacity: 0,
+            scale: 0.8,
+            rotation: -8,
+            y: 30
+        },
+        {
+            opacity: 1,
+            scale: 1,
+            rotation: 2,
+            y: 0,
+            duration: 0.9,
+            ease: "back.out(1.7)"
+        }
+    );
+
+    textTL.fromTo(titleElements[0],
+        {
+            opacity: 0,
+            y: 50,
+            scale: 0.95
+        },
+        {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 1,
+            ease: "power3.out"
+        },
+        0.3
+    );
+
+    textTL.fromTo(titleElements[1],
+        {
+            opacity: 0,
+            y: 50,
+            scale: 0.95
+        },
+        {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 1,
+            ease: "power3.out"
+        },
+        0.4
+    );
+
+    textTL.fromTo(titleElements[2],
+        {
+            opacity: 0,
+            y: 40
+        },
+        {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: "power3.out"
+        },
+        0.6
+    );
+
+    const windowTL = gsap.timeline({
+        scrollTrigger: {
+            trigger: section,
+            start: "top 75%",
+            toggleActions: "play none reverse none"
+        }
+    });
+
+    windowTL.fromTo(windowFrame,
+        {
+            opacity: 0,
+            scale: 0.85,
+            y: 80,
+            rotation: -5,
+            transformPerspective: 1000,
+            rotationX: 15
+        },
+        {
+            opacity: 1,
+            scale: 1,
+            y: 0,
+            rotation: 0,
+            rotationX: 0,
+            duration: 1.4,
+            ease: "power3.out"
+        },
+        0.5
+    );
+
+    const floatTL = gsap.timeline({
+        repeat: -1,
+        yoyo: true,
+        paused: true
+    });
+
+    floatTL.to(windowFrame, {
+        y: -12,
+        duration: 2.8,
+        ease: "sine.inOut"
+    })
+    .to(windowFrame, {
+        y: 0,
+        duration: 2.8,
+        ease: "sine.inOut"
+    });
+
+    ScrollTrigger.create({
+        trigger: section,
+        start: "top 60%",
+        end: "bottom top",
+        onEnter: () => floatTL.play(),
+        onLeave: () => floatTL.pause(),
+        onEnterBack: () => floatTL.restart(),
+        onLeaveBack: () => floatTL.pause()
+    });
+
+    const rotateTL = gsap.timeline({
+        repeat: -1,
+        paused: true
+    });
+
+    rotateTL.to(bgShapes[0], {
+        rotation: 20,
+        duration: 25,
+        ease: "none"
+    })
+    .to(bgShapes[1], {
+        rotation: -10,
+        duration: 25,
+        ease: "none"
+    }, 0);
+
+    ScrollTrigger.create({
+        trigger: section,
+        start: "top 70%",
+        end: "bottom top",
+        onEnter: () => rotateTL.play(),
+        onLeave: () => rotateTL.pause(),
+        onEnterBack: () => rotateTL.play(),
+        onLeaveBack: () => rotateTL.pause()
+    });
+
+    const microBounce = gsap.timeline({
+        repeat: -1,
+        yoyo: true,
+        paused: true
+    });
+
+    microBounce.to(windowFrame, {
+        scale: 1.008,
+        duration: 1.5,
+        ease: "sine.inOut"
+    })
+    .to(windowFrame, {
+        scale: 1,
+        duration: 1.5,
+        ease: "sine.inOut"
+    });
+
+    ScrollTrigger.create({
+        trigger: section,
+        start: "top 60%",
+        onEnter: () => microBounce.play(),
+        onLeave: () => microBounce.pause(),
+        onEnterBack: () => microBounce.play(),
+        onLeaveBack: () => microBounce.pause()
+    });
+
+    const glowEffect = gsap.timeline({
+        repeat: -1,
+        yoyo: true,
+        paused: true
+    });
+
+    glowEffect.to(windowFrame, {
+        boxShadow: "0 0 40px rgba(59, 130, 246, 0.15)",
+        duration: 2,
+        ease: "sine.inOut"
+    })
+    .to(windowFrame, {
+        boxShadow: "0 0 20px rgba(59, 130, 246, 0.05)",
+        duration: 2,
+        ease: "sine.inOut"
+    });
+
+    ScrollTrigger.create({
+        trigger: section,
+        start: "top 70%",
+        onEnter: () => glowEffect.play(),
+        onLeave: () => glowEffect.pause(),
+        onEnterBack: () => glowEffect.play(),
+        onLeaveBack: () => glowEffect.pause()
+    });
+</script>
+
+    <style>
+        .comment-bubble {
+            position: relative;
+            animation: bubbleIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            opacity: 0;
+        }
+        
+        @keyframes bubbleIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        
+        .window-frame {
+            transform-style: preserve-3d;
+            transform: perspective(1000px);
+        }
+        
+        .comment-bubble:nth-child(odd) {
+            transform: rotate(0.5deg);
+        }
+        
+        .comment-bubble:nth-child(even) {
+            transform: rotate(-0.5deg);
+        }
+        
+        .comment-bubble:hover {
+            transform: rotate(0deg) translateY(-4px) !important;
+            box-shadow: 8px 8px 0px 0px #0F0F0F !important;
+        }
+        
+        #github-login-btn:hover {
+            background-color: #333 !important;
+        }
+        
+        @media (max-width: 768px) {
+            .window-body {
+                padding: 1.5rem !important;
+            }
+            
+            .comment-bubble {
+                padding: 1rem !important;
+            }
+        }
+    </style>
+</section>
+        <section id="contact" class="py-20 md:py-32 bg-neo-bg border-b-3 border-neo-black relative overflow-hidden section-anim">
+            <div class="absolute inset-0 bg-[linear-gradient(rgba(15,15,15,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(15,15,15,0.02)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none"></div>
+
+            <div class="container max-w-screen-xl mx-auto px-4 md:px-6 relative z-10">
+                <div class="flex flex-col items-center mb-16 md:mb-24 text-center">
+                    <div class="inline-block bg-neo-yellow border-3 border-neo-black px-6 py-2 shadow-neo transform -rotate-2 mb-6">
+                        <span class="font-bold font-mono text-sm md:text-base uppercase tracking-widest">Let's Connect</span>
+                    </div>
+                    <h2 class="font-display text-5xl md:text-8xl font-black uppercase leading-none mb-4 tracking-tight">
+                        <span class="block contact-title-reveal">Get In</span>
+                        <span class="block text-stroke-2 text-transparent contact-title-reveal hover:text-neo-black transition-colors duration-500">Touch</span>
+                    </h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 max-w-6xl mx-auto perspective-1000">
+                    
+                    <a href="https://wa.me/6282336479077" target="_blank" class="contact-card-wrapper group relative block">
+                        <div class="contact-card bg-white border-3 border-neo-black p-8 md:px-6 md:py-12 shadow-neo-lg hover:shadow-neo-xl transition-all duration-300 flex flex-col items-center justify-center gap-6 h-full min-h-[300px] relative z-20 interact-hover">
+                            <div class="absolute inset-0 bg-wa-green transform scale-y-0 origin-bottom group-hover:scale-y-100 transition-transform duration-500 ease-in-out z-0"></div>
+                            
+                            <div class="relative z-10 contact-icon-float">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="currentColor" class="text-wa-green group-hover:text-white transition-colors duration-300 transform scale-100 group-hover:scale-110">
+                                    <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+                                </svg>
+                            </div>
+                            
+                            <h3 class="text-2xl lg:text-3xl font-display font-black uppercase text-neo-black group-hover:text-white transition-colors duration-300 relative z-10 w-full text-center break-words">WhatsApp</h3>
+                            
+                            <div class="absolute top-4 right-4 bg-neo-black text-white px-3 py-1 text-xs font-mono font-bold uppercase opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">Chat Now</div>
+                        </div>
+                    </a>
+
+                    <a href="https://t.me/6282336479077" target="_blank" class="contact-card-wrapper group relative block">
+                        <div class="contact-card bg-white border-3 border-neo-black p-8 md:px-6 md:py-12 shadow-neo-lg hover:shadow-neo-xl transition-all duration-300 flex flex-col items-center justify-center gap-6 h-full min-h-[300px] relative z-20 interact-hover">
+                            <div class="absolute inset-0 bg-tg-blue transform scale-y-0 origin-bottom group-hover:scale-y-100 transition-transform duration-500 ease-in-out z-0"></div>
+                            
+                            <div class="relative z-10 contact-icon-float" style="animation-delay: -1.3s;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="currentColor" class="text-tg-blue group-hover:text-white transition-colors duration-300 transform scale-100 group-hover:scale-110">
+                                    <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 11.944 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+                                </svg>
+                            </div>
+                            
+                            <h3 class="text-2xl lg:text-3xl font-display font-black uppercase text-neo-black group-hover:text-white transition-colors duration-300 relative z-10 w-full text-center break-words">Telegram</h3>
+                            
+                             <div class="absolute top-4 right-4 bg-neo-black text-white px-3 py-1 text-xs font-mono font-bold uppercase opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">Message</div>
+                        </div>
+                    </a>
+
+                    <a href="mailto:farhanshahab777@gmail.com" class="contact-card-wrapper group relative block">
+                        <div class="contact-card bg-white border-3 border-neo-black p-8 md:px-6 md:py-12 shadow-neo-lg hover:shadow-neo-xl transition-all duration-300 flex flex-col items-center justify-center gap-6 h-full min-h-[300px] relative z-20 interact-hover">
+                            <div class="absolute inset-0 bg-gmail-red transform scale-y-0 origin-bottom group-hover:scale-y-100 transition-transform duration-500 ease-in-out z-0"></div>
+                            
+                            <div class="relative z-10 contact-icon-float" style="animation-delay: -2.6s;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="currentColor" class="text-gmail-red group-hover:text-white transition-colors duration-300 transform scale-100 group-hover:scale-110">
+                                    <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/>
+                                </svg>
+                            </div>
+                            
+                            <h3 class="text-2xl lg:text-3xl font-display font-black uppercase text-neo-black group-hover:text-white transition-colors duration-300 relative z-10 w-full text-center break-words">Email Me</h3>
+                            
+                             <div class="absolute top-4 right-4 bg-neo-black text-white px-3 py-1 text-xs font-mono font-bold uppercase opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">Send Mail</div>
+                        </div>
+                    </a>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-neo-black text-white py-12 md:py-20 relative z-10" id="main-footer">
+        <div class="container max-w-screen-xl mx-auto px-6 text-center footer-content opacity-0 translate-y-10">
+            <h2 class="font-display text-4xl md:text-7xl font-black mb-6 md:mb-8 hover:text-neo-yellow transition-colors cursor-default select-none">FARHAN.</h2>
+            <div class="flex justify-center items-center gap-4 md:gap-6 mb-8 md:mb-10">
+                <span class="h-1 w-8 md:w-16 bg-neo-yellow"></span>
+                <p class="text-sm md:text-xl font-bold font-mono tracking-wide text-white">Created by Farhan Kertadiwangsa</p>
+                <span class="h-1 w-8 md:w-16 bg-neo-yellow"></span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <script>
+        document.body.style.overflow = 'hidden';
+        document.documentElement.style.overflow = 'hidden';
+        window.scrollTo(0, 0);
+
+        gsap.registerPlugin(ScrollTrigger);
+        const isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+
+        if (!isTouch && window.innerWidth > 1024) {
+            const cursorDot = document.querySelector('.cursor-dot');
+            const cursorCircle = document.querySelector('.cursor-circle');
+            
+            const xDot = gsap.quickTo(cursorDot, "x", {duration: 0.1, ease: "power3"});
+            const yDot = gsap.quickTo(cursorDot, "y", {duration: 0.1, ease: "power3"});
+            const xCircle = gsap.quickTo(cursorCircle, "x", {duration: 0.3, ease: "power3"});
+            const yCircle = gsap.quickTo(cursorCircle, "y", {duration: 0.3, ease: "power3"});
+
+            window.addEventListener("mousemove", (e) => {
+                xDot(e.clientX); yDot(e.clientY);
+                xCircle(e.clientX); yCircle(e.clientY);
+            });
+
+            const interactables = document.querySelectorAll('a, button, .interact-hover, input, textarea');
+            interactables.forEach(el => {
+                el.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
+                el.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
+            });
+            
+            const magnets = document.querySelectorAll('.magnetic-wrap');
+            magnets.forEach(magnet => {
+                magnet.addEventListener('mousemove', (e) => {
+                    const bound = magnet.getBoundingClientRect();
+                    const x = e.clientX - bound.left - bound.width / 2;
+                    const y = e.clientY - bound.top - bound.height / 2;
+                    gsap.to(magnet, { x: x * 0.3, y: y * 0.3, duration: 0.3, ease: "power2.out" });
+                });
+                magnet.addEventListener('mouseleave', () => {
+                    gsap.to(magnet, { x: 0, y: 0, duration: 0.8, ease: "elastic.out(1, 0.4)" });
+                });
+            });
+        }
+
+        const initHero = () => {
+            const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
+            
+            const heroText = document.querySelectorAll("h1 .reveal-text-inner");
+            
+            tl.to(heroText, { y: 0, duration: 1.2, stagger: 0.15, skewY: 0, force3D: true })
+            .from(".hero-badge", { scale: 0, rotation: -10, opacity: 0, duration: 0.8, ease: "back.out(1.7)" }, "-=0.8")
+            .from(".reveal-opacity", { y: 30, opacity: 0, duration: 1, stagger: 0.1 }, "-=0.6")
+            .from(".perspective-container", { y: 100, opacity: 0, rotation: 5, duration: 1.2, ease: "elastic.out(1, 0.7)" }, "-=1")
+            .from(".nav-item-anim", { y: -30, opacity: 0, duration: 1, stagger: 0.1, ease: "elastic.out(1, 0.75)" }, "-=1.2");
+
+            if(window.innerWidth > 768) {
+                const heroCard = document.querySelector('#hero-card');
+                const heroSection = document.querySelector('section');
+                heroSection.addEventListener('mousemove', (e) => {
+                    const xVal = (e.clientX - window.innerWidth / 2) * 0.015;
+                    const yVal = (e.clientY - window.innerHeight / 2) * 0.015;
+                    gsap.to(heroCard, { rotationY: xVal, rotationX: -yVal, duration: 0.5, ease: "power2.out" });
+                });
+            }
+            
+            return tl;
+        };
+
+        const initMarquee = () => {
+            const rows = document.querySelectorAll('.marquee-row');
+            
+            rows.forEach(row => {
+                const track = row.querySelector('.marquee-track');
+                const content = track.innerHTML;
+                track.innerHTML = content + content + content + content; 
+                
+                const speed = parseFloat(row.dataset.speed || 1);
+                
+                const tween = gsap.to(track, {
+                    x: "-25%",
+                    duration: 20 / speed,
+                    ease: "none",
+                    repeat: -1
+                });
+                
+                row.marqueeTween = tween;
+            });
+
+            ScrollTrigger.create({
+                onUpdate: (self) => {
+                    const scrollDir = self.direction; 
+                    
+                    rows.forEach(row => {
+                        const tween = row.marqueeTween;
+                        const baseFactor = parseFloat(row.dataset.baseFactor || 1);
+                        
+                        const targetTimeScale = -1 * baseFactor * scrollDir;
+                        
+                        gsap.to(tween, {
+                            timeScale: targetTimeScale,
+                            duration: 0.8,
+                            ease: "power1.out",
+                            overwrite: true
+                        });
+                    });
+                }
+            });
+        };
+
+        const initSectionAnimations = () => {
+            gsap.utils.toArray('.section-anim').forEach(section => {
+                gsap.fromTo(section, 
+                    { opacity: 0, y: 50, scale: 0.98 },
+                    { 
+                        opacity: 1, y: 0, scale: 1, 
+                        duration: 1.2, 
+                        ease: "power3.out",
+                        scrollTrigger: {
+                            trigger: section,
+                            start: "top 85%",
+                            end: "bottom top",
+                            toggleActions: "play reverse play reverse"
+                        }
+                    }
+                );
+            });
+        };
+
+        const initScrollReveals = () => {
+            const allMasks = gsap.utils.toArray(".reveal-text-mask");
+            
+            allMasks.forEach(mask => {
+                if (mask.closest('h1') || mask.closest('#loader-intro')) return;
+
+                const text = mask.querySelector(".reveal-text-inner");
+                if(text) {
+                    gsap.fromTo(text, { y: "100%" }, { y: "0%", duration: 1, ease: "power3.out", scrollTrigger: { trigger: mask, start: "top 95%", toggleActions: "play none none reverse" }});
+                }
+            });
+
+            gsap.utils.toArray(".reveal-box").forEach((box) => {
+                gsap.from(box, { y: 50, opacity: 0, scale: 0.95, duration: 0.8, ease: "back.out(1.5)", scrollTrigger: { trigger: box, start: "top 90%", toggleActions: "play none none reverse" }});
+            });
+
+            gsap.utils.toArray(".about-text-anim").forEach((text, i) => {
+                gsap.from(text, {
+                    y: 30,
+                    opacity: 0,
+                    duration: 1.2,
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: text,
+                        start: "top 85%", 
+                        toggleActions: "play none none reverse"
+                    }
+                });
+            });
+
+            gsap.to(".footer-content", {
+                y: 0,
+                opacity: 1,
+                duration: 1,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: "#main-footer",
+                    start: "top 90%",
+                    toggleActions: "play none none reverse"
+                }
+            });
+        };
+
+        const initProProjects = () => {
+            const projects = gsap.utils.toArray('.pro-project');
+            
+            const headerTexts = document.querySelectorAll('#projects .pro-text-inner');
+            ScrollTrigger.batch(headerTexts, {
+                start: "top 90%",
+                onEnter: batch => gsap.to(batch, { y: "0%", duration: 1.2, stagger: 0.1, ease: "power4.out" }),
+                once: true
+            });
+
+            projects.forEach((project, i) => {
+                const imgMask = project.querySelector('.pro-mask-img');
+                const imgParallax = project.querySelector('.pro-img-parallax');
+                const texts = project.querySelectorAll('.pro-text-inner');
+                const visual = project.querySelector('.pro-card-visual');
+                const badge = project.querySelector('.pro-badge');
+                const btn = project.querySelector('.magnetic-btn');
+                const btnTrigger = btn.querySelector('.magnetic-trigger');
+
+                const tl = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: project,
+                        start: "top 75%",
+                        toggleActions: "play none none reverse"
+                    }
+                });
+
+                tl.to(imgMask, { clipPath: "inset(0% 0 0 0)", duration: 1.4, ease: "expo.out" })
+                  .to(texts, { y: "0%", duration: 1, stagger: 0.1, ease: "power3.out" }, "-=1")
+                  .from(badge, { scale: 0, rotation: 180, duration: 0.8, ease: "back.out(1.7)" }, "-=1");
+
+                gsap.fromTo(imgParallax, 
+                    { yPercent: -10, scale: 1.1 }, 
+                    { yPercent: 10, scale: 1, ease: "none", scrollTrigger: { trigger: project, start: "top bottom", end: "bottom top", scrub: true }}
+                );
+
+                if(btn && btnTrigger && !isTouch && window.innerWidth > 1024) {
+                    btn.addEventListener('mousemove', (e) => {
+                        const bound = btnTrigger.getBoundingClientRect();
+                        const x = e.clientX - bound.left - bound.width / 2;
+                        const y = e.clientY - bound.top - bound.height / 2;
+                        gsap.to(btnTrigger, { x: x * 0.4, y: y * 0.4, duration: 0.3, ease: "power2.out" });
+                    });
+                    btn.addEventListener('mouseleave', () => {
+                        gsap.to(btnTrigger, { x: 0, y: 0, duration: 0.8, ease: "elastic.out(1, 0.4)" });
+                    });
+                }
+
+                if(visual && !isTouch && window.innerWidth > 1024) {
+                    const xTo = gsap.quickTo(visual, "rotationY", { duration: 0.4, ease: "power3.out" });
+                    const yTo = gsap.quickTo(visual, "rotationX", { duration: 0.4, ease: "power3.out" });
+
+                    project.addEventListener("mousemove", (e) => {
+                        const rect = visual.getBoundingClientRect();
+                        const x = (e.clientX - rect.left - rect.width / 2) / 20;
+                        const y = (e.clientY - rect.top - rect.height / 2) / 20 * -1;
+                        
+                        xTo(x);
+                        yTo(y);
+                    });
+
+                    project.addEventListener("mouseleave", () => {
+                        xTo(0);
+                        yTo(0);
+                    });
+                }
+            });
+        };
+
+        const initSkills = () => {
+            const skillRows = [
+                 [
+                    { name: 'HTML', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg' },
+                    { name: 'CSS', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg' },
+                    { name: 'JavaScript', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg' },
+                    { name: 'TypeScript', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg' },
+                    { name: 'Python', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg' },
+                    { name: 'Go', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original.svg' },
+                    { name: 'C++', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg' },
+                    { name: 'Java', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg' },
+                    { name: 'Lua', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/lua/lua-original.svg' }
+                ],
+                [
+                    { name: 'React', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg' },
+                    { name: 'Next.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg' },
+                    { name: 'Vue', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg' },
+                    { name: 'Svelte', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/svelte/svelte-original.svg' },
+                    { name: 'Tailwind', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg' },
+                    { name: 'Bootstrap', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg' },
+                    { name: 'Vite', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vitejs/vitejs-original.svg' }
+                ],
+                [
+                    { name: 'Node.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg' },
+                    { name: 'Express', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg' },
+                    { name: 'NestJS', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nestjs/nestjs-original.svg' },
+                    { name: 'Laravel', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg' },
+                    { name: 'Spring', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg' },
+                    { name: 'Django', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg' },
+                    { name: 'FastAPI', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg' }
+                ],
+                [
+                    { name: 'MySQL', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg' },
+                    { name: 'PostgreSQL', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg' },
+                    { name: 'MongoDB', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg' },
+                    { name: 'Redis', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg' },
+                    { name: 'Firebase', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg' },
+                    { name: 'Supabase', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/supabase/supabase-original.svg' }
+                ],
+                [
+                    { name: 'Docker', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg' },
+                    { name: 'Kubernetes', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg' },
+                    { name: 'Nginx', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nginx/nginx-original.svg' },
+                    { name: 'Linux', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg' },
+                    { name: 'Cloudflare', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cloudflare/cloudflare-original.svg' },
+                    { name: 'Vercel', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vercel/vercel-original.svg' }
+                ],
+                [
+                    { name: 'Git', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg' },
+                    { name: 'GitHub', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg' },
+                    { name: 'Figma', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg' },
+                    { name: 'Postman', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg' },
+                    { name: 'VS Code', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg' }
+                ]
+            ];
+
+            const container = document.getElementById('skill-rows-container');
+            
+            skillRows.forEach((rowSkills) => {
+                const rowDiv = document.createElement('div');
+                rowDiv.className = "flex flex-wrap justify-center gap-4 md:gap-8 w-full";
+                
+                rowSkills.forEach(skill => {
+                    const btnWrapper = document.createElement('div');
+                    btnWrapper.className = 'skill-btn-wrapper';
+                    const btn = document.createElement('div');
+                    btn.className = `skill-btn w-16 h-16 md:w-24 md:h-24 bg-white border-3 border-neo-black rounded-xl md:rounded-2xl shadow-neo flex items-center justify-center cursor-pointer relative z-10 will-change-transform`;
+                    btn.innerHTML = `<img src="${skill.icon}" alt="${skill.name}" class="w-8 h-8 md:w-12 md:h-12 object-contain pointer-events-none select-none" loading="lazy">`;
+                    btnWrapper.appendChild(btn);
+                    rowDiv.appendChild(btnWrapper);
+
+                    gsap.to(btn, { y: gsap.utils.random(-6, 6), rotation: gsap.utils.random(-3, 3), duration: gsap.utils.random(2.5, 4.5), ease: "sine.inOut", yoyo: true, repeat: -1, delay: gsap.utils.random(0, 2) });
+
+                    if(!isTouch && window.innerWidth > 1024) {
+                        btn.addEventListener('mousemove', (e) => {
+                            const rect = btn.getBoundingClientRect();
+                            const x = e.clientX - rect.left - rect.width / 2;
+                            const y = e.clientY - rect.top - rect.height / 2;
+                            gsap.to(btn, { x: x * 0.4, y: y * 0.4, scale: 1.15, boxShadow: "10px 10px 0px 0px #0F0F0F", borderColor: "#0F0F0F", duration: 0.3, ease: "power2.out" });
+                        });
+                        btn.addEventListener('mouseleave', () => {
+                            gsap.to(btn, { x: 0, y: 0, scale: 1, boxShadow: "5px 5px 0px 0px #0F0F0F", duration: 1.2, ease: "elastic.out(1, 0.3)" });
+                        });
+                    }
+                    btn.addEventListener('mousedown', () => gsap.to(btn, { scale: 0.95, boxShadow: "0px 0px 0px 0px #0F0F0F", x: 5, y: 5, duration: 0.05, ease: "power2.out" }));
+                    btn.addEventListener('mouseup', () => gsap.to(btn, { scale: 1.1, boxShadow: "8px 8px 0px 0px #0F0F0F", x: 0, y: 0, duration: 0.5, ease: "elastic.out(1, 0.4)" }));
+                });
+                container.appendChild(rowDiv);
+                gsap.from(rowDiv.children, { y: 150, opacity: 0, scale: 0.5, duration: 0.8, stagger: 0.05, ease: "back.out(1.5)", scrollTrigger: { trigger: rowDiv, start: "top 90%", toggleActions: "play none none reverse" }});
+            });
+        };
+
+        const initMenu = () => {
+            const btn = document.getElementById('menu-toggle');
+            const menu = document.getElementById('mobile-menu');
+            const links = document.querySelectorAll('.mobile-link');
+            let isOpen = false;
+
+            const tl = gsap.timeline({ paused: true });
+            tl.to(menu, { y: '0%', duration: 0.6, ease: 'expo.inOut' })
+              .fromTo(links, { y: 50, opacity: 0 }, { y: 0, opacity: 1, stagger: 0.1, duration: 0.4 }, "-=0.3");
+
+            btn.addEventListener('click', () => {
+                isOpen = !isOpen;
+                if(isOpen) {
+                    btn.classList.add('active');
+                    menu.style.pointerEvents = "auto";
+                    document.body.style.overflow = "hidden";
+                    tl.play();
+                } else {
+                    btn.classList.remove('active');
+                    menu.style.pointerEvents = "none";
+                    document.body.style.overflow = "auto";
+                    tl.reverse();
+                }
+            });
+            links.forEach(link => link.addEventListener('click', () => btn.click()));
+        };
+
+        const initContactPhysics = () => {
+            const section = document.querySelector('#contact');
+            const titleTexts = section.querySelectorAll('.contact-title-reveal');
+            const cards = section.querySelectorAll('.contact-card-wrapper');
+
+            gsap.fromTo(titleTexts, 
+                { y: 100, opacity: 0, rotate: 5 },
+                { y: 0, opacity: 1, rotate: 0, duration: 1.2, stagger: 0.2, ease: "power4.out", scrollTrigger: { trigger: section, start: "top 60%", toggleActions: "play reverse play reverse" } }
+            );
+
+            gsap.fromTo(cards, 
+                { y: 200, opacity: 0, scale: 0.8 },
+                { y: 0, opacity: 1, scale: 1, duration: 1, stagger: 0.15, ease: "back.out(1.2)", scrollTrigger: { trigger: section, start: "top 60%", toggleActions: "play reverse play reverse" } }
+            );
+
+            if(!isTouch && window.innerWidth > 1024) {
+                cards.forEach(card => {
+                    const inner = card.querySelector('.contact-card');
+                    
+                    card.addEventListener('mousemove', (e) => {
+                        const rect = card.getBoundingClientRect();
+                        const x = e.clientX - rect.left - rect.width / 2;
+                        const y = e.clientY - rect.top - rect.height / 2;
+                        
+                        gsap.to(card, { x: x * 0.3, y: y * 0.3, duration: 0.4, ease: "power2.out" });
+                        
+                        gsap.to(inner, { 
+                            rotationY: x * 0.1, 
+                            rotationX: -y * 0.1, 
+                            transformPerspective: 1000,
+                            transformOrigin: "center center", 
+                            duration: 0.4, 
+                            ease: "power2.out" 
+                        });
+                    });
+
+                    card.addEventListener('mouseleave', () => {
+                        gsap.to(card, { x: 0, y: 0, duration: 1, ease: "elastic.out(1, 0.3)" });
+                        gsap.to(inner, { rotationY: 0, rotationX: 0, duration: 1, ease: "elastic.out(1, 0.3)" });
+                    });
+
+                    card.addEventListener('mousedown', () => {
+                        gsap.to(inner, { scale: 0.92, duration: 0.1, ease: "power2.in" });
+                    });
+
+                    card.addEventListener('mouseup', () => {
+                        gsap.to(inner, { scale: 1, duration: 0.6, ease: "elastic.out(1, 0.3)" });
+                    });
+                });
+            }
+        };
+
+        window.addEventListener('load', () => {
+            window.scrollTo(0, 0);
+
+            initMarquee(); 
+            initSectionAnimations();
+            initScrollReveals(); 
+            initSkills(); 
+            initProProjects(); 
+            initMenu();
+            initContactPhysics();
+            
+            gsap.utils.toArray(".counter").forEach(counter => {
+                const target = parseInt(counter.getAttribute("data-target"));
+                gsap.to(counter, { innerText: target, duration: 2, snap: { innerText: 1 }, scrollTrigger: { trigger: counter, start: "top 85%", once: true }});
+            });
+
+            const tlLoader = gsap.timeline({
+                onComplete: () => {
+                    document.body.style.overflow = '';
+                    document.documentElement.style.overflow = '';
+                    gsap.set("#preloader", { display: "none" });
+                    ScrollTrigger.refresh();
+                    initHero();
+                }
+            });
+
+            const introTexts = document.querySelectorAll("#loader-intro .reveal-text-inner");
+            tlLoader.to(introTexts, {
+                y: "0%",
+                duration: 1.2,
+                stagger: 0.2,
+                ease: "power4.out"
+            })
+            .to(introTexts, {
+                y: "-120%",
+                duration: 0.8,
+                stagger: 0.1,
+                ease: "power3.in",
+                delay: 0.5
+            });
+
+            tlLoader.to("#loader-main", {
+                y: 0,
+                duration: 1.5,
+                ease: "elastic.out(1, 0.75)",
+            }, "-=0.2");
+
+            const circle = document.getElementById("loader-circle");
+            const percentText = document.getElementById("loader-percent");
+            const batteryLiquid = document.getElementById("battery-liquid");
+            const counter = { val: 0 };
+
+            tlLoader.to(circle, {
+                strokeDashoffset: 0,
+                duration: 2.2,
+                ease: "power2.inOut"
+            })
+            .to(counter, {
+                val: 100,
+                duration: 2.2,
+                ease: "power2.inOut",
+                onUpdate: () => {
+                    percentText.innerText = Math.floor(counter.val) + "%";
+                    if(batteryLiquid) {
+                        batteryLiquid.style.transform = `scaleY(${counter.val / 100})`;
+                    }
+                }
+            }, "<")
+            .to("#loader-text-sub", {
+                y: "0%",
+                opacity: 1,
+                duration: 1,
+                ease: "power3.out"
+            }, "<0.5");
+
+            tlLoader.to("#loader-rocket", {
+                scale: 3,
+                y: -50,
+                duration: 0.5,
+                ease: "back.in(2)"
+            })
+            .to(["#loader-main", "#loader-text-sub"], {
+                opacity: 0,
+                scale: 0.95,
+                duration: 0.3,
+                ease: "power2.out"
+            }, "<")
+            .to("#preloader", {
+                yPercent: -100,
+                duration: 0.8,
+                ease: "power4.inOut"
+            }, "-=0.1");
+        });
+    </script>
+</body>
+</html>
